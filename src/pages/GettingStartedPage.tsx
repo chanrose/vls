@@ -1,6 +1,7 @@
 import React from "react";
 import {
   IonAvatar,
+  IonButton,
   IonCard,
   IonCardContent,
   IonCardHeader,
@@ -22,7 +23,7 @@ import "./styles/GettingStartedPage.css";
 const GettingStartedPage: React.FC = () => {
   return (
     <IonPage>
-      <IonContent fullscreen>
+      <IonContent color="light" fullscreen>
         <IonCard className="ionCardstyle">
           <IonCardHeader>
             <img
@@ -44,16 +45,20 @@ const GettingStartedPage: React.FC = () => {
                   <IonLabel>Thai</IonLabel>
                 </IonCol>
                 <IonCol>
-                  <div className="grayStraightLine"/>
-                  </IonCol>
+                  <div className="grayStraightLine" />
+                </IonCol>
                 <IonCol>
                   <img src="https://cdn4.iconfinder.com/data/icons/europe-country-flags/105/UNITED_KINGDOM-512.png" />
                   <br />
                   <IonLabel>English</IonLabel>
                 </IonCol>
               </IonRow>
+              
             </IonGrid>
+            <br />
+            <IonButton className="IonButtonRadius" expand="block">NEXT</IonButton>
           </IonCardContent>
+          
         </IonCard>
       </IonContent>
     </IonPage>
