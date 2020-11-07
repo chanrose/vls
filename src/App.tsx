@@ -16,6 +16,8 @@ import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
 import GettingStartedPage from './pages/GettingStartedPage';
 import GettingStartedS2Page from './pages/GettingStartedS2Page';
+import LoginPage from './pages/LoginPage';
+import RegistrationPage from './pages/RegistrationPage';
 
 const App: React.FC = () => (
   <IonApp>
@@ -24,6 +26,8 @@ const App: React.FC = () => (
         <IonRouterOutlet>
           <Route path="/gettingstarted" component={GettingStartedPage} />
           <Route path="/gettingstarted/s2" component={GettingStartedS2Page} />
+          <Route path="/register" component={RegistrationPage} />
+          <Route path="/login" component={LoginPage} />
           <Route path="/tab1" component={Tab1} exact={true} />
           <Route path="/tab2" component={Tab2} exact={true} />
           <Route path="/tab3" component={Tab3} />
