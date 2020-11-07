@@ -26,7 +26,7 @@ import {
 import ExploreContainer from "../components/ExploreContainer";
 import "./styles/GettingStartedPage.css";
 
-const AdminHomePage: React.FC = () => {
+const AdminViewPage: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -35,14 +35,12 @@ const AdminHomePage: React.FC = () => {
             onIonChange={(e) => console.log("Segment selected", e.detail.value)}
           >
             <IonSegmentButton value="home">
-              <IonLabel>Home</IonLabel>
+              <IonLabel>Vehicle</IonLabel>
             </IonSegmentButton>
             <IonSegmentButton value="guest">
-              <IonLabel>Guest's Post</IonLabel>
+              <IonLabel>Ticket</IonLabel>
             </IonSegmentButton>
-            <IonSegmentButton value="tools">
-              <IonLabel>Admin tools</IonLabel>
-            </IonSegmentButton>
+           
           </IonSegment>
         </IonToolbar>
       </IonHeader>
@@ -51,4 +49,4 @@ const AdminHomePage: React.FC = () => {
   );
 };
 
-export default AdminHomePage;
+export default AdminViewPage;
