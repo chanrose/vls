@@ -27,6 +27,9 @@ const AdminAppTabs: React.FC = () => {
         <Route exact path="/admin/home/" component={AdminHomePage} />
         <Route exact path="/admin/addnew/" component={AdminAddPage} />
         <Route exact path="/admin/viewlist/" component={AdminViewPage} />
+        <Route exact path="admin/viewlist/entries/:id">
+          
+        </Route>
 
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
