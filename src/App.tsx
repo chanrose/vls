@@ -14,18 +14,30 @@ import { ellipse, square, triangle } from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
+import GettingStartedPage from './pages/GettingStartedPage';
+import GettingStartedS2Page from './pages/GettingStartedS2Page';
+import LoginPage from './pages/LoginPage';
+import RegistrationPage from './pages/RegistrationPage';
+import AdminAppTabs from './AdminAppTabs';
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route path="/tab1" component={Tab1} exact={true} />
+      {/* <IonTabs> */}
+       
+          <Route path="/gettingstarted" component={GettingStartedPage} />
+          <Route path="/gettingstarted/s2" component={GettingStartedS2Page} />
+          <Route path="/register" component={RegistrationPage} />
+          <Route path="/login" component={LoginPage} />
+          <Route path="/admin">
+              <AdminAppTabs />
+          </Route>
           <Route path="/tab2" component={Tab2} exact={true} />
           <Route path="/tab3" component={Tab3} />
-          <Route path="/" render={() => <Redirect to="/tab1" />} exact={true} />
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
+          
+          <Route path="/" render={() => <Redirect to="/gettingstarted/s2" />} exact={true} />
+       
+       {/*  <IonTabBar slot="bottom">
           <IonTabButton tab="tab1" href="/tab1">
             <IonIcon icon={triangle} />
             <IonLabel>Tab 1</IonLabel>
@@ -38,8 +50,8 @@ const App: React.FC = () => (
             <IonIcon icon={square} />
             <IonLabel>Tab 3</IonLabel>
           </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
+        </IonTabBar> */}
+      {/* </IonTabs> */}
     </IonReactRouter>
   </IonApp>
 );
