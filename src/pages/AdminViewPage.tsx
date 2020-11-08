@@ -1,30 +1,17 @@
 import React from "react";
 import {
-  IonAvatar,
-  IonButton,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
-  IonCol,
   IonContent,
-  IonGrid,
   IonHeader,
-  IonInput,
   IonItem,
   IonLabel,
   IonList,
   IonPage,
-  IonRow,
   IonSegment,
   IonSegmentButton,
-  IonText,
-  IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import ExploreContainer from "../components/ExploreContainer";
 import "./styles/GettingStartedPage.css";
+import entries from "../data";
 
 const AdminViewPage: React.FC = () => {
   return (
@@ -44,7 +31,14 @@ const AdminViewPage: React.FC = () => {
           </IonSegment>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen></IonContent>
+      <IonContent className="ion-padding" fullscreen>
+        <IonList>
+          {entries.map((entry) =>
+            <IonItem button key={entry.id}
+              routerLink={`/admin/viewlist/entries/${entry.id}`}>{entry.brand + ' ' + entry.model} {entry.currentOwner} 
+              </IonItem>)}
+        </IonList>
+      </IonContent>
     </IonPage>
   );
 };

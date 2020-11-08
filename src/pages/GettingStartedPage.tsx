@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  IonAvatar,
   IonButton,
   IonCard,
   IonCardContent,
@@ -10,14 +9,10 @@ import {
   IonCol,
   IonContent,
   IonGrid,
-  IonHeader,
   IonLabel,
   IonPage,
   IonRow,
-  IonTitle,
-  IonToolbar,
 } from "@ionic/react";
-import ExploreContainer from "../components/ExploreContainer";
 import "./styles/GettingStartedPage.css";
 
 const GettingStartedPage: React.FC = () => {
@@ -56,7 +51,7 @@ const GettingStartedPage: React.FC = () => {
               
             </IonGrid>
             <br />
-            <IonButton className="IonButtonRadius" expand="block">NEXT</IonButton>
+            <IonButton routerLink="/gettingstarted2" className="IonButtonRadius" expand="block">NEXT</IonButton>
           </IonCardContent>
           
         </IonCard>
