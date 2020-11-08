@@ -3,3 +3,4 @@
 #### Modify root css with given color
 #### Added Register, Login page
 #### Updated route and pages for admin
+#### Updating Login function, adding UI components like sorting button, action sheet.
