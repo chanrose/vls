@@ -1,26 +1,16 @@
 import React from "react";
 import {
-  IonAvatar,
   IonButton,
   IonCard,
   IonCardContent,
   IonCardHeader,
-  IonCardSubtitle,
   IonCardTitle,
-  IonCol,
   IonContent,
-  IonGrid,
-  IonHeader,
   IonInput,
   IonItem,
-  IonLabel,
   IonList,
   IonPage,
-  IonRow,
-  IonTitle,
-  IonToolbar,
 } from "@ionic/react";
-import ExploreContainer from "../components/ExploreContainer";
 import "./styles/GettingStartedPage.css";
 
 const RegistrationPage: React.FC = () => {

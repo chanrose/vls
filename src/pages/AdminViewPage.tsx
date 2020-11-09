@@ -1,50 +1,94 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-  IonAvatar,
+  IonActionSheet,
   IonButton,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
   IonCol,
   IonContent,
+  IonFooter,
   IonGrid,
   IonHeader,
-  IonInput,
+  IonIcon,
   IonItem,
   IonLabel,
   IonList,
   IonPage,
   IonRow,
+  IonSearchbar,
   IonSegment,
   IonSegmentButton,
   IonText,
-  IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import ExploreContainer from "../components/ExploreContainer";
 import "./styles/GettingStartedPage.css";
+import entries from "../data";
+import { funnel, funnelOutline } from "ionicons/icons";
 
 const AdminViewPage: React.FC = () => {
+  const [searchText, setSearchText] = useState("");
+  const [btnFilter, setFilter] = useState(false);
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonSegment
-            onIonChange={(e) => console.log("Segment selected", e.detail.value)}
-          >
-            <IonSegmentButton value="home">
-              <IonLabel>Vehicle</IonLabel>
-            </IonSegmentButton>
-            <IonSegmentButton value="guest">
-              <IonLabel>Ticket</IonLabel>
-            </IonSegmentButton>
-           
-          </IonSegment>
+          <IonGrid>
+            <IonRow>
+              <IonCol>
+                {" "}
+                <IonSegment
+                  onIonChange={(e) =>
+                    console.log("Segment selected", e.detail.value)
+                  }
+                >
+                  <IonSegmentButton value="home">
+                    <IonLabel>Vehicle</IonLabel>
+                  </IonSegmentButton>
+                  <IonSegmentButton value="guest">
+                    <IonLabel>Ticket</IonLabel>
+                  </IonSegmentButton>
+                </IonSegment>
+              </IonCol>
+              <IonCol>
+                <IonButton fill="clear" onClick={() => setFilter(true)}>
+                  <IonIcon icon={funnelOutline} />
+                </IonButton>
+              </IonCol>
+            </IonRow>
+          </IonGrid>
+        </IonToolbar>
+        <IonToolbar>
+          <IonSearchbar
+            value={searchText}
+            onIonChange={(e) => setSearchText(e.detail.value!)}
+          />
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen></IonContent>
+      <IonContent className="ion-padding" fullscreen>
+        <IonActionSheet
+          isOpen={btnFilter}
+          onDidDismiss={() => setFilter(false)}
+          buttons={[
+            {
+              text: "Owner Name",
+              handler: () => {
+                console.log("Owner Name clicked");
+              },
+            },
+            { text: "Vehicle Name" },
+            { text: "Tax Expired" },
+          ]}
+        />
+        <IonList>
+          {entries.map((entry) => (
+            <IonItem
+              button
+              key={entry.id}
+              routerLink={`/admin/viewlist/entries/${entry.id}`}
+            >
+              {entry.brand + " " + entry.model} {entry.currentOwner}
+            </IonItem>
+          ))}
+        </IonList>
+      </IonContent>
     </IonPage>
   );
 };

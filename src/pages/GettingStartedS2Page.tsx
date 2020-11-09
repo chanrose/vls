@@ -1,26 +1,16 @@
 import React from "react";
 import {
-  IonAvatar,
   IonButton,
   IonCard,
   IonCardContent,
   IonCardHeader,
-  IonCardSubtitle,
   IonCardTitle,
-  IonCol,
   IonContent,
-  IonGrid,
-  IonHeader,
   IonInput,
   IonItem,
-  IonLabel,
   IonList,
   IonPage,
-  IonRow,
-  IonTitle,
-  IonToolbar,
 } from "@ionic/react";
-import ExploreContainer from "../components/ExploreContainer";
 import "./styles/GettingStartedPage.css";
 
 const GettingStartedS2Page: React.FC = () => {
@@ -49,9 +39,9 @@ const GettingStartedS2Page: React.FC = () => {
             
             
             <br />
-            <IonButton className="IonButtonRadius" expand="block">ENTER</IonButton>
-            <IonButton color="secondary" className="IonButtonRadius" expand="block">Login as Admin</IonButton>
-            <IonButton fill="clear" expand="block">Sign up for organization?</IonButton>
+            <IonButton routerLink="/login" className="IonButtonRadius" expand="block">Enter as Guest</IonButton>
+            <IonButton routerLink="/login" color="secondary" className="IonButtonRadius" expand="block">Login as Admin</IonButton>
+            <IonButton routerLink="/register" fill="clear" expand="block">Sign up for organization?</IonButton>
           </IonCardContent>
           
         </IonCard>
