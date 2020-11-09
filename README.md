@@ -6,3 +6,4 @@
  - Updating Login function, adding UI components like sorting button, action sheet.
  - Changed Logo
  - Adding FAB Btn
+ - Added btn post and modal

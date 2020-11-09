@@ -31,7 +31,7 @@ const AdminViewPage: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonGrid>
-            <IonRow>
+            <IonRow className="ion-align-items-start">
               <IonCol>
                 {" "}
                 <IonSegment
@@ -48,9 +48,12 @@ const AdminViewPage: React.FC = () => {
                 </IonSegment>
               </IonCol>
               <IonCol>
+              <div className="ion-text-right">
+                  {/* <IonText onClick={() => setFilter(true)}><IonIcon icon={funnelOutline} /></IonText> */}
                 <IonButton fill="clear" onClick={() => setFilter(true)}>
                   <IonIcon icon={funnelOutline} />
-                </IonButton>
+                </IonButton> 
+                </div>
               </IonCol>
             </IonRow>
           </IonGrid>
