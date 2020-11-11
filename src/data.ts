@@ -12,7 +12,8 @@ export const entries = [
         currentOwner: 'Chanbroset Prach',
         greenBook: 'True',
         email: 'bdchanbroset@gmail',
-        telephone: '062 729 5841'
+        telephone: '062 729 5841',
+        vehicleType: 'bike'
     },
     {
         id: '2',
@@ -27,7 +28,8 @@ export const entries = [
         currentOwner: 'Sokhovait Prasit',
         greenBook: 'True',
         email: 'andreas.m.mambu@gmail',
-        telephone: '032 729 5841'
+        telephone: '032 729 5841',
+        vehicleType: 'car'
     },
     {
         id: '3',
@@ -42,7 +44,8 @@ export const entries = [
         currentOwner: 'Prasit Yukasilv',
         greenBook: 'True',
         email: 'darreltracypeter@gmail',
-        telephone: '042 529 5841'
+        telephone: '042 529 5841',
+        vehicleType: 'car'
     },
     {
         id: '4',
@@ -57,7 +60,8 @@ export const entries = [
         currentOwner: 'Noraka Yasil',
         greenBook: 'True',
         email: 'kepisethnorak@gmail',
-        telephone: '053 219 5841'
+        telephone: '053 219 5841',
+        vehicleType: 'car'
     },
 
 ];

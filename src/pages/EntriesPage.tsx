@@ -106,6 +106,9 @@ const EntriesPage: React.FC = () => {
               <IonInput type="text" placeholder="Role" />
             </IonItem>
             <IonItem>
+            <IonInput type="text" placeholder="Vehicle Type" />
+          </IonItem>
+            <IonItem>
               <IonTextarea placeholder="Remark" />
             </IonItem>
 

@@ -6,6 +6,7 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonContent,
+  IonImg,
   IonInput,
   IonItem,
   IonList,
@@ -19,10 +20,8 @@ const GettingStartedS2Page: React.FC = () => {
       <IonContent color="light" fullscreen>
         <IonCard className="ionCardstyle">
           <IonCardHeader>
-            <img
-              className="imageSize"
-              src="https://raw.githubusercontent.com/chanrose/vls/v1.0/src/pages/media/vlsIcon.png"
-            />
+          <IonImg className="imageSize" src={"https://raw.githubusercontent.com/chanrose/vls/main/public/assets/icon/app2Logo.png"} />
+     
             <IonCardTitle className="centerText">Enter your Information</IonCardTitle>
           </IonCardHeader>
 
