@@ -9,6 +9,7 @@ import {
   IonCol,
   IonContent,
   IonGrid,
+  IonImg,
   IonLabel,
   IonPage,
   IonRow,
@@ -21,10 +22,11 @@ const GettingStartedPage: React.FC = () => {
       <IonContent color="light" fullscreen>
         <IonCard className="ionCardstyle">
           <IonCardHeader>
-            <img
+            <IonImg className="imageSize" src={"https://raw.githubusercontent.com/chanrose/vls/main/public/assets/icon/app2Logo.png"} />
+       {/*      <img
               className="imageSize"
-              src="https://raw.githubusercontent.com/chanrose/vls/v1.0/src/pages/media/vlsIcon.png"
-            />
+              src="{./media/v}"
+            /> */}
             <IonCardTitle className="centerText">Getting started</IonCardTitle>
             <IonCardSubtitle className="centerText">
               Choose language
@@ -35,17 +37,17 @@ const GettingStartedPage: React.FC = () => {
             <IonGrid>
               <IonRow className="centerText">
                 <IonCol>
-                  <img src="https://cdn4.iconfinder.com/data/icons/europe-country-flags/105/UNITED_KINGDOM-512.png" />
-                  <br />
-                  <IonLabel>Thai</IonLabel>
-                </IonCol>
-                <IonCol>
-                  <div className="grayStraightLine" />
-                </IonCol>
-                <IonCol>
-                  <img src="https://cdn4.iconfinder.com/data/icons/europe-country-flags/105/UNITED_KINGDOM-512.png" />
+                  <IonImg className="flagIcon" src="https://raw.githubusercontent.com/chanrose/vls/main/src/pages/media/englishLogo.png" />
                   <br />
                   <IonLabel>English</IonLabel>
+                </IonCol>
+              
+                  <div className="grayStraightLine" />
+           
+                <IonCol>
+                  <IonImg className="flagIcon" src="https://raw.githubusercontent.com/chanrose/vls/main/src/pages/media/thaiLogo.png" />
+                  <br />
+                  <IonLabel>Thai</IonLabel>
                 </IonCol>
               </IonRow>
               
