@@ -1,3 +1,16 @@
 .floatRight {
     float: right;
 }
+
+
+.imageSize {
+    display: block;
+    margin-top: 5vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 160px;
+}
+
+.announcementCard {
+    margin-top: 0 auto;
+}

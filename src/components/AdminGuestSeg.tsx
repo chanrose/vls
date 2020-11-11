@@ -15,9 +15,9 @@ const AdminGuestSeg: React.FC = () => {
           <IonToolbar>
             <IonRow>
               <IonCol>
-                <div>
+               
                   <IonTitle>Create a new post</IonTitle>
-                </div>
+                
               </IonCol>
               <IonCol>
                 <div className="ion-text-right">
@@ -29,10 +29,8 @@ const AdminGuestSeg: React.FC = () => {
             </IonRow>
           </IonToolbar>
         </IonHeader>
-
-        <div>
           <AnnouncementCard name={"hi"} />
-        </div>
+       
       </IonModal>
     </div>
   );

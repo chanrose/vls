@@ -22,6 +22,7 @@ import "./styles/GettingStartedPage.css";
 import { add, bicycle, car, easel, logoFacebook, ticket } from "ionicons/icons";
 import AnnouncementCard from "../components/AnnouncementCard";
 import AdminGuestSeg from "../components/AdminGuestSeg";
+import AdminHomeSeg from "../components/AdminHomeSeg";
 
 
 const AdminHomePage: React.FC = () => {
@@ -66,9 +67,11 @@ const AdminHomePage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
-        <IonText>{segmentSelection}</IonText>
         {selectedGuest &&
           <AdminGuestSeg />
+        }
+        {selectedHome &&
+          <AdminHomeSeg />  
         }
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton>
