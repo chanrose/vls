@@ -12,6 +12,7 @@ import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import AdminAppTabs from "./AdminAppTabs";
 import { AuthContext, useAuthInit } from "./auth";
+import GuestAppTabs from "./GuestAppTabs";
 
 const App: React.FC = () => {
   const {loading, auth} = useAuthInit();
@@ -28,6 +29,7 @@ const App: React.FC = () => {
         <Route path="/gettingstarted2" component={GettingStartedS2Page} />
         <Route path="/register" component={RegistrationPage} />
         <Route path="/login" component={LoginPage} />
+        <Route path="/guest" component={GuestAppTabs} />
         <Route path="/admin/">
           <AdminAppTabs />
         </Route>
