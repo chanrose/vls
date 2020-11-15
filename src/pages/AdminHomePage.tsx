@@ -9,13 +9,9 @@ import {
   IonHeader,
   IonIcon,
   IonLabel,
-  IonModal,
   IonPage,
-  IonRow,
   IonSegment,
   IonSegmentButton,
-  IonText,
-  IonTitle,
   IonToolbar,
 } from "@ionic/react";
 import "./styles/GettingStartedPage.css";

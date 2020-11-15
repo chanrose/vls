@@ -38,7 +38,7 @@ const GettingStartedS2Page: React.FC = () => {
             
             
             <br />
-            <IonButton routerLink="/login" className="IonButtonRadius" expand="block">Enter as Guest</IonButton>
+            <IonButton routerLink="/guest" className="IonButtonRadius" expand="block">Enter as Guest</IonButton>
             <IonButton routerLink="/login" color="secondary" className="IonButtonRadius" expand="block">Login as Admin</IonButton>
             <IonButton routerLink="/register" fill="clear" expand="block">Sign up for organization?</IonButton>
           </IonCardContent>
