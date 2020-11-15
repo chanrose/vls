@@ -10,3 +10,5 @@
  - Update the segment function and app logo
  - Updating segment function on View List and adding IonCard to Guest Post.
  - Added Guest's Home, Request, View Page
+ ## Enjoy some random image from picsum
+ <img src="https://picsum.photos/seed/picsum/536/354" />
