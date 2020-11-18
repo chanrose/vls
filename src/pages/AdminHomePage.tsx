@@ -19,16 +19,17 @@ import { add, bicycle, car, easel, logoFacebook, ticket } from "ionicons/icons";
 import AnnouncementCard from "../components/AnnouncementCard";
 import AdminGuestSeg from "../components/AdminGuestSeg";
 import AdminHomeSeg from "../components/AdminHomeSeg";
-
+import { useAuth } from "../auth";
 
 const AdminHomePage: React.FC = () => {
-
+  const { userId } = useAuth();
+  console.log("User logged: ", userId);
   const [selectedHome, setHome] = useState(true);
   const [selectedGuest, setGuest] = useState(false);
   const [selectedTools, setTools] = useState(false);
   const [segmentSelection, setSegment] = useState("home");
 
-  const returnSegment = (selectedSegment : string) => {
+  const returnSegment = (selectedSegment: string) => {
     if (selectedSegment == "guest") {
       setGuest(true);
       setHome(false);
@@ -42,9 +43,8 @@ const AdminHomePage: React.FC = () => {
       setHome(true);
       setTools(false);
     }
+  };
 
-  }
- 
   return (
     <IonPage>
       <IonHeader>
@@ -63,12 +63,8 @@ const AdminHomePage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
-        {selectedGuest &&
-          <AdminGuestSeg />
-        }
-        {selectedHome &&
-          <AdminHomeSeg />  
-        }
+        {selectedGuest && <AdminGuestSeg />}
+        {selectedHome && <AdminHomeSeg />}
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton>
             <IonIcon icon={add} />

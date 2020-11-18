@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   IonActionSheet,
   IonButton,
   IonCol,
   IonContent,
+  IonFab,
+  IonFabButton,
   IonFooter,
   IonGrid,
   IonHeader,
@@ -22,41 +24,40 @@ import {
 import "./styles/GettingStartedPage.css";
 import entries from "../data";
 import { funnel, funnelOutline } from "ionicons/icons";
+import { useAuth } from "../auth";
+import { firestore } from "../firebase";
+import { Entry, toEntry } from "../model";
 
 const AdminViewPage: React.FC = () => {
+  const { userId } = useAuth();
+  console.log("View Page, logged by: ", userId);
+  const [entries, setEntries] = useState<Entry[]>([]);
+  useEffect(() => {
+    const entriesRef = firestore
+      .collection("users")
+      .doc(userId)
+      .collection("entries");
+    entriesRef.get().then(({ docs }) => setEntries(docs.map(toEntry)));
+  }, [userId]);
+
   const [searchText, setSearchText] = useState("");
   const [btnFilter, setFilter] = useState(false);
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonGrid>
-            <IonRow className="ion-align-items-start">
-              <IonCol>
-                {" "}
-                <IonSegment
-                  onIonChange={(e) =>
-                    console.log("Segment selected", e.detail.value)
-                  }
-                >
-                  <IonSegmentButton value="home">
-                    <IonLabel>Vehicle</IonLabel>
-                  </IonSegmentButton>
-                  <IonSegmentButton value="guest">
-                    <IonLabel>Ticket</IonLabel>
-                  </IonSegmentButton>
-                </IonSegment>
-              </IonCol>
-              <IonCol>
-              <div className="ion-text-right">
-                  {/* <IonText onClick={() => setFilter(true)}><IonIcon icon={funnelOutline} /></IonText> */}
-                <IonButton fill="clear" onClick={() => setFilter(true)}>
-                  <IonIcon icon={funnelOutline} />
-                </IonButton> 
-                </div>
-              </IonCol>
-            </IonRow>
-          </IonGrid>
+          <IonSegment
+            onIonChange={(e) => console.log("Segment selected", e.detail.value)}
+          >
+            <IonSegmentButton value="home">
+              <IonLabel>Vehicle</IonLabel>
+            </IonSegmentButton>
+            <IonSegmentButton value="guest">
+              <IonLabel>Ticket</IonLabel>
+            </IonSegmentButton>
+          </IonSegment>
+
+          {/* <IonText onClick={() => setFilter(true)}><IonIcon icon={funnelOutline} /></IonText> */}
         </IonToolbar>
         <IonToolbar>
           <IonSearchbar
@@ -66,6 +67,11 @@ const AdminViewPage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
+        <IonFab vertical="bottom" horizontal="end" slot="fixed">
+          <IonFabButton onClick={() => setFilter(true)}>
+            <IonIcon icon={funnelOutline} />
+          </IonFabButton>
+        </IonFab>
         <IonActionSheet
           isOpen={btnFilter}
           onDidDismiss={() => setFilter(false)}
@@ -87,7 +93,8 @@ const AdminViewPage: React.FC = () => {
               key={entry.id}
               routerLink={`/admin/viewlist/entries/${entry.id}`}
             >
-              {entry.brand + " " + entry.model} {entry.currentOwner}
+              {entry.vehicleOwner + " " + entry.vehicleType}{" "}
+              {entry.vehiclePlate}
             </IonItem>
           ))}
         </IonList>
