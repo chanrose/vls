@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   IonButton,
   IonCard,
@@ -20,19 +20,36 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import "./styles/GettingStartedPage.css";
-import { useParams } from "react-router";
+import { useParams, useRouteMatch } from "react-router";
 import entries from "../data";
+import { useAuth } from "../auth";
+import { Entry, toEntry } from "../model";
+import { firestore } from "../firebase";
 
 interface RouterParams {
   id: string;
 }
 
 const EntriesPage: React.FC = () => {
-  const {id} = useParams<RouterParams>();
-  const entry = entries.find((entry) => entry.id === id);
-  if (!entry) {
-    throw new Error(`No such ID ${id}`);
-  }
+  const { userId } = useAuth();
+  const match = useRouteMatch<RouterParams>();
+  const { id } = match.params;
+  const [entry, setEntry] = useState<Entry>();
+
+  useEffect(() => {
+    const entryRef = firestore
+      .collection("users")
+      .doc(userId)
+      .collection("entries")
+      .doc(id);
+    entryRef.get().then((doc) => {
+      setEntry(toEntry(doc));
+    });
+    console.log("EntryRef: ", entryRef);
+  }, [userId]);
+
+  console.log("Entry.id:", entry?.id);
+  console.log(entry);
   return (
     <IonPage>
       <IonHeader>
@@ -51,65 +68,69 @@ const EntriesPage: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <IonCard>
-          <IonCardHeader><IonCardTitle>Modifying Sticker No. 1 </IonCardTitle></IonCardHeader>
+          <IonCardHeader>
+            <IonCardTitle>Modifying Sticker No. 1 </IonCardTitle>
+          </IonCardHeader>
           <IonList>
             <IonItem>
-              <IonText>Sticker No. 1</IonText>
+              <IonText>
+                Sticker No. {entry?.id} {entry?.vehicleOwner} dfg
+              </IonText>
             </IonItem>
 
             <IonItem>
-              <IonInput type="text" placeholder={entry.vehicleOwner} />
+              <IonInput type="text" placeholder={entry?.vehicleOwner} />
             </IonItem>
 
             <IonItem>
-              <IonInput type="text" placeholder={entry.vehiclePlate} />
+              <IonInput type="text" placeholder={entry?.vehiclePlate} />
             </IonItem>
 
             <IonItem>
-              <IonInput type="text" placeholder={entry.province} />
+              <IonInput type="text" placeholder={entry?.province} />
             </IonItem>
 
             <IonItem>
-              <IonInput type="text" placeholder={entry.brand} />
+              <IonInput type="text" placeholder={entry?.vehicleBrand} />
             </IonItem>
 
             <IonItem>
-              <IonInput type="text" placeholder="Model" />
+              <IonInput type="text" placeholder={entry?.vehicleModel} />
             </IonItem>
 
             <IonItem>
-              <IonInput type="text" placeholder="Colour" />
+              <IonInput type="text" placeholder={entry?.vehicleColour} />
             </IonItem>
 
             <IonItem>
-              <IonInput type="text" placeholder="Tax Expired" />
+              <IonInput type="text" placeholder={entry?.taxExpire} />
             </IonItem>
 
             <IonItem>
-              <IonInput type="text" placeholder="Insurance Expired" />
+              <IonInput type="text" placeholder={entry?.greenBookOwner} />
             </IonItem>
 
             <IonItem>
-              <IonInput type="text" placeholder="Current Owner" />
+              <IonInput type="text" placeholder={entry?.hasGreenBook} />
             </IonItem>
 
             <IonItem>
-              <IonInput type="text" placeholder="Green Book" />
+              <IonInput type="text" placeholder={entry?.ownerEmail} />
             </IonItem>
             <IonItem>
-              <IonInput type="text" placeholder="Email" />
+              <IonInput type="text" placeholder={entry?.ownerTele} />
             </IonItem>
             <IonItem>
-              <IonInput type="text" placeholder="Telephone" />
+              <IonInput type="text" placeholder={entry?.ownerRole} />
             </IonItem>
             <IonItem>
-              <IonInput type="text" placeholder="Role" />
+              <IonInput type="text" placeholder={entry?.vehicleType} />
             </IonItem>
             <IonItem>
-            <IonInput type="text" placeholder="Vehicle Type" />
-          </IonItem>
+              <IonInput type="text" placeholder={entry?.vehicleBrand} />
+            </IonItem>
             <IonItem>
-              <IonTextarea placeholder="Remark" />
+              <IonTextarea placeholder={entry?.messageRemark} />
             </IonItem>
 
             {/* This is for Issue a ticket */}

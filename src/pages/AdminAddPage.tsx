@@ -1,19 +1,11 @@
 import React, { useState } from "react";
 import {
-  IonButton,
-  IonCol,
   IonContent,
   IonHeader,
-  IonInput,
-  IonItem,
   IonLabel,
-  IonList,
   IonPage,
-  IonRow,
   IonSegment,
   IonSegmentButton,
-  IonText,
-  IonTextarea,
   IonToolbar,
 } from "@ionic/react";
 import "./styles/GettingStartedPage.css";
