@@ -39,6 +39,7 @@ const AdminViewPage: React.FC = () => {
       .collection("entries");
     entriesRef.get().then(({ docs }) => setEntries(docs.map(toEntry)));
   }, [userId]);
+  console.log("entry: ", entries);
 
   const [searchText, setSearchText] = useState("");
   const [btnFilter, setFilter] = useState(false);
@@ -56,8 +57,6 @@ const AdminViewPage: React.FC = () => {
               <IonLabel>Ticket</IonLabel>
             </IonSegmentButton>
           </IonSegment>
-
-          {/* <IonText onClick={() => setFilter(true)}><IonIcon icon={funnelOutline} /></IonText> */}
         </IonToolbar>
         <IonToolbar>
           <IonSearchbar
@@ -93,8 +92,7 @@ const AdminViewPage: React.FC = () => {
               key={entry.id}
               routerLink={`/admin/viewlist/entries/${entry.id}`}
             >
-              {entry.vehicleOwner + " " + entry.vehicleType}{" "}
-              {entry.vehiclePlate}
+              {entry.vehicleType} {entry.vehiclePlate}
             </IonItem>
           ))}
         </IonList>
