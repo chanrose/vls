@@ -1,6 +1,7 @@
 export interface Entry {
     map(arg0: (entry: any) => JSX.Element): import("react").ReactNode;
     id: string,
+    sticker: string,
     vehicleOwner: string,
     vehicleType: string,
     vehiclePlate: string,

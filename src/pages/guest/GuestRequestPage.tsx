@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  IonCheckbox,
   IonContent,
   IonHeader,
   IonItem,
@@ -15,7 +16,14 @@ import {
 } from "@ionic/react";
 
 const GuestRequestPage: React.FC = () => {
-   
+  const checkboxList = [
+    { val: 'Make driver license', isChecked: true },
+    { val: 'Renew driver license', isChecked: false },
+    { val: 'Renew tax and insurance', isChecked: false },
+    { val: 'Others', isChecked: false }
+  ];
+
+  
   return (
     <IonPage>
       <IonHeader>
@@ -30,26 +38,13 @@ const GuestRequestPage: React.FC = () => {
             <IonListHeader>
               <IonLabel>What request do you have?</IonLabel>
             </IonListHeader>
-
-            <IonItem>
-              <IonLabel>Make driver license</IonLabel>
-              <IonRadio slot="start" value="biff" />
+            {checkboxList.map(({ val, isChecked }, i) => (
+            <IonItem key={i}>
+              <IonLabel>{val}</IonLabel>
+              <IonCheckbox slot="end" value={val} checked={isChecked} />
             </IonItem>
-
-            <IonItem>
-              <IonLabel>Renew driver license</IonLabel>
-              <IonRadio slot="start" value="griff" />
-            </IonItem>
-
-            <IonItem>
-              <IonLabel>Renew tax and insurance</IonLabel>
-              <IonRadio slot="start" value="buford" />
-            </IonItem>
-            <IonItem>
-              <IonLabel>Others</IonLabel>
-              <IonRadio slot="start" value="buford" />
-            </IonItem>
-
+          ))}
+          
           </IonRadioGroup>
           <IonItemDivider>Others</IonItemDivider>
           <IonItem></IonItem>

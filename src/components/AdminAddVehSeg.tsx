@@ -4,8 +4,11 @@ import {
   IonDatetime,
   IonInput,
   IonItem,
+  IonLabel,
   IonList,
   IonRow,
+  IonSelect,
+  IonSelectOption,
   IonText,
   IonTextarea,
 } from "@ionic/react";
@@ -21,7 +24,7 @@ const AdminAddVehSeg: React.FC = () => {
   const history = useHistory();
   const handleSave = () => {
     firestore.collection("users").doc(userId).collection("entries").add({
-      id: stickerId,
+      sticker: stickerId,
       vehicleOwner: vehicleOwner,
       vehicleType: vehicleType,
       vehiclePlate: vehiclePlate,
@@ -123,7 +126,7 @@ const AdminAddVehSeg: React.FC = () => {
       </IonItem>
 
       <IonItem>
-        <IonDatetime
+        <IonDatetime max="2030-12-20"
           value={taxExpire}
           onIonChange={(e) => setTax(e.detail.value!)}
           placeholder="Tax Expired"
@@ -131,7 +134,7 @@ const AdminAddVehSeg: React.FC = () => {
       </IonItem>
 
       <IonItem>
-        <IonDatetime
+        <IonDatetime max="2030-12-20"
           value={insuranceExpire}
           onIonChange={(e) => setInsurance(e.detail.value!)}
           placeholder="Insurance Expired"
@@ -139,22 +142,23 @@ const AdminAddVehSeg: React.FC = () => {
       </IonItem>
 
       <IonItem>
-        <IonInput
-          type="text"
-          value={greenBookOwner}
-          onIonChange={(e) => setGB(e.detail.value!)}
-          placeholder="Current Owner"
-        />
-      </IonItem>
+      <IonLabel>Have Green Book</IonLabel>
+      <IonSelect value={hasGreenBook} placeholder="Select One" onIonChange={e => setGreenBook(e.detail.value)}>
+        <IonSelectOption value="true">Yes</IonSelectOption>
+        <IonSelectOption value="false">No</IonSelectOption>
+      </IonSelect>
+    </IonItem>
 
-      <IonItem>
-        <IonInput
-          type="text"
-          value={hasGreenBook}
-          onIonChange={(e) => setGreenBook(e.detail.value!)}
-          placeholder="Green Book"
-        />
-      </IonItem>
+    <IonItem>
+    <IonInput
+      type="text"
+      value={greenBookOwner}
+      onIonChange={(e) => setGB(e.detail.value!)}
+      placeholder="Greenbook owner"
+    />
+  </IonItem>
+  
+
       <IonItem>
         <IonInput
           type="text"
@@ -171,22 +175,25 @@ const AdminAddVehSeg: React.FC = () => {
           placeholder="Telephone"
         />
       </IonItem>
+
       <IonItem>
-        <IonInput
-          type="text"
-          value={ownerRole}
-          onIonChange={(e) => setRole(e.detail.value!)}
-          placeholder="Role"
-        />
-      </IonItem>
-      <IonItem>
-        <IonInput
-          type="text"
-          value={vehicleType}
-          onIonChange={(e) => setType(e.detail.value!)}
-          placeholder="Vehicle Type"
-        />
-      </IonItem>
+      <IonLabel>Who is the owner?</IonLabel>
+      <IonSelect value={ownerRole} placeholder="Select One" onIonChange={e => setRole(e.detail.value)}>
+        <IonSelectOption value="student">Student</IonSelectOption>
+        <IonSelectOption value="faculty">Faculty</IonSelectOption>
+        <IonSelectOption value="other">Others</IonSelectOption>
+      </IonSelect>
+    </IonItem>
+
+    <IonItem>
+    <IonLabel>Vehicle Type</IonLabel>
+    <IonSelect value={vehicleType} placeholder="Select One" onIonChange={e => setType(e.detail.value)}>
+      <IonSelectOption value="Motorbike">Motorbike</IonSelectOption>
+      <IonSelectOption value="Car">Car</IonSelectOption>
+      <IonSelectOption value="Other">Others</IonSelectOption>
+    </IonSelect>
+  </IonItem>
+
       <IonItem>
         <IonTextarea
           value={messageRemark}

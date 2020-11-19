@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import {
+  IonBackButton,
   IonButton,
+  IonButtons,
   IonCard,
   IonCardHeader,
   IonCardTitle,
   IonCol,
   IonContent,
+  IonDatetime,
   IonHeader,
   IonInput,
   IonItem,
@@ -17,6 +20,7 @@ import {
   IonSegmentButton,
   IonText,
   IonTextarea,
+  IonTitle,
   IonToolbar,
 } from "@ionic/react";
 import "./styles/GettingStartedPage.css";
@@ -25,9 +29,19 @@ import entries from "../data";
 import { useAuth } from "../auth";
 import { Entry, toEntry } from "../model";
 import { firestore } from "../firebase";
+import dayjs from "dayjs";
 
 interface RouterParams {
   id: string;
+}
+
+const formatDate = (inputDate:string) => {
+  const dayjs = require('dayjs');
+  const date = dayjs(inputDate);
+  date.toISOString();
+  return (
+    date.format('MMM DD, YYYY')
+  );
 }
 
 const EntriesPage: React.FC = () => {
@@ -54,16 +68,10 @@ const EntriesPage: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonSegment
-            onIonChange={(e) => console.log("Segment selected", e.detail.value)}
-          >
-            <IonSegmentButton value="home">
-              <IonLabel>Vehicle</IonLabel>
-            </IonSegmentButton>
-            <IonSegmentButton value="guest">
-              <IonLabel>Ticket</IonLabel>
-            </IonSegmentButton>
-          </IonSegment>
+          <IonButtons slot="start">
+          <IonBackButton />
+          </IonButtons>
+          <IonTitle>{entry?.id}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -74,7 +82,7 @@ const EntriesPage: React.FC = () => {
           <IonList>
             <IonItem>
               <IonText>
-                Sticker No. {entry?.id} {entry?.vehicleOwner} dfg
+                Sticker No. {entry?.sticker}
               </IonText>
             </IonItem>
 
@@ -103,8 +111,12 @@ const EntriesPage: React.FC = () => {
             </IonItem>
 
             <IonItem>
-              <IonInput type="text" placeholder={entry?.taxExpire} />
+              <IonDatetime placeholder={formatDate(entry?.taxExpire!)} />
             </IonItem>
+
+            <IonItem>
+            <IonDatetime placeholder={formatDate(entry?.insuranceExpire!)} />
+          </IonItem>
 
             <IonItem>
               <IonInput type="text" placeholder={entry?.greenBookOwner} />
