@@ -4,40 +4,46 @@ import {
   IonTabBar,
   IonTabButton,
   IonLabel,
-  IonIcon
-} from '@ionic/react';
-import HomePage from './pages/HomePage';
-import { addCircleOutline, home as homeIcon, listOutline, settings as settingsIcon } from 'ionicons/icons';
-import { Redirect, Route, Switch } from 'react-router-dom';
-import React from 'react';
-import AdminHomePage from './pages/AdminHomePage';
-import AdminAddPage from './pages/AdminAddPage';
-import AdminViewPage from './pages/AdminViewPage';
-import EntriesPage from './pages/EntriesPage';
-import { useAuth } from './auth'; 
+  IonIcon,
+} from "@ionic/react";
+import HomePage from "./pages/HomePage";
+import {
+  addCircleOutline,
+  chatbox,
+  home as homeIcon,
+  listOutline,
+  settings as settingsIcon,
+} from "ionicons/icons";
+import { Redirect, Route, Switch } from "react-router-dom";
+import React from "react";
+import AdminHomePage from "./pages/AdminHomePage";
+import AdminAddPage from "./pages/AdminAddPage";
+import AdminViewPage from "./pages/AdminViewPage";
+import EntriesPage from "./pages/EntriesPage";
+import { useAuth } from "./auth";
+import AdminSettingPage from "./pages/AdminSettingPage";
 
 const AdminAppTabs: React.FC = () => {
-   const { loggedIn } = useAuth();
+  const { loggedIn } = useAuth();
   if (!loggedIn) {
-    return <Redirect to="/login" />
+    return <Redirect to="/login" />;
   }
 
   return (
     <IonTabs>
       <IonRouterOutlet>
         <Switch>
-        <Route exact path="/admin/home/" component={AdminHomePage} />
-        <Route exact path="/admin/addnew/" component={AdminAddPage} />
-        <Route exact path="/admin/viewlist/" component={AdminViewPage} />
-        <Route exact path="/admin/viewlist/entries/:id">
-          <EntriesPage />
-        </Route>
-        <Route>
-          <AdminHomePage />
-        </Route>
+          <Route exact path="/admin/home/" component={AdminHomePage} />
+          <Route exact path="/admin/addnew/" component={AdminAddPage} />
+          <Route exact path="/admin/viewlist/" component={AdminViewPage} />
+          <Route exact path="/admin/settings/" component={AdminSettingPage} />
+          <Route exact path="/admin/viewlist/entries/:id">
+            <EntriesPage />
+          </Route>
+          <Route>
+            <AdminHomePage />
+          </Route>
         </Switch>
-        
-
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
         <IonTabButton tab="home" href="/admin/home/">
@@ -45,14 +51,14 @@ const AdminAppTabs: React.FC = () => {
           <IonLabel>Home</IonLabel>
         </IonTabButton>
         <IonTabButton tab="addnew" href="/admin/addnew/">
-          <IonIcon icon={addCircleOutline} />
-          <IonLabel>Add New</IonLabel>
+          <IonIcon icon={chatbox} />
+          <IonLabel>Message</IonLabel>
         </IonTabButton>
         <IonTabButton tab="listItem" href="/admin/viewlist/">
           <IonIcon icon={listOutline} />
           <IonLabel>View List</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="settings" href="/my/settings">
+        <IonTabButton tab="settings" href="/admin/settings/">
           <IonIcon icon={settingsIcon} />
           <IonLabel>Settings</IonLabel>
         </IonTabButton>

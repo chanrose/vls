@@ -1,17 +1,10 @@
-# Vehicle Legal System Updated on November 18, 2020
+# Vehicle Legal System Updated on November 20, 2020
 
-- Added 2 new pages (Getting started /s1 and /2)
-- Modify root css with given color
-- Added Register, Login page
-- Updated route and pages for admin
-- Updating Login function, adding UI components like sorting button, action sheet.
-- Changed Logo
-- Adding FAB Btn
-- Added btn post and modal
-- Update the segment function and app logo
-- Updating segment function on View List and adding IonCard to Guest Post.
-- Added Guest's Home, Request, View Page
-- Added View and Add new page from firebase
+- Update View Page, Add Page
+- Custom Filter Button on View page for Secondary list of data
+- Created FAB Add button on the View Page
+- Added Delete Feature to Entry
+- Added Setting / Logout Page / Replace AddTab to Message Tab
 
 ## Enjoy some random image from picsum
 

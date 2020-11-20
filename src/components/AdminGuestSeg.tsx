@@ -1,4 +1,12 @@
-import { IonButton, IonCol, IonHeader, IonModal, IonRow, IonTitle, IonToolbar } from "@ionic/react";
+import {
+  IonButton,
+  IonCol,
+  IonHeader,
+  IonModal,
+  IonRow,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/react";
 import React, { useState } from "react";
 import AnnouncementCard from "./AnnouncementCard";
 import "./ExploreContainer.css";
@@ -15,9 +23,7 @@ const AdminGuestSeg: React.FC = () => {
           <IonToolbar>
             <IonRow>
               <IonCol>
-               
-                  <IonTitle>Create a new post</IonTitle>
-                
+                <IonTitle>Create a new post</IonTitle>
               </IonCol>
               <IonCol>
                 <div className="ion-text-right">
@@ -29,8 +35,7 @@ const AdminGuestSeg: React.FC = () => {
             </IonRow>
           </IonToolbar>
         </IonHeader>
-          <AnnouncementCard name={"hi"} />
-       
+        <AnnouncementCard name={"hi"} />
       </IonModal>
     </div>
   );

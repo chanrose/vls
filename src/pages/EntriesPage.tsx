@@ -1,118 +1,196 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
+  IonBackButton,
   IonButton,
+  IonButtons,
   IonCard,
   IonCardHeader,
   IonCardTitle,
   IonCol,
   IonContent,
+  IonDatetime,
   IonHeader,
   IonInput,
   IonItem,
+  IonItemDivider,
   IonLabel,
   IonList,
   IonPage,
   IonRow,
   IonSegment,
   IonSegmentButton,
+  IonSelect,
+  IonSelectOption,
   IonText,
   IonTextarea,
+  IonTitle,
   IonToolbar,
 } from "@ionic/react";
 import "./styles/GettingStartedPage.css";
-import { useParams } from "react-router";
+import { useHistory, useParams, useRouteMatch } from "react-router";
 import entries from "../data";
+import { useAuth } from "../auth";
+import { Entry, toEntry } from "../model";
+import { firestore } from "../firebase";
+import dayjs from "dayjs";
 
 interface RouterParams {
   id: string;
 }
 
+const formatDate = (inputDate: string) => {
+  if (inputDate == "") return "Nan";
+  const dayjs = require("dayjs");
+  const date = dayjs(inputDate);
+  date.toISOString();
+  return date.format("MMM DD, YYYY");
+};
+
 const EntriesPage: React.FC = () => {
-  const {id} = useParams<RouterParams>();
-  const entry = entries.find((entry) => entry.id === id);
-  if (!entry) {
-    throw new Error(`No such ID ${id}`);
-  }
+  const { userId } = useAuth();
+  const match = useRouteMatch<RouterParams>();
+  const { id } = match.params;
+  const [entry, setEntry] = useState<Entry>();
+  const history = useHistory();
+  useEffect(() => {
+    const entryRef = firestore
+      .collection("users")
+      .doc(userId)
+      .collection("entries")
+      .doc(id);
+    entryRef.get().then((doc) => {
+      setEntry(toEntry(doc));
+    });
+    console.log("EntryRef: ", entryRef);
+  }, [userId]);
+
+  console.log("Entry.id:", entry?.id);
+  console.log(entry);
+
+  const handleDelete = () => {
+    const entryRef = firestore
+      .collection("users")
+      .doc(userId)
+      .collection("entries")
+      .doc(id);
+    entryRef.delete();
+    history.goBack();
+  };
+
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonSegment
-            onIonChange={(e) => console.log("Segment selected", e.detail.value)}
-          >
-            <IonSegmentButton value="home">
-              <IonLabel>Vehicle</IonLabel>
-            </IonSegmentButton>
-            <IonSegmentButton value="guest">
-              <IonLabel>Ticket</IonLabel>
-            </IonSegmentButton>
-          </IonSegment>
+          <IonButtons slot="start">
+            <IonBackButton />
+          </IonButtons>
+          <IonTitle>
+            {entry?.vehicleBrand} {entry?.vehicleModel}{" "}
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonCard>
-          <IonCardHeader><IonCardTitle>Modifying Sticker No. 1 </IonCardTitle></IonCardHeader>
+          <IonCardHeader>
+            <IonCardTitle>
+              <IonLabel>Modifying Sticker No. 1</IonLabel>{" "}
+            </IonCardTitle>
+          </IonCardHeader>
+
           <IonList>
+            <IonItemDivider>
+              <IonLabel>Owner Information: </IonLabel>
+            </IonItemDivider>
             <IonItem>
-              <IonText>Sticker No. 1</IonText>
+              <IonText>Sticker No. {entry?.sticker}</IonText>
             </IonItem>
 
             <IonItem>
-              <IonInput type="text" placeholder={entry.vehicleOwner} />
+              <IonLabel>Owner: </IonLabel>
+              <IonInput type="text" placeholder={entry?.vehicleOwner} />
+            </IonItem>
+            <IonItem>
+              <IonLabel>Who is the owner?</IonLabel>
+              <IonSelect placeholder={entry?.ownerRole}>
+                <IonSelectOption value="Student">Student</IonSelectOption>
+                <IonSelectOption value="Faculty">Faculty</IonSelectOption>
+                <IonSelectOption value="AIMS">AIMS</IonSelectOption>
+                <IonSelectOption value="Other">Others</IonSelectOption>
+              </IonSelect>
+            </IonItem>
+            <IonItem>
+              <IonLabel>ID No: </IonLabel>
+              <IonInput type="text" placeholder={entry?.idNo} />
+            </IonItem>
+            <IonItem>
+              <IonLabel>Email: </IonLabel>
+              <IonInput type="text" placeholder={entry?.ownerEmail} />
+            </IonItem>
+            <IonItem>
+              <IonLabel>Telephone: </IonLabel>
+              <IonInput type="text" placeholder={entry?.ownerTele} />
+            </IonItem>
+            <IonItem>
+              <IonLabel>Driving License: </IonLabel>
+              <IonDatetime placeholder={formatDate(entry?.drivingExpire!)} />
+            </IonItem>
+            <IonItemDivider>
+              <IonLabel>Vehicle Information:</IonLabel>
+            </IonItemDivider>
+            <IonItem>
+              <IonLabel>Vehicle type: </IonLabel>
+              <IonInput type="text" placeholder={entry?.vehicleType} />
+            </IonItem>
+            <IonItem>
+              <IonLabel>Plate: </IonLabel>
+              <IonInput type="text" placeholder={entry?.vehiclePlate} />
             </IonItem>
 
             <IonItem>
-              <IonInput type="text" placeholder={entry.vehiclePlate} />
+              <IonLabel>Province: </IonLabel>
+              <IonInput type="text" placeholder={entry?.province} />
             </IonItem>
 
             <IonItem>
-              <IonInput type="text" placeholder={entry.province} />
+              <IonLabel>Brand: </IonLabel>
+              <IonInput type="text" placeholder={entry?.vehicleBrand} />
             </IonItem>
 
             <IonItem>
-              <IonInput type="text" placeholder={entry.brand} />
+              <IonLabel>Model: </IonLabel>
+              <IonInput type="text" placeholder={entry?.vehicleModel} />
             </IonItem>
 
             <IonItem>
-              <IonInput type="text" placeholder="Model" />
+              <IonLabel>Colour: </IonLabel>
+              <IonInput type="text" placeholder={entry?.vehicleColour} />
             </IonItem>
 
             <IonItem>
-              <IonInput type="text" placeholder="Colour" />
+              <IonLabel>Tax Expire: </IonLabel>
+              <IonDatetime placeholder={formatDate(entry?.taxExpire!)} />
             </IonItem>
 
             <IonItem>
-              <IonInput type="text" placeholder="Tax Expired" />
+              <IonLabel>Insurance Expire: </IonLabel>
+              <IonDatetime placeholder={formatDate(entry?.insuranceExpire!)} />
             </IonItem>
 
             <IonItem>
-              <IonInput type="text" placeholder="Insurance Expired" />
+              <IonLabel>Has greenbook? </IonLabel>
+              <IonInput type="text" placeholder={entry?.hasGreenBook} />
+            </IonItem>
+            <IonItem>
+              <IonLabel>Greenbook Name: </IonLabel>
+              <IonInput type="text" placeholder={entry?.greenBookOwner} />
             </IonItem>
 
             <IonItem>
-              <IonInput type="text" placeholder="Current Owner" />
+              <IonLabel>Remark: </IonLabel>
+              <IonTextarea placeholder={entry?.messageRemark} />
             </IonItem>
 
-            <IonItem>
-              <IonInput type="text" placeholder="Green Book" />
-            </IonItem>
-            <IonItem>
-              <IonInput type="text" placeholder="Email" />
-            </IonItem>
-            <IonItem>
-              <IonInput type="text" placeholder="Telephone" />
-            </IonItem>
-            <IonItem>
-              <IonInput type="text" placeholder="Role" />
-            </IonItem>
-            <IonItem>
-            <IonInput type="text" placeholder="Vehicle Type" />
-          </IonItem>
-            <IonItem>
-              <IonTextarea placeholder="Remark" />
-            </IonItem>
-
-            {/* This is for Issue a ticket */}
+            {/*   This is for Issue a ticket 
             <IonItem>
               <IonText>Ticket Issue No.1</IonText>
             </IonItem>
@@ -120,14 +198,16 @@ const EntriesPage: React.FC = () => {
             <IonItem>
               <IonInput type="text" placeholder="Vehicle License Plate" />
             </IonItem>
-
+ */}
             <IonRow>
               <IonCol>
-                <IonButton fill="clear">Cancel</IonButton>
+                <IonButton onClick={handleDelete} color="danger">
+                  Delete
+                </IonButton>
               </IonCol>
               <IonCol>
-                <IonButton className="floatRight" fill="clear">
-                  Add
+                <IonButton color="primary" className="floatRight">
+                  Update
                 </IonButton>
               </IonCol>
             </IonRow>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   IonActionSheet,
   IonButton,
+  IonChip,
   IonCol,
   IonContent,
   IonFab,
@@ -13,20 +14,40 @@ import {
   IonItem,
   IonLabel,
   IonList,
+  IonListHeader,
+  IonModal,
   IonPage,
   IonRow,
   IonSearchbar,
   IonSegment,
   IonSegmentButton,
   IonText,
+  IonTitle,
   IonToolbar,
 } from "@ionic/react";
 import "./styles/GettingStartedPage.css";
 import entries from "../data";
-import { funnel, funnelOutline } from "ionicons/icons";
+import { add, funnel, funnelOutline } from "ionicons/icons";
 import { useAuth } from "../auth";
 import { firestore } from "../firebase";
 import { Entry, toEntry } from "../model";
+import dayjs from "dayjs";
+import AdminAddVehSeg from "../components/AdminAddVehSeg";
+
+const formatDate = (inputDate: string, type: string) => {
+  if (inputDate == "") return "Nan";
+  else {
+    const dayjs = require("dayjs");
+    const date = dayjs(inputDate);
+    const now = dayjs();
+    date.toISOString();
+    if (type == "format") {
+      return (
+        date.format("MMM DD, YYYY") + " | " + date.diff(now, "days") + " left"
+      );
+    }
+  }
+};
 
 const AdminViewPage: React.FC = () => {
   const { userId } = useAuth();
@@ -37,11 +58,23 @@ const AdminViewPage: React.FC = () => {
       .collection("users")
       .doc(userId)
       .collection("entries");
-    entriesRef.get().then(({ docs }) => setEntries(docs.map(toEntry)));
+    entriesRef
+      .orderBy("taxExpire", "asc")
+      .get()
+      .then(({ docs }) => setEntries(docs.map(toEntry)));
   }, [userId]);
-
+  console.log("entry: ", entries);
   const [searchText, setSearchText] = useState("");
   const [btnFilter, setFilter] = useState(false);
+  const [filterName, setListFilter] = useState("Tax Expire");
+
+  const [vehicleType, setVFilter] = useState(false);
+  const [typeName, setVType] = useState("Motorbike");
+  const [selectedTax, setTax] = useState(true);
+  const [selectedOwn, setOwn] = useState(false);
+  const [selectedInsure, setInsure] = useState(false);
+  const [showAddModal, setAddModal] = useState(false);
+
   return (
     <IonPage>
       <IonHeader>
@@ -56,8 +89,6 @@ const AdminViewPage: React.FC = () => {
               <IonLabel>Ticket</IonLabel>
             </IonSegmentButton>
           </IonSegment>
-
-          {/* <IonText onClick={() => setFilter(true)}><IonIcon icon={funnelOutline} /></IonText> */}
         </IonToolbar>
         <IonToolbar>
           <IonSearchbar
@@ -68,10 +99,39 @@ const AdminViewPage: React.FC = () => {
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
-          <IonFabButton onClick={() => setFilter(true)}>
-            <IonIcon icon={funnelOutline} />
+          <IonFabButton
+            routerLink={"/admin/addnew/"}
+            onClick={() => setAddModal(true)}
+          >
+            <IonIcon icon={add} />
           </IonFabButton>
         </IonFab>
+
+        <IonActionSheet
+          isOpen={vehicleType}
+          onDidDismiss={() => setVFilter(false)}
+          buttons={[
+            {
+              text: "Motorbike",
+              handler: () => {
+                setVType("Motorbike");
+              },
+            },
+            {
+              text: "Car",
+              handler: () => {
+                setVType("Car");
+              },
+            },
+            {
+              text: "Others",
+              handler: () => {
+                setVType("other");
+              },
+            },
+          ]}
+        />
+
         <IonActionSheet
           isOpen={btnFilter}
           onDidDismiss={() => setFilter(false)}
@@ -79,22 +139,58 @@ const AdminViewPage: React.FC = () => {
             {
               text: "Owner Name",
               handler: () => {
-                console.log("Owner Name clicked");
+                setListFilter("Owner Name");
+                setTax(false);
+                setInsure(false);
+                setOwn(true);
               },
             },
-            { text: "Vehicle Name" },
-            { text: "Tax Expired" },
+            {
+              text: "Insurance Expire",
+              handler: () => {
+                setListFilter("Insurance Expire");
+                setTax(false);
+                setInsure(true);
+                setOwn(false);
+              },
+            },
+            {
+              text: "Tax Expire",
+              handler: () => {
+                setListFilter("Tax Expire");
+                setTax(true);
+                setInsure(false);
+                setOwn(false);
+              },
+            },
           ]}
         />
+
         <IonList>
+          <IonListHeader>
+            <IonLabel>
+              <IonButton onClick={() => setVFilter(true)}>
+                <IonText>{typeName} </IonText>
+              </IonButton>
+            </IonLabel>
+            <IonButton onClick={() => setFilter(true)}>
+              <IonText>{filterName} </IonText>
+            </IonButton>
+          </IonListHeader>
           {entries.map((entry) => (
             <IonItem
               button
               key={entry.id}
               routerLink={`/admin/viewlist/entries/${entry.id}`}
             >
-              {entry.vehicleOwner + " " + entry.vehicleType}{" "}
-              {entry.vehiclePlate}
+              <IonText>
+                {entry.vehicleBrand} {entry.vehicleModel}
+              </IonText>
+              <IonText slot="end">
+                {selectedTax && formatDate(entry.taxExpire, "format")}
+                {selectedOwn && entry.vehicleOwner}
+                {selectedInsure && formatDate(entry.insuranceExpire, "format")}
+              </IonText>
             </IonItem>
           ))}
         </IonList>
