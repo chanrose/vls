@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   IonActionSheet,
   IonButton,
+  IonChip,
   IonCol,
   IonContent,
   IonFab,
@@ -13,6 +14,7 @@ import {
   IonItem,
   IonLabel,
   IonList,
+  IonListHeader,
   IonPage,
   IonRow,
   IonSearchbar,
@@ -23,10 +25,19 @@ import {
 } from "@ionic/react";
 import "./styles/GettingStartedPage.css";
 import entries from "../data";
-import { funnel, funnelOutline } from "ionicons/icons";
+import { add, funnel, funnelOutline } from "ionicons/icons";
 import { useAuth } from "../auth";
 import { firestore } from "../firebase";
 import { Entry, toEntry } from "../model";
+import dayjs from "dayjs";
+
+const formatDate = (inputDate: string) => {
+  if (inputDate == "") return "Nan";
+  const dayjs = require("dayjs");
+  const date = dayjs(inputDate);
+  date.toISOString();
+  return date.format("MMM DD, YYYY");
+};
 
 const AdminViewPage: React.FC = () => {
   const { userId } = useAuth();
@@ -40,9 +51,16 @@ const AdminViewPage: React.FC = () => {
     entriesRef.get().then(({ docs }) => setEntries(docs.map(toEntry)));
   }, [userId]);
   console.log("entry: ", entries);
-
   const [searchText, setSearchText] = useState("");
   const [btnFilter, setFilter] = useState(false);
+  const [filterName, setListFilter] = useState("Tax Expire");
+
+  const [vehicleType, setVFilter] = useState(false);
+  const [typeName, setVType] = useState("Motorbike");
+  const [selectedTax, setTax] = useState(true);
+  const [selectedOwn, setOwn] = useState(false);
+  const [selectedInsure, setInsure] = useState(false);
+
   return (
     <IonPage>
       <IonHeader>
@@ -67,10 +85,35 @@ const AdminViewPage: React.FC = () => {
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
-          <IonFabButton onClick={() => setFilter(true)}>
-            <IonIcon icon={funnelOutline} />
+          <IonFabButton routerLink="/admin/addnew/">
+            <IonIcon icon={add} />
           </IonFabButton>
         </IonFab>
+        <IonActionSheet
+          isOpen={vehicleType}
+          onDidDismiss={() => setVFilter(false)}
+          buttons={[
+            {
+              text: "Motorbike",
+              handler: () => {
+                setVType("Motorbike");
+              },
+            },
+            {
+              text: "Car",
+              handler: () => {
+                setVType("Car");
+              },
+            },
+            {
+              text: "Others",
+              handler: () => {
+                setVType("other");
+              },
+            },
+          ]}
+        />
+
         <IonActionSheet
           isOpen={btnFilter}
           onDidDismiss={() => setFilter(false)}
@@ -78,21 +121,58 @@ const AdminViewPage: React.FC = () => {
             {
               text: "Owner Name",
               handler: () => {
-                console.log("Owner Name clicked");
+                setListFilter("Owner Name");
+                setTax(false);
+                setInsure(false);
+                setOwn(true);
               },
             },
-            { text: "Vehicle Name" },
-            { text: "Tax Expired" },
+            {
+              text: "Insurance Expire",
+              handler: () => {
+                setListFilter("Insurance Expire");
+                setTax(false);
+                setInsure(true);
+                setOwn(false);
+              },
+            },
+            {
+              text: "Tax Expire",
+              handler: () => {
+                setListFilter("Tax Expire");
+                setTax(true);
+                setInsure(false);
+                setOwn(false);
+              },
+            },
           ]}
         />
+
         <IonList>
+          <IonListHeader>
+            <IonLabel>
+              <IonButton onClick={() => setVFilter(true)}>
+                <IonText>{typeName} </IonText>
+              </IonButton>
+            </IonLabel>
+            <IonButton onClick={() => setFilter(true)}>
+              <IonText>{filterName} </IonText>
+            </IonButton>
+          </IonListHeader>
           {entries.map((entry) => (
             <IonItem
               button
               key={entry.id}
               routerLink={`/admin/viewlist/entries/${entry.id}`}
             >
-              {entry.vehicleType} {entry.vehiclePlate}
+              <IonText>
+                {entry.vehicleBrand} {entry.vehicleModel}
+              </IonText>
+              <IonText slot="end">
+                {selectedTax && formatDate(entry.taxExpire)}
+                {selectedOwn && entry.vehicleOwner}
+                {selectedInsure && formatDate(entry.insuranceExpire)}
+              </IonText>
             </IonItem>
           ))}
         </IonList>

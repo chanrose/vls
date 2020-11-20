@@ -16,7 +16,9 @@ export interface Entry {
     ownerTele: string,
     ownerRole: string,
     messageRemark: string,
-    greenBookOwner: string
+    greenBookOwner: string,
+    drivingExpire: string,
+    idNo: string
 }
 
 /* export function toEntry(doc): Entry {

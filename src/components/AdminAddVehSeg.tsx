@@ -4,6 +4,7 @@ import {
   IonDatetime,
   IonInput,
   IonItem,
+  IonItemDivider,
   IonLabel,
   IonList,
   IonRow,
@@ -40,6 +41,7 @@ const AdminAddVehSeg: React.FC = () => {
       messageRemark: messageRemark,
       province: province,
       greenBookOwner: greenBookOwner,
+      drivingExpire: drivingExpire,
     });
     history.goBack();
   };
@@ -59,154 +61,191 @@ const AdminAddVehSeg: React.FC = () => {
   const [messageRemark, setMessage] = useState("");
   const [greenBookOwner, setGB] = useState("");
   const [province, setProvince] = useState("");
+  const [idNo, setIdNo] = useState("");
+  const [drivingExpire, setDrivingExpire] = useState("");
 
   return (
     <IonList>
+      <IonItemDivider>
+        <IonLabel>Owner Information: </IonLabel>
+      </IonItemDivider>
       <IonItem>
+        <IonLabel>Sticker No.</IonLabel>
         <IonInput
           type="text"
           value={stickerId}
           onIonChange={(e) => setSticker(e.detail.value!)}
-          placeholder="Sticker No. "
         />
       </IonItem>
 
       <IonItem>
+        <IonLabel>Owner: </IonLabel>
         <IonInput
           type="text"
           value={vehicleOwner}
           onIonChange={(e) => setOwner(e.detail.value!)}
-          placeholder="Vehicle Owner"
         />
+      </IonItem>
+      <IonItem>
+        <IonLabel>Who is the owner?</IonLabel>
+        <IonSelect
+          value={ownerRole}
+          placeholder="Select One"
+          onIonChange={(e) => setRole(e.detail.value)}
+        >
+          <IonSelectOption value="Student">Student</IonSelectOption>
+          <IonSelectOption value="Faculty">Faculty</IonSelectOption>
+          <IonSelectOption value="AIMS">AIMS</IonSelectOption>
+          <IonSelectOption value="Other">Others</IonSelectOption>
+        </IonSelect>
       </IonItem>
 
       <IonItem>
+        <IonLabel>ID No: </IonLabel>
         <IonInput
           type="text"
-          value={vehiclePlate}
-          onIonChange={(e) => setPlate(e.detail.value!)}
-          placeholder="Vehicle Plate"
+          value={idNo}
+          onIonChange={(e) => setIdNo(e.detail.value!)}
         />
       </IonItem>
 
       <IonItem>
-        <IonInput
-          type="text"
-          value={province}
-          onIonChange={(e) => setProvince(e.detail.value!)}
-          placeholder="Province"
-        />
-      </IonItem>
-
-      <IonItem>
-        <IonInput
-          type="text"
-          value={vehicleBrand}
-          onIonChange={(e) => setBrand(e.detail.value!)}
-          placeholder="Brand"
-        />
-      </IonItem>
-
-      <IonItem>
-        <IonInput
-          type="text"
-          value={vehicleModel}
-          onIonChange={(e) => setModel(e.detail.value!)}
-          placeholder="Model"
-        />
-      </IonItem>
-
-      <IonItem>
-        <IonInput
-          type="text"
-          value={vehicleColour}
-          onIonChange={(e) => setColour(e.detail.value!)}
-          placeholder="Colour"
-        />
-      </IonItem>
-
-      <IonItem>
-        <IonDatetime max="2030-12-20"
-          value={taxExpire}
-          onIonChange={(e) => setTax(e.detail.value!)}
-          placeholder="Tax Expired"
-        />
-      </IonItem>
-
-      <IonItem>
-        <IonDatetime max="2030-12-20"
-          value={insuranceExpire}
-          onIonChange={(e) => setInsurance(e.detail.value!)}
-          placeholder="Insurance Expired"
-        />
-      </IonItem>
-
-      <IonItem>
-      <IonLabel>Have Green Book</IonLabel>
-      <IonSelect value={hasGreenBook} placeholder="Select One" onIonChange={e => setGreenBook(e.detail.value)}>
-        <IonSelectOption value="true">Yes</IonSelectOption>
-        <IonSelectOption value="false">No</IonSelectOption>
-      </IonSelect>
-    </IonItem>
-
-    <IonItem>
-    <IonInput
-      type="text"
-      value={greenBookOwner}
-      onIonChange={(e) => setGB(e.detail.value!)}
-      placeholder="Greenbook owner"
-    />
-  </IonItem>
-  
-
-      <IonItem>
+        <IonLabel>Email: </IonLabel>
         <IonInput
           type="text"
           value={ownerEmail}
           onIonChange={(e) => setEmail(e.detail.value!)}
-          placeholder="Email"
         />
       </IonItem>
       <IonItem>
+        <IonLabel>Phone: </IonLabel>
         <IonInput
           type="text"
           value={ownerTele}
           onIonChange={(e) => setTele(e.detail.value!)}
-          placeholder="Telephone"
+        />
+      </IonItem>
+      <IonItem>
+        <IonLabel>Driving License: </IonLabel>
+        <IonDatetime
+          max="2030-12-20"
+          value={drivingExpire}
+          onIonChange={(e) => setDrivingExpire(e.detail.value!)}
+        />
+      </IonItem>
+      <IonItem>
+        <IonLabel>Vehicle Type</IonLabel>
+        <IonSelect
+          value={vehicleType}
+          placeholder="Select One"
+          onIonChange={(e) => setType(e.detail.value)}
+        >
+          <IonSelectOption value="Motorbike">Motorbike</IonSelectOption>
+          <IonSelectOption value="Car">Car</IonSelectOption>
+          <IonSelectOption value="Other">Others</IonSelectOption>
+        </IonSelect>
+      </IonItem>
+      <IonItem>
+        <IonLabel>Plate: </IonLabel>
+        <IonInput
+          type="text"
+          value={vehiclePlate}
+          onIonChange={(e) => setPlate(e.detail.value!)}
         />
       </IonItem>
 
       <IonItem>
-      <IonLabel>Who is the owner?</IonLabel>
-      <IonSelect value={ownerRole} placeholder="Select One" onIonChange={e => setRole(e.detail.value)}>
-        <IonSelectOption value="student">Student</IonSelectOption>
-        <IonSelectOption value="faculty">Faculty</IonSelectOption>
-        <IonSelectOption value="other">Others</IonSelectOption>
-      </IonSelect>
-    </IonItem>
-
-    <IonItem>
-    <IonLabel>Vehicle Type</IonLabel>
-    <IonSelect value={vehicleType} placeholder="Select One" onIonChange={e => setType(e.detail.value)}>
-      <IonSelectOption value="Motorbike">Motorbike</IonSelectOption>
-      <IonSelectOption value="Car">Car</IonSelectOption>
-      <IonSelectOption value="Other">Others</IonSelectOption>
-    </IonSelect>
-  </IonItem>
+        <IonLabel>Province: </IonLabel>
+        <IonInput
+          type="text"
+          value={province}
+          onIonChange={(e) => setProvince(e.detail.value!)}
+        />
+      </IonItem>
 
       <IonItem>
+        <IonLabel>Brand: </IonLabel>
+        <IonInput
+          type="text"
+          value={vehicleBrand}
+          onIonChange={(e) => setBrand(e.detail.value!)}
+        />
+      </IonItem>
+
+      <IonItem>
+        <IonLabel>Model: </IonLabel>
+        <IonInput
+          type="text"
+          value={vehicleModel}
+          onIonChange={(e) => setModel(e.detail.value!)}
+        />
+      </IonItem>
+
+      <IonItem>
+        <IonLabel>Colour: </IonLabel>
+        <IonInput
+          type="text"
+          value={vehicleColour}
+          onIonChange={(e) => setColour(e.detail.value!)}
+        />
+      </IonItem>
+
+      <IonItem>
+        <IonLabel>Tax Expire: </IonLabel>
+        <IonDatetime
+          max="2030-12-20"
+          value={taxExpire}
+          onIonChange={(e) => setTax(e.detail.value!)}
+        />
+      </IonItem>
+
+      <IonItem>
+        <IonLabel>Insurance Expire: </IonLabel>
+        <IonDatetime
+          max="2030-12-20"
+          value={insuranceExpire}
+          onIonChange={(e) => setInsurance(e.detail.value!)}
+        />
+      </IonItem>
+
+      <IonItem>
+        <IonLabel>Have Green Book</IonLabel>
+        <IonSelect
+          value={hasGreenBook}
+          placeholder="Select One"
+          onIonChange={(e) => setGreenBook(e.detail.value)}
+        >
+          <IonSelectOption value="true">Yes</IonSelectOption>
+          <IonSelectOption value="false">No</IonSelectOption>
+        </IonSelect>
+      </IonItem>
+
+      <IonItem>
+        <IonLabel>Greenbook Owner: </IonLabel>
+        <IonInput
+          type="text"
+          value={greenBookOwner}
+          onIonChange={(e) => setGB(e.detail.value!)}
+        />
+      </IonItem>
+
+      <IonItem>
+        <IonLabel>Remark: </IonLabel>
         <IonTextarea
           value={messageRemark}
           onIonChange={(e) => setMessage(e.detail.value!)}
-          placeholder="Remark"
         />
       </IonItem>
+
       <IonRow>
         <IonCol>
-          <IonButton fill="clear">Cancel</IonButton>
+          <IonButton fill="clear" routerLink="/admin/viewlist/">
+            Cancel
+          </IonButton>
         </IonCol>
         <IonCol>
           <IonButton
+            color="primary"
             onClick={handleSave}
             className="floatRight"
             routerLink="/admin/viewlist/"
