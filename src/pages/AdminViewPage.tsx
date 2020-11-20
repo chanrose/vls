@@ -15,12 +15,14 @@ import {
   IonLabel,
   IonList,
   IonListHeader,
+  IonModal,
   IonPage,
   IonRow,
   IonSearchbar,
   IonSegment,
   IonSegmentButton,
   IonText,
+  IonTitle,
   IonToolbar,
 } from "@ionic/react";
 import "./styles/GettingStartedPage.css";
@@ -30,13 +32,21 @@ import { useAuth } from "../auth";
 import { firestore } from "../firebase";
 import { Entry, toEntry } from "../model";
 import dayjs from "dayjs";
+import AdminAddVehSeg from "../components/AdminAddVehSeg";
 
-const formatDate = (inputDate: string) => {
+const formatDate = (inputDate: string, type: string) => {
   if (inputDate == "") return "Nan";
-  const dayjs = require("dayjs");
-  const date = dayjs(inputDate);
-  date.toISOString();
-  return date.format("MMM DD, YYYY");
+  else {
+    const dayjs = require("dayjs");
+    const date = dayjs(inputDate);
+    const now = dayjs();
+    date.toISOString();
+    if (type == "format") {
+      return (
+        date.format("MMM DD, YYYY") + " | " + date.diff(now, "days") + " left"
+      );
+    }
+  }
 };
 
 const AdminViewPage: React.FC = () => {
@@ -48,7 +58,10 @@ const AdminViewPage: React.FC = () => {
       .collection("users")
       .doc(userId)
       .collection("entries");
-    entriesRef.get().then(({ docs }) => setEntries(docs.map(toEntry)));
+    entriesRef
+      .orderBy("taxExpire", "asc")
+      .get()
+      .then(({ docs }) => setEntries(docs.map(toEntry)));
   }, [userId]);
   console.log("entry: ", entries);
   const [searchText, setSearchText] = useState("");
@@ -60,6 +73,7 @@ const AdminViewPage: React.FC = () => {
   const [selectedTax, setTax] = useState(true);
   const [selectedOwn, setOwn] = useState(false);
   const [selectedInsure, setInsure] = useState(false);
+  const [showAddModal, setAddModal] = useState(false);
 
   return (
     <IonPage>
@@ -85,10 +99,14 @@ const AdminViewPage: React.FC = () => {
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
-          <IonFabButton routerLink="/admin/addnew/">
+          <IonFabButton
+            routerLink={"/admin/addnew/"}
+            onClick={() => setAddModal(true)}
+          >
             <IonIcon icon={add} />
           </IonFabButton>
         </IonFab>
+
         <IonActionSheet
           isOpen={vehicleType}
           onDidDismiss={() => setVFilter(false)}
@@ -169,9 +187,9 @@ const AdminViewPage: React.FC = () => {
                 {entry.vehicleBrand} {entry.vehicleModel}
               </IonText>
               <IonText slot="end">
-                {selectedTax && formatDate(entry.taxExpire)}
+                {selectedTax && formatDate(entry.taxExpire, "format")}
                 {selectedOwn && entry.vehicleOwner}
-                {selectedInsure && formatDate(entry.insuranceExpire)}
+                {selectedInsure && formatDate(entry.insuranceExpire, "format")}
               </IonText>
             </IonItem>
           ))}

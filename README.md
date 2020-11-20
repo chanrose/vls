@@ -4,6 +4,7 @@
 - Custom Filter Button on View page for Secondary list of data
 - Created FAB Add button on the View Page
 - Added Delete Feature to Entry
+- Added Setting / Logout Page / Replace AddTab to Message Tab
 
 ## Enjoy some random image from picsum
 

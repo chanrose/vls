@@ -43,7 +43,6 @@ const AdminAddVehSeg: React.FC = () => {
       greenBookOwner: greenBookOwner,
       drivingExpire: drivingExpire,
     });
-    history.goBack();
   };
   const [stickerId, setSticker] = useState("");
   const [vehicleOwner, setOwner] = useState("");
@@ -239,7 +238,11 @@ const AdminAddVehSeg: React.FC = () => {
 
       <IonRow>
         <IonCol>
-          <IonButton fill="clear" routerLink="/admin/viewlist/">
+          <IonButton
+            onClick={() => history.goBack()}
+            fill="clear"
+            routerLink="/admin/viewlist/"
+          >
             Cancel
           </IonButton>
         </IonCol>
@@ -248,8 +251,8 @@ const AdminAddVehSeg: React.FC = () => {
             color="primary"
             onClick={handleSave}
             className="floatRight"
-            routerLink="/admin/viewlist/"
             fill="clear"
+            routerLink={"/admin/viewlist/"}
           >
             Add
           </IonButton>
