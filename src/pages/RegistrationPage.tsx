@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   IonButton,
   IonCard,
@@ -10,10 +10,38 @@ import {
   IonItem,
   IonList,
   IonPage,
+  IonText,
 } from "@ionic/react";
 import "./styles/GettingStartedPage.css";
+import { useAuth } from "../auth";
+import { Redirect } from "react-router";
+import { auth, firestore } from "../firebase";
 
 const RegistrationPage: React.FC = () => {
+  const [errorName, setErr] = useState({ Err: "" });
+  const [email, setEmailString] = useState("");
+  const [password, setPassword] = useState("");
+  const [status, setStatus] = useState({ loading: false, error: false });
+  const { loggedIn } = useAuth();
+  const handleRegister = async () => {
+    try {
+      setStatus({ loading: true, error: false });
+      const credential = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      console.log("credential", credential);
+      const { userId } = useAuth();
+      firestore.collection("users").add(userId);
+    } catch (error) {
+      setStatus({ loading: false, error: true });
+      console.log("error: ", error);
+      setErr({ Err: `${error.message}` });
+    }
+  };
+  /*  if (loggedIn) {
+    return <Redirect to="/admin/home/" />;
+  } */
   return (
     <IonPage>
       <IonContent color="light" fullscreen>
@@ -31,27 +59,49 @@ const RegistrationPage: React.FC = () => {
                 <IonInput type="text" placeholder="Name:" />
               </IonItem>
               <IonItem>
-                <IonInput type="email" placeholder="Email:" />
+                <IonInput
+                  value={email}
+                  onIonChange={(e) => setEmailString(e.detail.value!)}
+                  type="email"
+                  placeholder="Email:"
+                />
               </IonItem>
               <IonItem>
                 <IonInput type="text" placeholder="Username:" />
               </IonItem>
               <IonItem>
-                <IonInput type="password" placeholder="Password:" />
+                <IonInput
+                  value={password}
+                  onIonChange={(e) => setPassword(e.detail.value!)}
+                  type="password"
+                  placeholder="Password:"
+                />
               </IonItem>
               <IonItem>
                 <IonInput type="text" placeholder="Create Organization ID" />
               </IonItem>
-
             </IonList>
-            
-            
+
             <br />
-            <IonButton className="IonButtonRadius" expand="block">SIGN UP</IonButton>
-            <IonButton color="secondary" className="IonButtonRadius" expand="block">Go Back</IonButton>
-            <IonButton fill="clear" expand="block">Sign up for organization?</IonButton>
+            <IonButton
+              onClick={handleRegister}
+              className="IonButtonRadius"
+              expand="block"
+            >
+              SIGN UP
+            </IonButton>
+            <IonButton
+              color="secondary"
+              className="IonButtonRadius"
+              expand="block"
+            >
+              Go Back
+            </IonButton>
+
+            <IonText color="danger">
+              <div className="ion-text-center">{errorName.Err}</div>
+            </IonText>
           </IonCardContent>
-          
         </IonCard>
       </IonContent>
     </IonPage>
