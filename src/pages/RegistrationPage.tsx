@@ -31,17 +31,15 @@ const RegistrationPage: React.FC = () => {
         password
       );
       console.log("credential", credential);
-      const { userId } = useAuth();
-      firestore.collection("users").add(userId);
     } catch (error) {
       setStatus({ loading: false, error: true });
       console.log("error: ", error);
       setErr({ Err: `${error.message}` });
     }
   };
-  /*  if (loggedIn) {
+  if (loggedIn) {
     return <Redirect to="/admin/home/" />;
-  } */
+  }
   return (
     <IonPage>
       <IonContent color="light" fullscreen>
