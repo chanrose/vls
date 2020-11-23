@@ -23,6 +23,8 @@ const RegistrationPage: React.FC = () => {
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState({ loading: false, error: false });
   const { loggedIn } = useAuth();
+  const { userId } = useAuth();
+  const [signup, setSignup] = useState(false);
   const handleRegister = async () => {
     try {
       setStatus({ loading: true, error: false });
@@ -31,15 +33,25 @@ const RegistrationPage: React.FC = () => {
         password
       );
       console.log("credential", credential);
+      setSignup(true);
     } catch (error) {
       setStatus({ loading: false, error: true });
       console.log("error: ", error);
       setErr({ Err: `${error.message}` });
     }
   };
-  if (loggedIn) {
-    return <Redirect to="/admin/home/" />;
+
+  if (signup) {
+    console.log(userId);
+    firestore.collection("accounts").doc(userId).collection("detail").add({
+      email: email,
+      password: password,
+    });
   }
+
+  /*   if (loggedIn) {
+    return <Redirect to="/admin/home/" />;
+  } */
   return (
     <IonPage>
       <IonContent color="light" fullscreen>
