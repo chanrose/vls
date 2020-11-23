@@ -1,6 +1,6 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "vehiclelegalsystem",
+  "appName": "vls",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",
