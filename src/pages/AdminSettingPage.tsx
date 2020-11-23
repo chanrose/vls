@@ -2,38 +2,19 @@ import React, { useState } from "react";
 import {
   IonButton,
   IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCol,
   IonContent,
-  IonFab,
-  IonFabButton,
-  IonFabList,
   IonHeader,
-  IonIcon,
   IonItem,
-  IonLabel,
   IonList,
   IonPage,
   IonRouterLink,
-  IonRow,
-  IonSegment,
-  IonSegmentButton,
-  IonText,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
 import "./styles/GettingStartedPage.css";
-import { add, bicycle, car, easel, logoFacebook, ticket } from "ionicons/icons";
-import AnnouncementCard from "../components/AnnouncementCard";
-import AdminGuestSeg from "../components/AdminGuestSeg";
-import AdminHomeSeg from "../components/AdminHomeSeg";
-import { useAuth } from "../auth";
 import { auth } from "../firebase";
 
 const AdminSettingPage: React.FC = () => {
-  const { userId } = useAuth();
-
   return (
     <IonPage>
       <IonHeader>

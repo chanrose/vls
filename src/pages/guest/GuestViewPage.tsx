@@ -7,7 +7,6 @@ import {
   IonFab,
   IonFabButton,
   IonFabList,
-  IonFooter,
   IonGrid,
   IonHeader,
   IonIcon,
@@ -19,11 +18,17 @@ import {
   IonSearchbar,
   IonSegment,
   IonSegmentButton,
-  IonText,
   IonToolbar,
 } from "@ionic/react";
 import entries from "../../data";
-import { add, bicycle, car, easel, funnel, funnelOutline, ticket } from "ionicons/icons";
+import {
+  add,
+  bicycle,
+  car,
+  easel,
+  funnelOutline,
+  ticket,
+} from "ionicons/icons";
 
 const GuestViewPage: React.FC = () => {
   const [searchText, setSearchText] = useState("");
@@ -50,11 +55,11 @@ const GuestViewPage: React.FC = () => {
                 </IonSegment>
               </IonCol>
               <IonCol>
-              <div className="ion-text-right">
+                <div className="ion-text-right">
                   {/* <IonText onClick={() => setFilter(true)}><IonIcon icon={funnelOutline} /></IonText> */}
-                <IonButton fill="clear" onClick={() => setFilter(true)}>
-                  <IonIcon icon={funnelOutline} />
-                </IonButton> 
+                  <IonButton fill="clear" onClick={() => setFilter(true)}>
+                    <IonIcon icon={funnelOutline} />
+                  </IonButton>
                 </div>
               </IonCol>
             </IonRow>
@@ -93,7 +98,7 @@ const GuestViewPage: React.FC = () => {
             </IonItem>
           ))}
         </IonList>
-        
+
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton>
             <IonIcon icon={add} />

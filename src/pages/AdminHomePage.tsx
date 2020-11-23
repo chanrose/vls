@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import {
-  IonButton,
-  IonCol,
   IonContent,
   IonFab,
   IonFabButton,
@@ -15,8 +13,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import "./styles/GettingStartedPage.css";
-import { add, bicycle, car, easel, logoFacebook, ticket } from "ionicons/icons";
-import AnnouncementCard from "../components/AnnouncementCard";
+import { add, bicycle, car, easel, ticket } from "ionicons/icons";
 import AdminGuestSeg from "../components/AdminGuestSeg";
 import AdminHomeSeg from "../components/AdminHomeSeg";
 import { useAuth } from "../auth";
@@ -27,18 +24,17 @@ const AdminHomePage: React.FC = () => {
   const [selectedHome, setHome] = useState(true);
   const [selectedGuest, setGuest] = useState(false);
   const [selectedTools, setTools] = useState(false);
-  const [segmentSelection, setSegment] = useState("home");
 
   const returnSegment = (selectedSegment: string) => {
-    if (selectedSegment == "guest") {
+    if (selectedSegment === "guest") {
       setGuest(true);
       setHome(false);
       setTools(false);
-    } else if (selectedSegment == "tools") {
+    } else if (selectedSegment === "tools") {
       setGuest(false);
       setHome(false);
       setTools(true);
-    } else if (selectedSegment == "home") {
+    } else if (selectedSegment === "home") {
       setGuest(false);
       setHome(true);
       setTools(false);

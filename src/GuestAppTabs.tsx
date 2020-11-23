@@ -4,43 +4,42 @@ import {
   IonTabBar,
   IonTabButton,
   IonLabel,
-  IonIcon
-} from '@ionic/react';
-import HomePage from './pages/HomePage';
-import { addCircleOutline, home as homeIcon, listOutline, settings as settingsIcon } from 'ionicons/icons';
-import { Redirect, Route, Switch } from 'react-router-dom';
-import React from 'react';
-import AdminHomePage from './pages/AdminHomePage';
-import AdminAddPage from './pages/AdminAddPage';
-import AdminViewPage from './pages/AdminViewPage';
-import EntriesPage from './pages/EntriesPage';
-import { useAuth } from './auth'; 
-import GuestHomePage from './pages/guest/GuestHomePage';
-import GuestViewPage from './pages/guest/GuestViewPage';
-import GuestRequestPage from './pages/guest/GuestRequestPage';
+  IonIcon,
+} from "@ionic/react";
+import {
+  addCircleOutline,
+  home as homeIcon,
+  listOutline,
+  settings as settingsIcon,
+} from "ionicons/icons";
+import { Redirect, Route, Switch } from "react-router-dom";
+import React from "react";
+import EntriesPage from "./pages/EntriesPage";
+import { useAuth } from "./auth";
+import GuestHomePage from "./pages/guest/GuestHomePage";
+import GuestViewPage from "./pages/guest/GuestViewPage";
+import GuestRequestPage from "./pages/guest/GuestRequestPage";
 
 const GuestAppTabs: React.FC = () => {
-   const { loggedIn } = useAuth();
+  const { loggedIn } = useAuth();
   if (!loggedIn) {
-    return <Redirect to="/login" />
+    return <Redirect to="/login" />;
   }
 
   return (
     <IonTabs>
       <IonRouterOutlet>
         <Switch>
-        <Route exact path="/guest/home/" component={GuestHomePage} />
-        <Route exact path="/guest/request/" component={GuestRequestPage} />
-        <Route exact path="/guest/viewlist/" component={GuestViewPage} />
-        <Route exact path="/admin/viewlist/entries/:id">
-          <EntriesPage />
-        </Route>
-        <Route>
-          <GuestHomePage />
-        </Route>
+          <Route exact path="/guest/home/" component={GuestHomePage} />
+          <Route exact path="/guest/request/" component={GuestRequestPage} />
+          <Route exact path="/guest/viewlist/" component={GuestViewPage} />
+          <Route exact path="/admin/viewlist/entries/:id">
+            <EntriesPage />
+          </Route>
+          <Route>
+            <GuestHomePage />
+          </Route>
         </Switch>
-        
-
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
         <IonTabButton tab="home" href="/guest/home/">

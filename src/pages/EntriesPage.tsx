@@ -17,8 +17,6 @@ import {
   IonList,
   IonPage,
   IonRow,
-  IonSegment,
-  IonSegmentButton,
   IonSelect,
   IonSelectOption,
   IonText,
@@ -27,19 +25,17 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import "./styles/GettingStartedPage.css";
-import { useHistory, useParams, useRouteMatch } from "react-router";
-import entries from "../data";
+import { useHistory, useRouteMatch } from "react-router";
 import { useAuth } from "../auth";
 import { Entry, toEntry } from "../model";
 import { firestore } from "../firebase";
-import dayjs from "dayjs";
 
 interface RouterParams {
   id: string;
 }
 
 const formatDate = (inputDate: string) => {
-  if (inputDate == "") return "Nan";
+  if (inputDate === "") return "Nan";
   const dayjs = require("dayjs");
   const date = dayjs(inputDate);
   date.toISOString();

@@ -1,29 +1,35 @@
-import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonHeader, IonImg, IonInput, IonRow, IonTextarea, IonTitle } from '@ionic/react';
-import React from 'react';
-import '../pages/styles/admin.css';
+import {
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonText,
+} from "@ionic/react";
+import React, { useState } from "react";
+import { useAuth } from "../auth";
+import "../pages/styles/admin.css";
 
-interface ContainerProps {
-  name: string;
+interface props {
+  title: string;
+  subtitle: string;
+  content: string;
 }
-
-const AnnouncementCard: React.FC<ContainerProps> = ({ name }) => {
+const AnnouncementCard: React.FC<props> = ({ title, subtitle, content }) => {
   return (
-      
-    
-      <IonCard className="announcementCard">
+    <IonCard>
       <IonCardHeader>
-        <IonImg src="https://picsum.photos/seed/picsum/536/354" />
-            <IonCardSubtitle><IonInput type="text" placeholder="Card Subtitle" /></IonCardSubtitle>
-            <IonCardTitle><IonInput type="text" placeholder="Card Title" /></IonCardTitle>
-          </IonCardHeader>
-          <IonCardContent><IonTextarea placeholder="Fill the content" />
-            </IonCardContent>
-            <IonRow>
-              <IonCol><IonButton> Cancel </IonButton></IonCol>
-              <IonCol><IonButton type="submit"> Post </IonButton></IonCol>
-            </IonRow>
-      </IonCard>
-  
+        <IonCardSubtitle>
+          <IonText>{subtitle}</IonText>
+        </IonCardSubtitle>
+        <IonCardTitle>
+          <IonText>{title}</IonText>
+        </IonCardTitle>
+      </IonCardHeader>
+      <IonCardContent>
+        <IonText>{content}</IonText>
+      </IonCardContent>
+    </IonCard>
   );
 };
 
