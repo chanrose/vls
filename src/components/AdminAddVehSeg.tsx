@@ -10,14 +10,12 @@ import {
   IonRow,
   IonSelect,
   IonSelectOption,
-  IonText,
   IonTextarea,
 } from "@ionic/react";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { useAuth } from "../auth";
 import { firestore } from "../firebase";
-import { Entry } from "../model";
 import "../pages/styles/admin.css";
 
 const AdminAddVehSeg: React.FC = () => {

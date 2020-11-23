@@ -6,7 +6,6 @@ import {
   IonList,
   IonRow,
   IonText,
-  IonTextarea,
 } from "@ionic/react";
 import React from "react";
 import "../pages/styles/admin.css";

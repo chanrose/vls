@@ -6,9 +6,7 @@ import {
   IonLabel,
   IonIcon,
 } from "@ionic/react";
-import HomePage from "./pages/HomePage";
 import {
-  addCircleOutline,
   chatbox,
   home as homeIcon,
   listOutline,

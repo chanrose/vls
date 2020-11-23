@@ -8,6 +8,7 @@ import {
   IonContent,
   IonInput,
   IonItem,
+  IonLabel,
   IonList,
   IonPage,
   IonText,
@@ -20,6 +21,9 @@ import { auth, firestore } from "../firebase";
 const RegistrationPage: React.FC = () => {
   const [errorName, setErr] = useState({ Err: "" });
   const [email, setEmailString] = useState("");
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [organId, setOrganId] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState({ loading: false, error: false });
   const { loggedIn } = useAuth();
@@ -43,15 +47,18 @@ const RegistrationPage: React.FC = () => {
 
   if (signup) {
     console.log(userId);
-    firestore.collection("accounts").doc(userId).collection("detail").add({
+    firestore.collection("users").doc(userId).collection("detail").add({
       email: email,
       password: password,
+      firstName: fname,
+      lastName: lname,
+      organId: organId,
     });
   }
 
-  /*   if (loggedIn) {
+  if (loggedIn) {
     return <Redirect to="/admin/home/" />;
-  } */
+  }
   return (
     <IonPage>
       <IonContent color="light" fullscreen>
@@ -66,29 +73,60 @@ const RegistrationPage: React.FC = () => {
           <IonCardContent>
             <IonList>
               <IonItem>
-                <IonInput type="text" placeholder="Name:" />
+                <IonLabel>First name:</IonLabel>
+                <IonInput
+                  value={fname}
+                  onIonChange={(e) => setFname(e.detail.value!)}
+                  type="text"
+                  placeholder="Eva"
+                />
               </IonItem>
+
               <IonItem>
+                <IonLabel>Last name:</IonLabel>
+                <IonInput
+                  value={lname}
+                  onIonChange={(e) => setLname(e.detail.value!)}
+                  type="text"
+                  placeholder="Taylor"
+                />
+              </IonItem>
+
+              <IonItem>
+                <IonLabel>Email:</IonLabel>
                 <IonInput
                   value={email}
                   onIonChange={(e) => setEmailString(e.detail.value!)}
                   type="email"
-                  placeholder="Email:"
+                  placeholder="example@email.com"
                 />
               </IonItem>
+
               <IonItem>
-                <IonInput type="text" placeholder="Username:" />
-              </IonItem>
-              <IonItem>
+                <IonLabel>Password:</IonLabel>
                 <IonInput
                   value={password}
                   onIonChange={(e) => setPassword(e.detail.value!)}
                   type="password"
-                  placeholder="Password:"
+                  placeholder="•••••••••••"
                 />
               </IonItem>
               <IonItem>
-                <IonInput type="text" placeholder="Create Organization ID" />
+                <IonLabel>Organization ID:</IonLabel>
+                <IonInput
+                  value={organId}
+                  onIonChange={(e) => setOrganId(e.detail.value!)}
+                  type="text"
+                  placeholder="11232020"
+                />
+                <br />
+              </IonItem>
+              <IonItem>
+                <IonText>
+                  <p>
+                    Other users will use Organ ID to identify your organization.
+                  </p>
+                </IonText>
               </IonItem>
             </IonList>
 

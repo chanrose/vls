@@ -2,46 +2,36 @@ import React, { useEffect, useState } from "react";
 import {
   IonActionSheet,
   IonButton,
-  IonChip,
-  IonCol,
   IonContent,
   IonFab,
   IonFabButton,
-  IonFooter,
-  IonGrid,
   IonHeader,
   IonIcon,
   IonItem,
   IonLabel,
   IonList,
   IonListHeader,
-  IonModal,
   IonPage,
-  IonRow,
   IonSearchbar,
   IonSegment,
   IonSegmentButton,
   IonText,
-  IonTitle,
   IonToolbar,
 } from "@ionic/react";
 import "./styles/GettingStartedPage.css";
-import entries from "../data";
-import { add, funnel, funnelOutline } from "ionicons/icons";
+import { add } from "ionicons/icons";
 import { useAuth } from "../auth";
 import { firestore } from "../firebase";
 import { Entry, toEntry } from "../model";
-import dayjs from "dayjs";
-import AdminAddVehSeg from "../components/AdminAddVehSeg";
 
 const formatDate = (inputDate: string, type: string) => {
-  if (inputDate == "") return "Nan";
+  if (inputDate === "") return "Nan";
   else {
     const dayjs = require("dayjs");
     const date = dayjs(inputDate);
     const now = dayjs();
     date.toISOString();
-    if (type == "format") {
+    if (type === "format") {
       return (
         date.format("MMM DD, YYYY") + " | " + date.diff(now, "days") + " left"
       );

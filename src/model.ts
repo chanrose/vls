@@ -28,3 +28,19 @@ export interface Entry {
 export const toEntry = (doc: { id: any; data: () => any }) => {
     return {id: doc.id, ...doc.data() }
 }
+
+export interface PostEntry {
+    map(arg0: (entry: any) => JSX.Element): import("react").ReactNode;
+    id: string,
+    title: string,
+    subtitle: string,
+    content: string
+}
+
+/* export function toEntry(doc): Entry {
+    return { id: doc.id, ...doc.data() };
+}
+ */
+export const toPostEntry = (doc: { id: any; data: () => any }) => {
+    return {id: doc.id, ...doc.data() }
+}

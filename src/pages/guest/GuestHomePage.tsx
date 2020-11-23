@@ -11,12 +11,15 @@ import {
 import AnnouncementCard from "../../components/AnnouncementCard";
 
 const GuestHomePage: React.FC = () => {
-   
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-        <IonSegment onIonChange={(e: { detail: { value: any; }; }) => console.log(e.detail.value!)}>
+          <IonSegment
+            onIonChange={(e: { detail: { value: any } }) =>
+              console.log(e.detail.value!)
+            }
+          >
             <IonSegmentButton value="home">
               <IonLabel>Home</IonLabel>
             </IonSegmentButton>
@@ -26,9 +29,7 @@ const GuestHomePage: React.FC = () => {
           </IonSegment>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding" fullscreen>
-        <AnnouncementCard name={"Hi"}/>
-      </IonContent>
+      <IonContent className="ion-padding" fullscreen></IonContent>
     </IonPage>
   );
 };
