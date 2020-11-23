@@ -10,24 +10,21 @@
     width: 200px;
 }
 
-
 .ionCardstyle {
     border-radius: 20px;
     margin-top: 8vh;
     margin-left: 5vw;
     margin-right: 5vw;
-   
 }
 
 .centerDiv {
     display: block;
     text-align: center;
     width: 15vw;
-
 }
 
 .centerText {
-   text-align: center;
+    text-align: center;
 }
 
 .centerText img {
@@ -47,7 +44,6 @@
 }
 
 .grayStraightLine {
-    
     margin-left: 0vw;
     border-left: 1px solid grey;
     border-right: 1px solid grey;
@@ -57,5 +53,4 @@
 
 .IonButtonRadius {
     --border-radius: 30px;
-
 }
