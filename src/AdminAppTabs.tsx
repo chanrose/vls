@@ -20,6 +20,7 @@ import AdminViewPage from "./pages/AdminViewPage";
 import EntriesPage from "./pages/EntriesPage";
 import { useAuth } from "./auth";
 import AdminSettingPage from "./pages/AdminSettingPage";
+import AdminNotificationPage from "./pages/AdminNotificationPage";
 
 const AdminAppTabs: React.FC = () => {
   const { loggedIn } = useAuth();
@@ -35,6 +36,11 @@ const AdminAppTabs: React.FC = () => {
           <Route exact path="/admin/addnew/" component={AdminAddPage} />
           <Route exact path="/admin/viewlist/" component={AdminViewPage} />
           <Route exact path="/admin/settings/" component={AdminSettingPage} />
+          <Route
+            exact
+            path="/admin/notification/"
+            component={AdminNotificationPage}
+          />
           <Route exact path="/admin/viewlist/entries/:id">
             <EntriesPage />
           </Route>
@@ -48,9 +54,9 @@ const AdminAppTabs: React.FC = () => {
           <IonIcon icon={homeIcon} />
           <IonLabel>Home</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="addnew" href="/admin/addnew/">
+        <IonTabButton tab="addnew" href="/admin/notification/">
           <IonIcon icon={chatbox} />
-          <IonLabel>Message</IonLabel>
+          <IonLabel>Notification</IonLabel>
         </IonTabButton>
         <IonTabButton tab="listItem" href="/admin/viewlist/">
           <IonIcon icon={listOutline} />
