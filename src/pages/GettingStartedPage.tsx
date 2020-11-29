@@ -22,8 +22,8 @@ const GettingStartedPage: React.FC = () => {
       <IonContent color="light" fullscreen>
         <IonCard className="ionCardstyle">
           <IonCardHeader>
-            <IonImg className="imageSize" src={"https://raw.githubusercontent.com/chanrose/vls/main/public/assets/icon/app2Logo.png"} />
-       {/*      <img
+            <IonImg className="imageSize" src={"/assets/icon/app2Logo.png"} />
+            {/*      <img
               className="imageSize"
               src="{./media/v}"
             /> */}
@@ -37,25 +37,35 @@ const GettingStartedPage: React.FC = () => {
             <IonGrid>
               <IonRow className="centerText">
                 <IonCol>
-                  <IonImg className="flagIcon" src="https://raw.githubusercontent.com/chanrose/vls/main/src/pages/media/englishLogo.png" />
+                  <IonImg
+                    className="flagIcon"
+                    src="/assets/media/englishLogo.png"
+                  />
                   <br />
                   <IonLabel>English</IonLabel>
                 </IonCol>
-              
-                  <div className="grayStraightLine" />
-           
+
+                <div className="grayStraightLine" />
+
                 <IonCol>
-                  <IonImg className="flagIcon" src="https://raw.githubusercontent.com/chanrose/vls/main/src/pages/media/thaiLogo.png" />
+                  <IonImg
+                    className="flagIcon"
+                    src="/assets/media/thaiLogo.png"
+                  />
                   <br />
                   <IonLabel>Thai</IonLabel>
                 </IonCol>
               </IonRow>
-              
             </IonGrid>
             <br />
-            <IonButton routerLink="/gettingstarted2" className="IonButtonRadius" expand="block">NEXT</IonButton>
+            <IonButton
+              routerLink="/gettingstarted2"
+              className="IonButtonRadius"
+              expand="block"
+            >
+              NEXT
+            </IonButton>
           </IonCardContent>
-          
         </IonCard>
       </IonContent>
     </IonPage>

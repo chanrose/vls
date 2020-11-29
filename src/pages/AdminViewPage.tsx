@@ -9,6 +9,7 @@ import {
   IonHeader,
   IonIcon,
   IonImg,
+  IonInput,
   IonItem,
   IonLabel,
   IonList,
@@ -21,7 +22,13 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import "./styles/GettingStartedPage.css";
-import { add, caretUpCircle } from "ionicons/icons";
+import {
+  add,
+  caretUpCircle,
+  chevronDown,
+  filter,
+  search,
+} from "ionicons/icons";
 import { useAuth } from "../auth";
 import { firestore } from "../firebase";
 import { Entry, toEntry } from "../model";
@@ -42,6 +49,10 @@ const formatDate = (inputDate: string, type: string) => {
   }
 };
 
+const SORT_OPTIONS = {
+  TAX_ASC: { column: "taxExpire", direction: "asc" },
+  TAX_DESC: { column: "taxExpire", direction: "desc" },
+};
 const vehicleDiff = (inputData: string) => {
   const bikePic = "/assets/media/bikeLogo.png";
   const carPic = "/assets/media/carLogo.png";
@@ -49,27 +60,67 @@ const vehicleDiff = (inputData: string) => {
   if (inputData === "Motorbike") return bikePic;
 };
 
-const AdminViewPage: React.FC = () => {
+function useEntry(sortBy = "TAX_ASC") {
+  const asc = SORT_OPTIONS["TAX_ASC"].direction;
   const { userId } = useAuth();
-  console.log("View Page, logged by: ", userId);
   const [entries, setEntries] = useState<Entry[]>([]);
+
   useEffect(() => {
     const entriesRef = firestore
       .collection("users")
       .doc(userId)
-      .collection("entries");
-    entriesRef
+      .collection("entries")
+      .onSnapshot(({ docs }) => setEntries(docs.map(toEntry)));
+  }, [sortBy]);
 
-      .orderBy(`${orderBy}`, "asc")
+  return entries;
+}
+
+const AdminViewPage: React.FC = () => {
+  const { userId } = useAuth();
+  const entriesRef = firestore
+    .collection("users")
+    .doc(userId)
+    .collection("entries");
+  const [entries, setEntries] = useState<Entry[]>([]);
+  const [queryName, setQuery] = useState("Car");
+  const [searchText, setSearch] = useState("");
+  const [filterSearch, setFSearch] = useState<Entry[]>([]);
+  console.log("Search Text:", searchText);
+  const viewEntry = async () => {
+    await entriesRef
+
+      /*  .orderBy(`${orderBy}`, "asc") */
+      /* .where("vehicleType", "==", queryName) */
+      /*       .orderBy(
+        SORT_OPTIONS["TAX_ASC"].column,
+        SORT_OPTIONS["TAX_ASC"].direction
+      ) */
       .get()
       .then(({ docs }) => setEntries(docs.map(toEntry)));
+  };
+  useEffect(() => {
+    viewEntry();
   }, [userId]);
 
+  useEffect(() => {
+    setFSearch(
+      entries.filter((entry) => {
+        return entry.vehicleBrand
+          .toLowerCase()
+          .includes(searchText.toLowerCase());
+      })
+    );
+    console.log("Filter: ", filterSearch);
+  }, [searchText, entries]);
+
+  /*   const filterBrand = entries.filter((entry) => {
+    return entry.vehicleBrand.toLowerCase().includes(searchText.toLowerCase());
+  }); */
+  console.log("Filter: ", filterSearch);
   console.log("entry: ", entries);
-  const [searchText, setSearchText] = useState("");
   const [btnFilter, setFilter] = useState(false);
   const [filterName, setListFilter] = useState("Tax Expire");
-
   const [vehicleType, setVFilter] = useState(false);
   const [typeName, setVType] = useState("Motorbike");
   const [selectedTax, setTax] = useState(true);
@@ -77,11 +128,6 @@ const AdminViewPage: React.FC = () => {
   const [selectedInsure, setInsure] = useState(false);
   const [showAddModal, setAddModal] = useState(false);
 
-  const [orderBy, setOrder] = useState("taxExpire");
-  const [filterBike, setFilterBike] = useState(true);
-  const [filterCar, setFilterCar] = useState(false);
-
-  const handleSearch = (searchText: string) => {};
   return (
     <IonPage>
       <IonHeader>
@@ -98,7 +144,13 @@ const AdminViewPage: React.FC = () => {
           </IonSegment>
         </IonToolbar>
         <IonToolbar>
-          <IonSearchbar onIonChange={(e) => handleSearch(e.detail.value!)} />
+          <IonSearchbar
+            value={searchText}
+            onIonChange={(e) => setSearch(e.detail.value!)}
+          ></IonSearchbar>
+          <IonButton slot="end">
+            <IonIcon icon={filter} />
+          </IonButton>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
@@ -181,7 +233,7 @@ const AdminViewPage: React.FC = () => {
               <IonText>{filterName} </IonText>
             </IonButton>
           </IonListHeader>
-          {entries.map((entry) => (
+          {filterSearch.map((entry) => (
             <IonItem
               button
               key={entry.id}
