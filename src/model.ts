@@ -3,22 +3,22 @@ export interface Entry {
     id: string,
     sticker: string,
     vehicleOwner: string,
+    ownerRole: string,
+    idNo: string
+    ownerEmail: string,
+    ownerTele: string,
+    drivingExpire: string,
     vehicleType: string,
     vehiclePlate: string,
+    province: string,
     vehicleBrand: string,
     vehicleModel: string,
     vehicleColour: string,
     taxExpire: string,
     insuranceExpire: string,
     hasGreenBook: string,
-    province: string,
-    ownerEmail: string,
-    ownerTele: string,
-    ownerRole: string,
-    messageRemark: string,
     greenBookOwner: string,
-    drivingExpire: string,
-    idNo: string
+    messageRemark: string,
 }
 
 /* export function toEntry(doc): Entry {
