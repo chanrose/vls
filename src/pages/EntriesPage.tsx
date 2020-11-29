@@ -33,7 +33,7 @@ interface RouterParams {
 }
 
 const formatDate = (inputDate: string) => {
-  if (inputDate === "") return "Nan";
+  if (inputDate === "") return "Not Filled";
   const dayjs = require("dayjs");
   const date = dayjs(inputDate);
   date.toISOString();
@@ -46,102 +46,64 @@ const EntriesPage: React.FC = () => {
   const { id } = match.params;
   const [entry, setEntry] = useState<Entry>();
   const history = useHistory();
+  const entryRef = firestore
+    .collection("users")
+    .doc(userId)
+    .collection("entries")
+    .doc(id);
 
   useEffect(() => {
-    const entryRef = firestore
-      .collection("users")
-      .doc(userId)
-      .collection("entries")
-      .doc(id);
     entryRef.get().then((doc) => {
       setEntry(toEntry(doc));
-      if (entry) {
-        updateData();
-      }
     });
-    console.log("EntryRef: ", entryRef);
   }, [userId]);
 
-  console.log("Entry.id:", entry?.id);
-  console.log(entry);
-
   const handleDelete = () => {
-    const entryRef = firestore
-      .collection("users")
-      .doc(userId)
-      .collection("entries")
-      .doc(id);
     entryRef.delete();
     history.goBack();
   };
 
   /* Updating Existing entry*/
-  const handleUpdate = () => {
-    firestore
-      .collection("users")
-      .doc(userId)
-      .collection("entries")
-      .doc(id)
-      .set({
-        sticker: stickerId,
-        vehicleOwner: vehicleOwner,
-        vehicleType: vehicleType,
-        vehiclePlate: vehiclePlate,
-        vehicleBrand: vehicleBrand,
-        vehicleModel: vehicleModel,
-        vehicleColour: vehicleColour,
-        taxExpire: taxExpire,
-        insuranceExpire: insuranceExpire,
-        hasGreenBook: hasGreenBook,
-        ownerEmail: ownerEmail,
-        ownerTele: ownerTele,
-        ownerRole: ownerRole,
-        messageRemark: messageRemark,
-        province: province,
-        greenBookOwner: greenBookOwner,
-        drivingExpire: drivingExpire,
-      });
-
+  const handleUpdate = async () => {
+    if (sticker != undefined) await entryRef.update({ sticker });
+    if (vehicleOwner != undefined) await entryRef.update({ vehicleOwner });
+    if (ownerRole != undefined) await entryRef.update({ ownerRole });
+    if (idNo != undefined) await entryRef.update({ idNo });
+    if (ownerEmail != undefined) await entryRef.update({ ownerEmail });
+    if (ownerTele != undefined) await entryRef.update({ ownerTele });
+    if (drivingExpire != undefined) await entryRef.update({ drivingExpire });
+    if (vehicleType != undefined) await entryRef.update({ vehicleType });
+    if (vehiclePlate != undefined) await entryRef.update({ vehiclePlate });
+    if (province != undefined) await entryRef.update({ province });
+    if (vehicleBrand != undefined) await entryRef.update({ vehicleBrand });
+    if (vehicleModel != undefined) await entryRef.update({ vehicleModel });
+    if (vehicleColour != undefined) await entryRef.update({ vehicleColour });
+    if (taxExpire != undefined) await entryRef.update({ taxExpire });
+    if (insuranceExpire != undefined)
+      await entryRef.update({ insuranceExpire });
+    if (hasGreenBook != undefined) await entryRef.update({ hasGreenBook });
+    if (greenBookOwner != undefined) await entryRef.update({ greenBookOwner });
+    if (messageRemark != undefined) await entryRef.update({ messageRemark });
     history.goBack();
   };
-  const [stickerId, setSticker] = useState("");
-  const [vehicleOwner, setOwner] = useState("");
-  const [vehicleType, setType] = useState("");
-  const [vehiclePlate, setPlate] = useState("");
-  const [vehicleBrand, setBrand] = useState("");
-  const [vehicleModel, setModel] = useState("");
-  const [vehicleColour, setColour] = useState("");
-  const [taxExpire, setTax] = useState("");
-  const [insuranceExpire, setInsurance] = useState("");
-  const [hasGreenBook, setGreenBook] = useState("");
-  const [ownerEmail, setEmail] = useState("");
-  const [ownerTele, setTele] = useState("");
-  const [ownerRole, setRole] = useState("");
-  const [messageRemark, setMessage] = useState("");
-  const [greenBookOwner, setGB] = useState("");
-  const [province, setProvince] = useState("");
-  const [idNo, setIdNo] = useState("");
-  const [drivingExpire, setDrivingExpire] = useState("");
-  const updateData = () => {
-    setSticker(entry?.sticker ?? "Not Filled");
-    setOwner(entry?.vehicleOwner ?? "Not Filled");
-    setRole(entry?.ownerRole ?? "Not Filled");
-    setIdNo(entry?.idNo ?? "Not Filled");
-    setEmail(entry?.ownerEmail ?? "Not Filled");
-    setTele(entry?.ownerTele ?? "Not Filled");
-    setDrivingExpire(entry?.drivingExpire ?? "Not Filled");
-    setType(entry?.vehicleType ?? "Not Filled");
-    setPlate(entry?.vehiclePlate ?? "Not Filled");
-    setProvince(entry?.province ?? "Not Filled");
-    setBrand(entry?.vehicleBrand ?? "Not Filled");
-    setModel(entry?.vehicleModel ?? "Not Filled");
-    setColour(entry?.vehicleColour ?? "Not Filled");
-    setTax(entry?.taxExpire ?? "Not Filled");
-    setInsurance(entry?.insuranceExpire ?? "Not Filled");
-    setGreenBook(entry?.hasGreenBook ?? "Not Filled");
-    setGB(entry?.greenBookOwner ?? "Not Filled");
-    setMessage(entry?.messageRemark ?? "Not Filled");
-  };
+  const [sticker, setSticker] = useState(entry?.sticker);
+  const [vehicleOwner, setOwner] = useState(entry?.vehicleOwner);
+  const [ownerRole, setRole] = useState(entry?.ownerRole);
+  const [idNo, setIdNo] = useState(entry?.idNo);
+  const [ownerEmail, setEmail] = useState(entry?.ownerEmail);
+  const [ownerTele, setTele] = useState(entry?.ownerTele);
+  const [drivingExpire, setDrivingExpire] = useState(entry?.drivingExpire);
+  const [vehicleType, setType] = useState(entry?.vehicleType);
+  const [vehiclePlate, setPlate] = useState(entry?.vehiclePlate);
+  const [province, setProvince] = useState(entry?.province);
+  const [vehicleBrand, setBrand] = useState(entry?.vehicleBrand);
+  const [vehicleModel, setModel] = useState(entry?.vehicleModel);
+  const [vehicleColour, setColour] = useState(entry?.vehicleColour);
+  const [taxExpire, setTax] = useState(entry?.taxExpire);
+  const [insuranceExpire, setInsurance] = useState(entry?.insuranceExpire);
+  const [hasGreenBook, setGreenBook] = useState(entry?.hasGreenBook);
+  const [greenBookOwner, setGB] = useState(entry?.greenBookOwner);
+  const [messageRemark, setMessage] = useState(entry?.messageRemark);
   return (
     <IonPage>
       <IonHeader>
@@ -162,7 +124,7 @@ const EntriesPage: React.FC = () => {
               <IonInput
                 placeholder={entry?.sticker}
                 type="text"
-                value={stickerId}
+                value={sticker}
                 onIonChange={(e) => setSticker(e.detail.value!)}
               />
             </IonItem>

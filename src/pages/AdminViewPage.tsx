@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import {
   IonActionSheet,
+  IonAvatar,
   IonButton,
   IonContent,
   IonFab,
   IonFabButton,
   IonHeader,
   IonIcon,
+  IonImg,
   IonItem,
   IonLabel,
   IonList,
@@ -19,10 +21,11 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import "./styles/GettingStartedPage.css";
-import { add } from "ionicons/icons";
+import { add, caretUpCircle } from "ionicons/icons";
 import { useAuth } from "../auth";
 import { firestore } from "../firebase";
 import { Entry, toEntry } from "../model";
+import EntriesPage from "./EntriesPage";
 
 const formatDate = (inputDate: string, type: string) => {
   if (inputDate === "") return "Nan";
@@ -39,6 +42,13 @@ const formatDate = (inputDate: string, type: string) => {
   }
 };
 
+const vehicleDiff = (inputData: string) => {
+  const bikePic = "/assets/media/bikeLogo.png";
+  const carPic = "/assets/media/carLogo.png";
+  if (inputData === "Car") return carPic;
+  if (inputData === "Motorbike") return bikePic;
+};
+
 const AdminViewPage: React.FC = () => {
   const { userId } = useAuth();
   console.log("View Page, logged by: ", userId);
@@ -49,10 +59,12 @@ const AdminViewPage: React.FC = () => {
       .doc(userId)
       .collection("entries");
     entriesRef
-      .orderBy("taxExpire", "asc")
+
+      .orderBy(`${orderBy}`, "asc")
       .get()
       .then(({ docs }) => setEntries(docs.map(toEntry)));
   }, [userId]);
+
   console.log("entry: ", entries);
   const [searchText, setSearchText] = useState("");
   const [btnFilter, setFilter] = useState(false);
@@ -65,6 +77,11 @@ const AdminViewPage: React.FC = () => {
   const [selectedInsure, setInsure] = useState(false);
   const [showAddModal, setAddModal] = useState(false);
 
+  const [orderBy, setOrder] = useState("taxExpire");
+  const [filterBike, setFilterBike] = useState(true);
+  const [filterCar, setFilterCar] = useState(false);
+
+  const handleSearch = (searchText: string) => {};
   return (
     <IonPage>
       <IonHeader>
@@ -81,10 +98,7 @@ const AdminViewPage: React.FC = () => {
           </IonSegment>
         </IonToolbar>
         <IonToolbar>
-          <IonSearchbar
-            value={searchText}
-            onIonChange={(e) => setSearchText(e.detail.value!)}
-          />
+          <IonSearchbar onIonChange={(e) => handleSearch(e.detail.value!)} />
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
@@ -173,6 +187,9 @@ const AdminViewPage: React.FC = () => {
               key={entry.id}
               routerLink={`/admin/viewlist/entries/${entry.id}`}
             >
+              <IonAvatar>
+                <IonImg src={vehicleDiff(entry.vehicleType)} />
+              </IonAvatar>
               <IonText>
                 {entry.vehicleBrand} {entry.vehicleModel}
               </IonText>

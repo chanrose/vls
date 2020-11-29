@@ -23,43 +23,44 @@ const AdminAddVehSeg: React.FC = () => {
   const history = useHistory();
   const handleSave = () => {
     firestore.collection("users").doc(userId).collection("entries").add({
-      sticker: stickerId,
-      vehicleOwner: vehicleOwner,
-      vehicleType: vehicleType,
-      vehiclePlate: vehiclePlate,
-      vehicleBrand: vehicleBrand,
-      vehicleModel: vehicleModel,
-      vehicleColour: vehicleColour,
-      taxExpire: taxExpire,
-      insuranceExpire: insuranceExpire,
-      hasGreenBook: hasGreenBook,
-      ownerEmail: ownerEmail,
-      ownerTele: ownerTele,
-      ownerRole: ownerRole,
-      messageRemark: messageRemark,
-      province: province,
-      greenBookOwner: greenBookOwner,
-      drivingExpire: drivingExpire,
+      sticker,
+      vehicleOwner,
+      ownerRole,
+      idNo,
+      ownerEmail,
+      ownerTele,
+      drivingExpire,
+      vehicleType,
+      vehiclePlate,
+      province,
+      vehicleBrand,
+      vehicleModel,
+      vehicleColour,
+      taxExpire,
+      insuranceExpire,
+      hasGreenBook,
+      greenBookOwner,
+      messageRemark,
     });
   };
-  const [stickerId, setSticker] = useState("");
+  const [sticker, setSticker] = useState("");
   const [vehicleOwner, setOwner] = useState("");
+  const [ownerRole, setRole] = useState("");
+  const [idNo, setIdNo] = useState("");
+  const [ownerEmail, setEmail] = useState("");
+  const [ownerTele, setTele] = useState("");
+  const [drivingExpire, setDrivingExpire] = useState("");
   const [vehicleType, setType] = useState("");
   const [vehiclePlate, setPlate] = useState("");
+  const [province, setProvince] = useState("");
   const [vehicleBrand, setBrand] = useState("");
   const [vehicleModel, setModel] = useState("");
   const [vehicleColour, setColour] = useState("");
   const [taxExpire, setTax] = useState("");
   const [insuranceExpire, setInsurance] = useState("");
   const [hasGreenBook, setGreenBook] = useState("");
-  const [ownerEmail, setEmail] = useState("");
-  const [ownerTele, setTele] = useState("");
-  const [ownerRole, setRole] = useState("");
-  const [messageRemark, setMessage] = useState("");
   const [greenBookOwner, setGB] = useState("");
-  const [province, setProvince] = useState("");
-  const [idNo, setIdNo] = useState("");
-  const [drivingExpire, setDrivingExpire] = useState("");
+  const [messageRemark, setMessage] = useState("");
 
   return (
     <IonList>
@@ -70,7 +71,7 @@ const AdminAddVehSeg: React.FC = () => {
         <IonLabel>Sticker No.</IonLabel>
         <IonInput
           type="text"
-          value={stickerId}
+          value={sticker}
           onIonChange={(e) => setSticker(e.detail.value!)}
         />
       </IonItem>
@@ -212,8 +213,8 @@ const AdminAddVehSeg: React.FC = () => {
           placeholder="Select One"
           onIonChange={(e) => setGreenBook(e.detail.value)}
         >
-          <IonSelectOption value="true">Yes</IonSelectOption>
-          <IonSelectOption value="false">No</IonSelectOption>
+          <IonSelectOption value="True">Yes</IonSelectOption>
+          <IonSelectOption value="False">No</IonSelectOption>
         </IonSelect>
       </IonItem>
 
