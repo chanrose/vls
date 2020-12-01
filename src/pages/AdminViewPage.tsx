@@ -106,9 +106,10 @@ const AdminViewPage: React.FC = () => {
   useEffect(() => {
     setFSearch(
       entries.filter((entry) => {
-        return entry.vehicleBrand
-          .toLowerCase()
-          .includes(searchText.toLowerCase());
+        return (
+          entry.vehicleBrand.toLowerCase().includes(searchText.toLowerCase()) ||
+          entry.vehicleModel.toLowerCase().includes(searchText.toLowerCase())
+        );
       })
     );
     console.log("Filter: ", filterSearch);
