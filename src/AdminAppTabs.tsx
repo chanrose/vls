@@ -21,9 +21,13 @@ import EntriesPage from "./pages/EntriesPage";
 import { useAuth } from "./auth";
 import AdminSettingPage from "./pages/AdminSettingPage";
 import AdminNotificationPage from "./pages/AdminNotificationPage";
+import { firestore } from "./firebase";
 
 const AdminAppTabs: React.FC = () => {
   const { loggedIn } = useAuth();
+  const { userId } = useAuth();
+  const isAdmin = firestore.collection("users").doc(userId);
+
   if (!loggedIn) {
     return <Redirect to="/login" />;
   }

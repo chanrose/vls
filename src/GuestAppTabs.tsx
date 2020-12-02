@@ -23,9 +23,8 @@ import GuestRequestPage from "./pages/guest/GuestRequestPage";
 const GuestAppTabs: React.FC = () => {
   const { loggedIn } = useAuth();
   if (!loggedIn) {
-    return <Redirect to="/login" />;
+    return <Redirect to="/gettingstarted" />;
   }
-
   return (
     <IonTabs>
       <IonRouterOutlet>
@@ -50,10 +49,10 @@ const GuestAppTabs: React.FC = () => {
           <IonIcon icon={addCircleOutline} />
           <IonLabel>Request</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="listItem" href="/guest/viewlist/">
+        {/*         <IonTabButton tab="listItem" href="/guest/viewlist/">
           <IonIcon icon={listOutline} />
           <IonLabel>View List</IonLabel>
-        </IonTabButton>
+        </IonTabButton> */}
         <IonTabButton tab="settings" href="/my/settings">
           <IonIcon icon={settingsIcon} />
           <IonLabel>Settings</IonLabel>
