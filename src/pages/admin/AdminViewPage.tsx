@@ -80,7 +80,6 @@ const AdminViewPage: React.FC = () => {
         );
       })
     );
-    console.log("Filter: ", filterSearch);
   }, [searchText, entries]);
 
   console.log("Filter: ", filterSearch);

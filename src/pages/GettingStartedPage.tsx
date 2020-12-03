@@ -25,7 +25,7 @@ const GettingStartedPage: React.FC = () => {
             <IonImg className="imageSize" src={"/assets/icon/app2Logo.png"} />
             <IonCardTitle className="centerText">Getting started</IonCardTitle>
             <IonCardSubtitle className="centerText">
-              Choose language
+              Updated on Dec 03
             </IonCardSubtitle>
           </IonCardHeader>
 

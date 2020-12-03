@@ -46,6 +46,7 @@ const EntriesPage: React.FC = () => {
   const { id } = match.params;
   const [entry, setEntry] = useState<Entry>();
   const history = useHistory();
+
   const entryRef = firestore
     .collection("users")
     .doc(userId)

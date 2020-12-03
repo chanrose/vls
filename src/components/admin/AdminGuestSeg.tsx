@@ -21,7 +21,7 @@ import { PostEntry, toPostEntry } from "../../model";
 import AnnouncementCard from "../AnnouncementCard";
 
 const AdminGuestSeg: React.FC = () => {
-  const aiuOrgId = "aiu18180";
+  const aiuOrgId = "hope18180";
   const { userId } = useAuth();
   const [subtitle, setSubtitle] = useState("");
   const [title, setTitle] = useState("");
