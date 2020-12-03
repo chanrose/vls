@@ -6,6 +6,7 @@ import {
   IonPage,
   IonSegment,
   IonSegmentButton,
+  IonText,
   IonToolbar,
 } from "@ionic/react";
 import { firestore } from "../../firebase";
@@ -46,7 +47,13 @@ const GuestHomePage: React.FC<props> = ({ organId }) => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
-        Hello there: Mr. {guestInfo?.name} :
+        <div className="ion-text-center">
+          {" "}
+          <IonText>
+            Hello there: Mr. {guestInfo?.name}
+            <br /> here are some posts by your administrator:
+          </IonText>
+        </div>
         <GuestAnnouncementList organID={`${organId}`} />
       </IonContent>
     </IonPage>

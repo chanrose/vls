@@ -58,6 +58,7 @@ const AdminGuestSeg: React.FC = () => {
           title={entry.title}
           subtitle={entry.subtitle}
           content={entry.content}
+          isAdmin={true}
         />
       ))}
       <IonButton expand="block" onClick={() => setModal(true)}>

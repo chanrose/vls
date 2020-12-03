@@ -66,10 +66,10 @@ const AdminHomePage: React.FC = () => {
             <IonIcon icon={add} />
           </IonFabButton>
           <IonFabList side="start">
-            <IonFabButton>
+            <IonFabButton routerLink={"/admin/addnew/Motorbike"}>
               <IonIcon icon={bicycle} />
             </IonFabButton>
-            <IonFabButton>
+            <IonFabButton routerLink={"/admin/addnew/Car"}>
               <IonIcon icon={car} />
             </IonFabButton>
           </IonFabList>

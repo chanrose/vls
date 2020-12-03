@@ -6,10 +6,10 @@ import {
   IonContent,
   IonFab,
   IonFabButton,
+  IonFabList,
   IonHeader,
   IonIcon,
   IonImg,
-  IonInput,
   IonItem,
   IonLabel,
   IonList,
@@ -22,7 +22,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import "../styles/GettingStartedPage.css";
-import { add, filter } from "ionicons/icons";
+import { add, bicycle, car, filter, image } from "ionicons/icons";
 import { useAuth } from "../../auth";
 import { firestore } from "../../firebase";
 import { Entry, toEntry } from "../../model";
@@ -51,23 +51,8 @@ const vehicleDiff = (inputData: string) => {
   const carPic = "/assets/media/carLogo.png";
   if (inputData === "Car") return carPic;
   if (inputData === "Motorbike") return bikePic;
+  if (inputData === "") return image;
 };
-
-function useEntry(sortBy = "TAX_ASC") {
-  const asc = SORT_OPTIONS["TAX_ASC"].direction;
-  const { userId } = useAuth();
-  const [entries, setEntries] = useState<Entry[]>([]);
-
-  useEffect(() => {
-    const entriesRef = firestore
-      .collection("users")
-      .doc(userId)
-      .collection("entries")
-      .onSnapshot(({ docs }) => setEntries(docs.map(toEntry)));
-  }, [sortBy]);
-
-  return entries;
-}
 
 const AdminViewPage: React.FC = () => {
   const { userId } = useAuth();
@@ -76,21 +61,11 @@ const AdminViewPage: React.FC = () => {
     .doc(userId)
     .collection("entries");
   const [entries, setEntries] = useState<Entry[]>([]);
-  const [queryName, setQuery] = useState("Car");
   const [searchText, setSearch] = useState("");
   const [filterSearch, setFSearch] = useState<Entry[]>([]);
   console.log("Search Text:", searchText);
   const viewEntry = async () => {
-    await entriesRef
-
-      /*  .orderBy(`${orderBy}`, "asc") */
-      /* .where("vehicleType", "==", queryName) */
-      /*       .orderBy(
-        SORT_OPTIONS["TAX_ASC"].column,
-        SORT_OPTIONS["TAX_ASC"].direction
-      ) */
-      .get()
-      .then(({ docs }) => setEntries(docs.map(toEntry)));
+    await entriesRef.get().then(({ docs }) => setEntries(docs.map(toEntry)));
   };
   useEffect(() => {
     viewEntry();
@@ -108,9 +83,6 @@ const AdminViewPage: React.FC = () => {
     console.log("Filter: ", filterSearch);
   }, [searchText, entries]);
 
-  /*   const filterBrand = entries.filter((entry) => {
-    return entry.vehicleBrand.toLowerCase().includes(searchText.toLowerCase());
-  }); */
   console.log("Filter: ", filterSearch);
   console.log("entry: ", entries);
   const [btnFilter, setFilter] = useState(false);
@@ -142,6 +114,7 @@ const AdminViewPage: React.FC = () => {
             value={searchText}
             onIonChange={(e) => setSearch(e.detail.value!)}
           ></IonSearchbar>
+
           <IonButton slot="end">
             <IonIcon icon={filter} />
           </IonButton>
@@ -149,12 +122,25 @@ const AdminViewPage: React.FC = () => {
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
-          <IonFabButton
-            routerLink={"/admin/addnew/"}
-            onClick={() => setAddModal(true)}
-          >
+          <IonFabButton>
             <IonIcon icon={add} />
           </IonFabButton>
+          <IonFabList side="start">
+            <IonFabButton
+              routerLink={"/admin/addnew/Car"}
+              onClick={() => setAddModal(true)}
+            >
+              <IonIcon icon={car} />
+            </IonFabButton>
+          </IonFabList>
+          <IonFabList side="top">
+            <IonFabButton
+              routerLink={"/admin/addnew/Motorbike"}
+              onClick={() => setAddModal(true)}
+            >
+              <IonIcon icon={bicycle} />
+            </IonFabButton>
+          </IonFabList>
         </IonFab>
 
         <IonActionSheet

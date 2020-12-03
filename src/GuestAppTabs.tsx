@@ -19,6 +19,7 @@ import { useAuth } from "./auth";
 import GuestHomePage from "./pages/guest/GuestHomePage";
 import GuestViewPage from "./pages/guest/GuestViewPage";
 import GuestRequestPage from "./pages/guest/GuestRequestPage";
+import GuestSettingPage from "./pages/guest/GuestSettingPage";
 
 const GuestAppTabs: React.FC = () => {
   const organID = "aiu18180";
@@ -35,6 +36,7 @@ const GuestAppTabs: React.FC = () => {
           </Route>
           <Route exact path="/guest/request/" component={GuestRequestPage} />
           <Route exact path="/guest/viewlist/" component={GuestViewPage} />
+          <Route exact path="/guest/settings/" component={GuestSettingPage} />
           <Route exact path="/admin/viewlist/entries/:id">
             <EntriesPage />
           </Route>
@@ -56,7 +58,7 @@ const GuestAppTabs: React.FC = () => {
           <IonIcon icon={listOutline} />
           <IonLabel>View List</IonLabel>
         </IonTabButton> */}
-        <IonTabButton tab="settings" href="/my/settings">
+        <IonTabButton tab="settings" href="/guest/settings">
           <IonIcon icon={settingsIcon} />
           <IonLabel>Settings</IonLabel>
         </IonTabButton>
