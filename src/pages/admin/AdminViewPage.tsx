@@ -1,4 +1,4 @@
- import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   IonActionSheet,
   IonAvatar,
@@ -21,18 +21,11 @@ import {
   IonText,
   IonToolbar,
 } from "@ionic/react";
-import "./styles/GettingStartedPage.css";
-import {
-  add,
-  caretUpCircle,
-  chevronDown,
-  filter,
-  search,
-} from "ionicons/icons";
-import { useAuth } from "../auth";
-import { firestore } from "../firebase";
-import { Entry, toEntry } from "../model";
-import EntriesPage from "./EntriesPage";
+import "../styles/GettingStartedPage.css";
+import { add, filter } from "ionicons/icons";
+import { useAuth } from "../../auth";
+import { firestore } from "../../firebase";
+import { Entry, toEntry } from "../../model";
 
 const formatDate = (inputDate: string, type: string) => {
   if (inputDate === "") return "Nan";

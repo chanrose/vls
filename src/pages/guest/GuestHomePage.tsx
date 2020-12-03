@@ -10,37 +10,23 @@ import {
 } from "@ionic/react";
 import { firestore } from "../../firebase";
 import { useAuth } from "../../auth";
-import {
-  guestProfile,
-  PostEntry,
-  toGuestProfile,
-  toPostEntry,
-} from "../../model";
-import AnnouncementCard from "../../components/AnnouncementCard";
+import { guestProfile, PostEntry, toGuestProfile } from "../../model";
 import GuestAnnouncementList from "./GuestAnnouncementList";
 
-const GuestHomePage: React.FC = () => {
-  const [guestInfo, setGuest] = useState<guestProfile>();
+interface props {
+  organId: string;
+}
+const GuestHomePage: React.FC<props> = ({ organId }) => {
   const { userId } = useAuth();
-  const [organizationId, setOrgan] = useState("");
-  const [postList, setPostList] = useState<PostEntry[]>([]);
+
+  const [guestInfo, setGuest] = useState<guestProfile>();
 
   const userProfile = firestore.collection("guest").doc(userId);
 
   useEffect(() => {
     userProfile.get().then((entry) => setGuest(toGuestProfile(entry)));
-    setOrgan(guestInfo?.organization!);
   }, [userProfile]);
 
-  useEffect(() => {
-    const postEntriesRef = firestore
-      .collection("public")
-      .doc("EfEqwXqtyzMFvDfzuRDGZdkSYaK2")
-      .collection("posts");
-    return postEntriesRef.onSnapshot(({ docs }) =>
-      setPostList(docs.map(toPostEntry))
-    );
-  }, [organizationId]);
   return (
     <IonPage>
       <IonHeader>
@@ -61,16 +47,7 @@ const GuestHomePage: React.FC = () => {
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
         Hello there: Mr. {guestInfo?.name} :
-        {organizationId && <GuestAnnouncementList organID={organizationId} />}
-        {/* 
-        {postList.map((entry) => (
-          <AnnouncementCard
-            key={entry.id}
-            title={entry.title}
-            subtitle={entry.title}
-            content={entry.title}
-          />
-        ))} */}
+        <GuestAnnouncementList organID={`${organId}`} />
       </IonContent>
     </IonPage>
   );

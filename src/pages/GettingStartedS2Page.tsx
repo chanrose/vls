@@ -9,12 +9,14 @@ import {
   IonImg,
   IonInput,
   IonItem,
+  IonLabel,
   IonList,
   IonPage,
+  IonSelect,
+  IonSelectOption,
 } from "@ionic/react";
 import "./styles/GettingStartedPage.css";
 import { useAuth } from "../auth";
-import firebase from "firebase";
 import { auth, firestore } from "../firebase";
 import { Redirect } from "react-router";
 
@@ -27,11 +29,9 @@ const GettingStartedS2Page: React.FC = () => {
 
   const handleLogin = async () => {
     const credential = await auth.signInAnonymously().catch((error) => {});
-    console.log("Credential: ", credential);
   };
 
   if (loggedIn) {
-    console.log("Signed in ehrn loggedIn:", userId);
     firestore.collection("guest").doc(userId).set({
       name,
       organization,
@@ -44,12 +44,7 @@ const GettingStartedS2Page: React.FC = () => {
       <IonContent color="light" fullscreen>
         <IonCard className="ionCardstyle">
           <IonCardHeader>
-            <IonImg
-              className="imageSize"
-              src={
-                "https://raw.githubusercontent.com/chanrose/vls/main/public/assets/icon/app2Logo.png"
-              }
-            />
+            <IonImg className="imageSize" src={"/assets/icon/app2Logo.png"} />
 
             <IonCardTitle className="centerText">
               Enter your Information
@@ -59,20 +54,24 @@ const GettingStartedS2Page: React.FC = () => {
           <IonCardContent>
             <IonList>
               <IonItem>
+                <IonLabel>Set your name</IonLabel>
                 <IonInput
                   value={name}
                   onIonChange={(e) => setName(e.detail.value!)}
                   type="text"
-                  placeholder="Enter your name"
+                  placeholder="Lastname firstname"
                 />
               </IonItem>
+
               <IonItem>
-                <IonInput
+                <IonLabel>Select Your Organization</IonLabel>
+                <IonSelect
                   value={organization}
-                  onIonChange={(e) => setOrg(e.detail.value!)}
-                  type="text"
-                  placeholder="Select your organization"
-                />
+                  placeholder="Select One"
+                  onIonChange={(e) => setOrg(e.detail.value)}
+                >
+                  <IonSelectOption value="aiu18180">AIU</IonSelectOption>
+                </IonSelect>
               </IonItem>
             </IonList>
 
@@ -85,6 +84,7 @@ const GettingStartedS2Page: React.FC = () => {
               Enter as Guest
             </IonButton>
             <IonButton
+              routerLink="/login"
               color="secondary"
               className="IonButtonRadius"
               expand="block"

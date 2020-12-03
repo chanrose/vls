@@ -20,7 +20,6 @@ import {
   IonSegmentButton,
   IonToolbar,
 } from "@ionic/react";
-import entries from "../../data";
 import {
   add,
   bicycle,
@@ -87,17 +86,6 @@ const GuestViewPage: React.FC = () => {
             { text: "Tax Expired" },
           ]}
         />
-        <IonList>
-          {entries.map((entry) => (
-            <IonItem
-              button
-              key={entry.id}
-              routerLink={`/admin/viewlist/entries/${entry.id}`}
-            >
-              {entry.brand + " " + entry.model} {entry.currentOwner}
-            </IonItem>
-          ))}
-        </IonList>
 
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton>

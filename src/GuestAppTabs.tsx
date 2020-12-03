@@ -14,29 +14,32 @@ import {
 } from "ionicons/icons";
 import { Redirect, Route, Switch } from "react-router-dom";
 import React from "react";
-import EntriesPage from "./pages/EntriesPage";
+import EntriesPage from "./pages/admin/EntriesPage";
 import { useAuth } from "./auth";
 import GuestHomePage from "./pages/guest/GuestHomePage";
 import GuestViewPage from "./pages/guest/GuestViewPage";
 import GuestRequestPage from "./pages/guest/GuestRequestPage";
 
 const GuestAppTabs: React.FC = () => {
+  const organID = "aiu18180";
   const { loggedIn } = useAuth();
   if (!loggedIn) {
-    return <Redirect to="/gettingstarted" />;
+    return <Redirect to="/gettingstarted2" />;
   }
   return (
     <IonTabs>
       <IonRouterOutlet>
         <Switch>
-          <Route exact path="/guest/home/" component={GuestHomePage} />
+          <Route exact path="/guest/home/">
+            <GuestHomePage organId={`${organID}`} />
+          </Route>
           <Route exact path="/guest/request/" component={GuestRequestPage} />
           <Route exact path="/guest/viewlist/" component={GuestViewPage} />
           <Route exact path="/admin/viewlist/entries/:id">
             <EntriesPage />
           </Route>
           <Route>
-            <GuestHomePage />
+            <GuestHomePage organId={`${organID}`} />
           </Route>
         </Switch>
       </IonRouterOutlet>

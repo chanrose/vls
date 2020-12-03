@@ -25,13 +25,12 @@ const GuestAnnouncementList: React.FC<props> = ({ organID }) => {
   }, [organizationId]);
   return (
     <div>
-      Announcement List :
       {postList.map((entry) => (
         <AnnouncementCard
           key={entry.id}
           title={entry.title}
-          subtitle={entry.title}
-          content={entry.title}
+          subtitle={entry.subtitle}
+          content={entry.content}
         />
       ))}
     </div>

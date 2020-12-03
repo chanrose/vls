@@ -11,8 +11,8 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import "./styles/GettingStartedPage.css";
-import { auth } from "../firebase";
+import "../styles/GettingStartedPage.css";
+import { auth } from "../../firebase";
 
 const AdminSettingPage: React.FC = () => {
   return (

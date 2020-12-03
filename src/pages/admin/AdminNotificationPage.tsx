@@ -6,8 +6,8 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import "./styles/GettingStartedPage.css";
-import "./styles/admin.css";
+import "../styles/GettingStartedPage.css";
+import "../styles/admin.css";
 
 const AdminNotificationPage: React.FC = () => {
   return (
