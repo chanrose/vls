@@ -29,7 +29,6 @@ const LoginPage: React.FC = () => {
     try {
       setStatus({ loading: true, error: false });
       const credential = await auth.signInWithEmailAndPassword(email, password);
-      console.log("credential: ", credential);
     } catch (error) {
       setStatus({ loading: false, error: true });
       setError({ errorCode: `${error.message}` });
@@ -46,10 +45,7 @@ const LoginPage: React.FC = () => {
       <IonContent color="light" fullscreen>
         <IonCard className="ionCardstyle">
           <IonCardHeader>
-            <img
-              className="imageSize"
-              src="https://raw.githubusercontent.com/chanrose/vls/v1.0/src/pages/media/vlsIcon.png"
-            />
+            <img className="imageSize" src={"/assets/icon/app2Logo.png"} />
             <IonCardTitle className="centerText">Login</IonCardTitle>
           </IonCardHeader>
 

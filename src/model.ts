@@ -44,3 +44,22 @@ export interface PostEntry {
 export const toPostEntry = (doc: { id: any; data: () => any }) => {
     return {id: doc.id, ...doc.data() }
 }
+
+
+export interface guestProfile {
+    map(arg0: (entry: any) => JSX.Element): import("react").ReactNode;
+    id: string,
+    name: string,
+    isAdmin: boolean,
+    organization: string
+}
+
+/* export function toEntry(doc): Entry {
+    return { id: doc.id, ...doc.data() };
+}
+ */
+export const toGuestProfile = (doc: { id: any; data: () => any }) => {
+    return {id: doc.id, ...doc.data() }
+}
+
+

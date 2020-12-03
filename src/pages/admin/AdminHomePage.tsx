@@ -12,11 +12,11 @@ import {
   IonSegmentButton,
   IonToolbar,
 } from "@ionic/react";
-import "./styles/GettingStartedPage.css";
+import "../styles/GettingStartedPage.css";
 import { add, bicycle, car, easel, ticket } from "ionicons/icons";
-import AdminGuestSeg from "../components/AdminGuestSeg";
-import AdminHomeSeg from "../components/AdminHomeSeg";
-import { useAuth } from "../auth";
+import AdminGuestSeg from "../../components/admin/AdminGuestSeg";
+import AdminHomeSeg from "../../components/admin/AdminHomeSeg";
+import { useAuth } from "../../auth";
 
 const AdminHomePage: React.FC = () => {
   const { userId } = useAuth();

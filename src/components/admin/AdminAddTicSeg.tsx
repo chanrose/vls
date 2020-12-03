@@ -8,7 +8,7 @@ import {
   IonText,
 } from "@ionic/react";
 import React from "react";
-import "../pages/styles/admin.css";
+import "../../pages/styles/admin.css";
 
 const AdminAddTicSeg: React.FC = () => {
   return (

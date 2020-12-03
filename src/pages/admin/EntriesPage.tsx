@@ -22,11 +22,11 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import "./styles/GettingStartedPage.css";
+import "../styles/GettingStartedPage.css";
 import { useHistory, useRouteMatch } from "react-router";
-import { useAuth } from "../auth";
-import { Entry, toEntry } from "../model";
-import { firestore } from "../firebase";
+import { useAuth } from "../../auth";
+import { Entry, toEntry } from "../../model";
+import { firestore } from "../../firebase";
 
 interface RouterParams {
   id: string;

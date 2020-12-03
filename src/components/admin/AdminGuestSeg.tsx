@@ -15,22 +15,22 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../auth";
-import { firestore } from "../firebase";
-import { PostEntry, toPostEntry } from "../model";
-import AnnouncementCard from "./AnnouncementCard";
-import "./ExploreContainer.css";
+import { useAuth } from "../../auth";
+import { firestore } from "../../firebase";
+import { PostEntry, toPostEntry } from "../../model";
+import AnnouncementCard from "../AnnouncementCard";
 
 const AdminGuestSeg: React.FC = () => {
+  const aiuOrgId = "aiu18180";
   const { userId } = useAuth();
   const [subtitle, setSubtitle] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const handleAdd = () => {
-    firestore.collection("users").doc(userId).collection("posts").add({
-      subtitle: subtitle,
-      title: title,
-      content: content,
+    firestore.collection("public").doc(aiuOrgId).collection("posts").add({
+      subtitle,
+      title,
+      content,
     });
     setModal(false);
   };
@@ -39,8 +39,8 @@ const AdminGuestSeg: React.FC = () => {
   const [postEntries, setPostEntries] = useState<PostEntry[]>([]);
   useEffect(() => {
     const postEntriesRef = firestore
-      .collection("users")
-      .doc(userId)
+      .collection("public")
+      .doc(aiuOrgId)
       .collection("posts");
     return postEntriesRef.onSnapshot(({ docs }) =>
       setPostEntries(docs.map(toPostEntry))

@@ -53,6 +53,7 @@ const RegistrationPage: React.FC = () => {
       firstName: fname,
       lastName: lname,
       organId: organId,
+      admin: true,
     });
   }
 
@@ -139,6 +140,7 @@ const RegistrationPage: React.FC = () => {
               SIGN UP
             </IonButton>
             <IonButton
+              routerLink="/gettingstarted2"
               color="secondary"
               className="IonButtonRadius"
               expand="block"

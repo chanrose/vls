@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   IonContent,
   IonHeader,
@@ -8,9 +8,25 @@ import {
   IonSegmentButton,
   IonToolbar,
 } from "@ionic/react";
-import AnnouncementCard from "../../components/AnnouncementCard";
+import { firestore } from "../../firebase";
+import { useAuth } from "../../auth";
+import { guestProfile, PostEntry, toGuestProfile } from "../../model";
+import GuestAnnouncementList from "./GuestAnnouncementList";
 
-const GuestHomePage: React.FC = () => {
+interface props {
+  organId: string;
+}
+const GuestHomePage: React.FC<props> = ({ organId }) => {
+  const { userId } = useAuth();
+
+  const [guestInfo, setGuest] = useState<guestProfile>();
+
+  const userProfile = firestore.collection("guest").doc(userId);
+
+  useEffect(() => {
+    userProfile.get().then((entry) => setGuest(toGuestProfile(entry)));
+  }, [userProfile]);
+
   return (
     <IonPage>
       <IonHeader>
@@ -29,7 +45,10 @@ const GuestHomePage: React.FC = () => {
           </IonSegment>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding" fullscreen></IonContent>
+      <IonContent className="ion-padding" fullscreen>
+        Hello there: Mr. {guestInfo?.name} :
+        <GuestAnnouncementList organID={`${organId}`} />
+      </IonContent>
     </IonPage>
   );
 };

@@ -14,16 +14,19 @@ import {
 } from "ionicons/icons";
 import { Redirect, Route, Switch } from "react-router-dom";
 import React from "react";
-import AdminHomePage from "./pages/AdminHomePage";
-import AdminAddPage from "./pages/AdminAddPage";
-import AdminViewPage from "./pages/AdminViewPage";
-import EntriesPage from "./pages/EntriesPage";
+import AdminHomePage from "./pages/admin/AdminHomePage";
+import AdminAddPage from "./pages/admin/AdminAddPage";
+import AdminViewPage from "./pages/admin/AdminViewPage";
+import EntriesPage from "./pages/admin/EntriesPage";
 import { useAuth } from "./auth";
-import AdminSettingPage from "./pages/AdminSettingPage";
-import AdminNotificationPage from "./pages/AdminNotificationPage";
+import AdminSettingPage from "./pages/admin/AdminSettingPage";
+import AdminNotificationPage from "./pages/admin/AdminNotificationPage";
+import { firestore } from "./firebase";
 
 const AdminAppTabs: React.FC = () => {
   const { loggedIn } = useAuth();
+  const { userId } = useAuth();
+
   if (!loggedIn) {
     return <Redirect to="/login" />;
   }

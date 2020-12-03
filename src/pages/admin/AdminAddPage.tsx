@@ -8,10 +8,10 @@ import {
   IonSegmentButton,
   IonToolbar,
 } from "@ionic/react";
-import "./styles/GettingStartedPage.css";
-import "./styles/admin.css";
-import AdminAddVehSeg from "../components/AdminAddVehSeg";
-import AdminAddTicSeg from "../components/AdminAddTicSeg";
+import "../styles/GettingStartedPage.css";
+import "../styles/admin.css";
+import AdminAddVehSeg from "../../components/admin/AdminAddVehSeg";
+import AdminAddTicSeg from "../../components/admin/AdminAddTicSeg";
 
 const AdminAddPage: React.FC = () => {
   const [selectedVehicle, setVehicle] = useState(true);

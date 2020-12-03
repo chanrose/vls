@@ -14,9 +14,9 @@ import {
 } from "@ionic/react";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-import { useAuth } from "../auth";
-import { firestore } from "../firebase";
-import "../pages/styles/admin.css";
+import { useAuth } from "../../auth";
+import { firestore } from "../../firebase";
+import "../../pages/styles/admin.css";
 
 const AdminAddVehSeg: React.FC = () => {
   const { userId } = useAuth();
