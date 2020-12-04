@@ -13,12 +13,18 @@ import {
   IonTextarea,
 } from "@ionic/react";
 import React, { useState } from "react";
-import { useHistory } from "react-router";
+import { useHistory, useRouteMatch } from "react-router";
 import { useAuth } from "../../auth";
 import { firestore } from "../../firebase";
 import "../../pages/styles/admin.css";
 
+interface props {
+  type?: string;
+}
+
 const AdminAddVehSeg: React.FC = () => {
+  const match = useRouteMatch<props>();
+  const { type } = match.params;
   const { userId } = useAuth();
   const history = useHistory();
   const handleSave = () => {
@@ -50,7 +56,7 @@ const AdminAddVehSeg: React.FC = () => {
   const [ownerEmail, setEmail] = useState("");
   const [ownerTele, setTele] = useState("");
   const [drivingExpire, setDrivingExpire] = useState("");
-  const [vehicleType, setType] = useState("");
+  const [vehicleType, setType] = useState(`${type}`);
   const [vehiclePlate, setPlate] = useState("");
   const [province, setProvince] = useState("");
   const [vehicleBrand, setBrand] = useState("");

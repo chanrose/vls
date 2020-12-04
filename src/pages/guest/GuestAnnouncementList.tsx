@@ -3,26 +3,26 @@ import React, { useEffect, useState } from "react";
 import { firestore } from "../../firebase";
 import { guestProfile, PostEntry, toPostEntry } from "../../model";
 import AnnouncementCard from "../../components/AnnouncementCard";
+import { useRouteMatch } from "react-router";
+import { useAuth } from "../../auth";
 
 interface props {
-  organID: string;
+  organId: string;
 }
 
-const GuestAnnouncementList: React.FC<props> = ({ organID }) => {
+const GuestAnnouncementList: React.FC<props> = ({ organId }) => {
   const [guestInfo, setGuest] = useState<guestProfile>();
-
-  const organizationId = organID;
   const [postList, setPostList] = useState<PostEntry[]>([]);
 
   useEffect(() => {
     const postEntriesRef = firestore
       .collection("public")
-      .doc(organizationId)
+      .doc(organId)
       .collection("posts");
     return postEntriesRef.onSnapshot(({ docs }) =>
       setPostList(docs.map(toPostEntry))
     );
-  }, [organizationId]);
+  }, [organId]);
   return (
     <div>
       {postList.map((entry) => (

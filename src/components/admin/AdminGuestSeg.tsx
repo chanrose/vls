@@ -21,7 +21,7 @@ import { PostEntry, toPostEntry } from "../../model";
 import AnnouncementCard from "../AnnouncementCard";
 
 const AdminGuestSeg: React.FC = () => {
-  const aiuOrgId = "aiu18180";
+  const aiuOrgId = "hope18180";
   const { userId } = useAuth();
   const [subtitle, setSubtitle] = useState("");
   const [title, setTitle] = useState("");
@@ -58,6 +58,7 @@ const AdminGuestSeg: React.FC = () => {
           title={entry.title}
           subtitle={entry.subtitle}
           content={entry.content}
+          isAdmin={true}
         />
       ))}
       <IonButton expand="block" onClick={() => setModal(true)}>

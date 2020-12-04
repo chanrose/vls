@@ -123,6 +123,16 @@ const RegistrationPage: React.FC = () => {
                 <br />
               </IonItem>
               <IonItem>
+                <IonLabel>Organization Name:</IonLabel>
+                <IonInput
+                  value={organId}
+                  onIonChange={(e) => setOrganId(e.detail.value!)}
+                  type="text"
+                  placeholder="AIU"
+                />
+                <br />
+              </IonItem>
+              <IonItem>
                 <IonText>
                   <p>
                     Other users will use Organ ID to identify your organization.

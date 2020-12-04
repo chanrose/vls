@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   IonButton,
   IonCard,
@@ -19,6 +19,7 @@ import "./styles/GettingStartedPage.css";
 import { useAuth } from "../auth";
 import { auth, firestore } from "../firebase";
 import { Redirect } from "react-router";
+import { orgList, toOrgList } from "../model";
 
 const GettingStartedS2Page: React.FC = () => {
   const [name, setName] = useState("");
@@ -26,18 +27,29 @@ const GettingStartedS2Page: React.FC = () => {
 
   const { loggedIn } = useAuth();
   const { userId } = useAuth();
+  const [orgEntries, setOrgEntries] = useState<orgList[]>([]);
+
+  const entriesPub = firestore.collection("public");
+  const publicOrg = async () => {
+    await entriesPub
+      .get()
+      .then(({ docs }) => setOrgEntries(docs.map(toOrgList)));
+  };
+  useEffect(() => {
+    publicOrg();
+  }, [userId]);
 
   const handleLogin = async () => {
     const credential = await auth.signInAnonymously().catch((error) => {});
   };
 
-  if (loggedIn) {
+  if (loggedIn && organization != "") {
     firestore.collection("guest").doc(userId).set({
       name,
       organization,
       isAdmin: false,
     });
-    return <Redirect to="/guest/home" />;
+    return <Redirect to={`/guest/home/`} />;
   }
   return (
     <IonPage>
@@ -70,7 +82,14 @@ const GettingStartedS2Page: React.FC = () => {
                   placeholder="Select One"
                   onIonChange={(e) => setOrg(e.detail.value)}
                 >
-                  <IonSelectOption value="aiu18180">AIU</IonSelectOption>
+                  {" "}
+                  {orgEntries.map((entry) => (
+                    <IonSelectOption value={entry.id}>
+                      {entry.name}
+                    </IonSelectOption>
+                  ))}
+                  {/* <IonSelectOption value="aiu18180">AIU</IonSelectOption>
+                  <IonSelectOption value="hope18180">HC</IonSelectOption> */}
                 </IonSelect>
               </IonItem>
             </IonList>

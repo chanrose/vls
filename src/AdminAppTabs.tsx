@@ -21,11 +21,12 @@ import EntriesPage from "./pages/admin/EntriesPage";
 import { useAuth } from "./auth";
 import AdminSettingPage from "./pages/admin/AdminSettingPage";
 import AdminNotificationPage from "./pages/admin/AdminNotificationPage";
-import { firestore } from "./firebase";
+import { auth, firestore } from "./firebase";
 
 const AdminAppTabs: React.FC = () => {
   const { loggedIn } = useAuth();
   const { userId } = useAuth();
+  console.log("Auth", auth);
 
   if (!loggedIn) {
     return <Redirect to="/login" />;
@@ -39,6 +40,9 @@ const AdminAppTabs: React.FC = () => {
           <Route exact path="/admin/addnew/" component={AdminAddPage} />
           <Route exact path="/admin/viewlist/" component={AdminViewPage} />
           <Route exact path="/admin/settings/" component={AdminSettingPage} />
+          <Route exact path="/admin/addnew/:type">
+            <AdminAddPage />
+          </Route>
           <Route
             exact
             path="/admin/notification/"
