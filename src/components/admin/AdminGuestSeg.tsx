@@ -17,42 +17,43 @@ import {
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../auth";
 import { firestore } from "../../firebase";
-import { PostEntry, toPostEntry } from "../../model";
+import { orgList, PostEntry, toOrgList, toPostEntry } from "../../model";
 import AnnouncementCard from "../AnnouncementCard";
 
-const AdminGuestSeg: React.FC = () => {
-  const aiuOrgId = "hope18180";
+interface props {
+  organId: string;
+}
+
+const AdminGuestSeg: React.FC<props> = ({ organId }) => {
   const { userId } = useAuth();
+  const [postList, setPostList] = useState<PostEntry[]>([]);
   const [subtitle, setSubtitle] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [orgDetail, setOrg] = useState<orgList>();
+  const [showModal, setModal] = useState(false);
+
+  useEffect(() => {
+    const postEntriesRef = firestore
+      .collection("public")
+      .doc(organId)
+      .collection("posts");
+    return postEntriesRef.onSnapshot(({ docs }) =>
+      setPostList(docs.map(toPostEntry))
+    );
+  }, [organId]);
+
   const handleAdd = () => {
-    firestore.collection("public").doc(aiuOrgId).collection("posts").add({
+    firestore.collection("public").doc(organId).collection("posts").add({
       subtitle,
       title,
       content,
     });
     setModal(false);
   };
-  const [showModal, setModal] = useState(false);
-
-  const [postEntries, setPostEntries] = useState<PostEntry[]>([]);
-  useEffect(() => {
-    const postEntriesRef = firestore
-      .collection("public")
-      .doc(aiuOrgId)
-      .collection("posts");
-    return postEntriesRef.onSnapshot(({ docs }) =>
-      setPostEntries(docs.map(toPostEntry))
-    );
-    /*     postEntriesRef
-      .get()
-      .then(({ docs }) => setPostEntries(docs.map(toPostEntry))); */
-  }, [userId]);
-
   return (
     <div>
-      {postEntries.map((entry) => (
+      {postList.map((entry) => (
         <AnnouncementCard
           key={entry.id}
           title={entry.title}

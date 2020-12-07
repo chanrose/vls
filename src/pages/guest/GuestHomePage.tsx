@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   IonContent,
   IonHeader,
+  IonImg,
   IonLabel,
   IonPage,
   IonSegment,
@@ -69,10 +70,10 @@ const GuestHomePage: React.FC = () => {
       <IonContent className="ion-padding" fullscreen>
         <div className="ion-text-center">
           {" "}
-          <IonText>
-            Hello there: Mr. {guestInfo?.name}
-            <br /> here are some posts by your administrator123:
-          </IonText>
+          <div>
+            <IonImg className="imageSize" src="/assets/icon/app2Logo.png" />
+            <br />
+          </div>
         </div>
         {/*        <div>
           {postList.map((entry) => (
