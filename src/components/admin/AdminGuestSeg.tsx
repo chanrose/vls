@@ -21,37 +21,57 @@ import { orgList, PostEntry, toOrgList, toPostEntry } from "../../model";
 import AnnouncementCard from "../AnnouncementCard";
 
 interface props {
-  ID: string;
+  organId: string;
 }
 
-const AdminGuestSeg: React.FC<props> = ({ ID }) => {
-  console.log("ID: ", ID);
-  const [orgId, setOrg] = useState(ID);
-  const [orgName, setOrgName] = useState("");
+const AdminGuestSeg: React.FC<props> = ({ organId }) => {
   const { userId } = useAuth();
+  const [postList, setPostList] = useState<PostEntry[]>([]);
 
   const [subtitle, setSubtitle] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  const handleAdd = () => {
-    if (orgId) {
-      console.log("ORG ID", orgId);
+  const [orgDetail, setOrg] = useState<orgList>();
 
-      firestore.collection("public").doc(orgId).collection("posts").add({
-        subtitle,
-        title,
-        content,
-      });
-      setModal(false);
-    }
-  };
   const [showModal, setModal] = useState(false);
-  const [postEntries, setPostEntries] = useState<PostEntry[]>([]);
+
+  /* 
+  useEffect(() => {
+    firestore
+      .collection("users")
+      .doc(userId)
+      .collection("detail")
+      .doc(userId)
+      .get()
+      .then((doc) => {
+        setOrg(toOrgList(doc));
+      });
+  }, [userId]);
+ */
+
+  useEffect(() => {
+    const postEntriesRef = firestore
+      .collection("public")
+      .doc(organId)
+      .collection("posts");
+    return postEntriesRef.onSnapshot(({ docs }) =>
+      setPostList(docs.map(toPostEntry))
+    );
+  }, [organId]);
+
+  const handleAdd = () => {
+    firestore.collection("public").doc(organId).collection("posts").add({
+      subtitle,
+      title,
+      content,
+    });
+    setModal(false);
+  };
 
   return (
     <div>
-      {postEntries.map((entry) => (
+      {postList.map((entry) => (
         <AnnouncementCard
           key={entry.id}
           title={entry.title}

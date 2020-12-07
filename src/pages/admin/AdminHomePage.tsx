@@ -36,7 +36,6 @@ const AdminHomePage: React.FC = () => {
       .get()
       .then((doc) => {
         setOrg(toOrgList(doc));
-        console.log(doc);
       });
   }, [userId]);
 
@@ -57,7 +56,6 @@ const AdminHomePage: React.FC = () => {
       setTools(false);
     }
   };
-  console.log("organ ID", organID);
   return (
     <IonPage>
       <IonHeader>
@@ -77,7 +75,7 @@ const AdminHomePage: React.FC = () => {
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
         Hello {orgDetail?.name}
-        {selectedGuest && <AdminGuestSeg ID={`${organID}`} />}
+        {selectedGuest && <AdminGuestSeg organId="INDI18180" />}
         {selectedHome && <AdminHomeSeg />}
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton>
