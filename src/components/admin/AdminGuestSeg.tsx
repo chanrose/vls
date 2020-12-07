@@ -27,28 +27,11 @@ interface props {
 const AdminGuestSeg: React.FC<props> = ({ organId }) => {
   const { userId } = useAuth();
   const [postList, setPostList] = useState<PostEntry[]>([]);
-
   const [subtitle, setSubtitle] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-
   const [orgDetail, setOrg] = useState<orgList>();
-
   const [showModal, setModal] = useState(false);
-
-  /* 
-  useEffect(() => {
-    firestore
-      .collection("users")
-      .doc(userId)
-      .collection("detail")
-      .doc(userId)
-      .get()
-      .then((doc) => {
-        setOrg(toOrgList(doc));
-      });
-  }, [userId]);
- */
 
   useEffect(() => {
     const postEntriesRef = firestore
@@ -68,7 +51,6 @@ const AdminGuestSeg: React.FC<props> = ({ organId }) => {
     });
     setModal(false);
   };
-
   return (
     <div>
       {postList.map((entry) => (

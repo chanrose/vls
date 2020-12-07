@@ -39,8 +39,6 @@ const AdminHomePage: React.FC = () => {
       });
   }, [userId]);
 
-  const [organID, setOrgan] = useState(orgDetail?.orgID);
-
   const returnSegment = (selectedSegment: string) => {
     if (selectedSegment === "guest") {
       setGuest(true);
@@ -56,6 +54,7 @@ const AdminHomePage: React.FC = () => {
       setTools(false);
     }
   };
+
   return (
     <IonPage>
       <IonHeader>
@@ -74,8 +73,7 @@ const AdminHomePage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
-        Hello {orgDetail?.name}
-        {selectedGuest && <AdminGuestSeg organId="INDI18180" />}
+        {selectedGuest && <AdminGuestSeg organId={`${orgDetail?.organId!}`} />}
         {selectedHome && <AdminHomeSeg />}
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton>
