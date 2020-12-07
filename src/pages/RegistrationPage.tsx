@@ -24,6 +24,7 @@ const RegistrationPage: React.FC = () => {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [organId, setOrganId] = useState("");
+  const [organName, setOrganName] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState({ loading: false, error: false });
   const { loggedIn } = useAuth();
@@ -47,17 +48,25 @@ const RegistrationPage: React.FC = () => {
 
   if (signup) {
     console.log(userId);
-    firestore.collection("users").doc(userId).collection("detail").add({
-      email: email,
-      password: password,
-      firstName: fname,
-      lastName: lname,
-      organId: organId,
-      admin: true,
-    });
   }
 
   if (loggedIn) {
+    firestore
+      .collection("users")
+      .doc(userId)
+      .collection("detail")
+      .doc(userId)
+      .set({
+        email: email,
+        password: password,
+        firstName: fname,
+        lastName: lname,
+        organId: organId,
+        admin: true,
+        name: organName,
+      });
+    firestore.collection("public").doc(organId).set({ name: organName });
+
     return <Redirect to="/admin/home/" />;
   }
   return (
@@ -125,8 +134,8 @@ const RegistrationPage: React.FC = () => {
               <IonItem>
                 <IonLabel>Organization Name:</IonLabel>
                 <IonInput
-                  value={organId}
-                  onIonChange={(e) => setOrganId(e.detail.value!)}
+                  value={organName}
+                  onIonChange={(e) => setOrganName(e.detail.value!)}
                   type="text"
                   placeholder="AIU"
                 />

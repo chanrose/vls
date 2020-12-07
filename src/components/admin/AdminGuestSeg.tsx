@@ -17,38 +17,37 @@ import {
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../auth";
 import { firestore } from "../../firebase";
-import { PostEntry, toPostEntry } from "../../model";
+import { orgList, PostEntry, toOrgList, toPostEntry } from "../../model";
 import AnnouncementCard from "../AnnouncementCard";
 
-const AdminGuestSeg: React.FC = () => {
-  const aiuOrgId = "hope18180";
+interface props {
+  ID: string;
+}
+
+const AdminGuestSeg: React.FC<props> = ({ ID }) => {
+  console.log("ID: ", ID);
+  const [orgId, setOrg] = useState(ID);
+  const [orgName, setOrgName] = useState("");
   const { userId } = useAuth();
+
   const [subtitle, setSubtitle] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+
   const handleAdd = () => {
-    firestore.collection("public").doc(aiuOrgId).collection("posts").add({
-      subtitle,
-      title,
-      content,
-    });
-    setModal(false);
+    if (orgId) {
+      console.log("ORG ID", orgId);
+
+      firestore.collection("public").doc(orgId).collection("posts").add({
+        subtitle,
+        title,
+        content,
+      });
+      setModal(false);
+    }
   };
   const [showModal, setModal] = useState(false);
-
   const [postEntries, setPostEntries] = useState<PostEntry[]>([]);
-  useEffect(() => {
-    const postEntriesRef = firestore
-      .collection("public")
-      .doc(aiuOrgId)
-      .collection("posts");
-    return postEntriesRef.onSnapshot(({ docs }) =>
-      setPostEntries(docs.map(toPostEntry))
-    );
-    /*     postEntriesRef
-      .get()
-      .then(({ docs }) => setPostEntries(docs.map(toPostEntry))); */
-  }, [userId]);
 
   return (
     <div>

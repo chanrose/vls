@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   IonContent,
   IonFab,
@@ -17,13 +17,30 @@ import { add, bicycle, car, easel, ticket } from "ionicons/icons";
 import AdminGuestSeg from "../../components/admin/AdminGuestSeg";
 import AdminHomeSeg from "../../components/admin/AdminHomeSeg";
 import { useAuth } from "../../auth";
+import { firestore } from "../../firebase";
+import { orgList, toOrgList } from "../../model";
 
 const AdminHomePage: React.FC = () => {
   const { userId } = useAuth();
-  console.log("User logged: ", userId);
   const [selectedHome, setHome] = useState(true);
   const [selectedGuest, setGuest] = useState(false);
   const [selectedTools, setTools] = useState(false);
+  const [orgDetail, setOrg] = useState<orgList>();
+
+  useEffect(() => {
+    firestore
+      .collection("users")
+      .doc(userId)
+      .collection("detail")
+      .doc(userId)
+      .get()
+      .then((doc) => {
+        setOrg(toOrgList(doc));
+        console.log(doc);
+      });
+  }, [userId]);
+
+  const [organID, setOrgan] = useState(orgDetail?.orgID);
 
   const returnSegment = (selectedSegment: string) => {
     if (selectedSegment === "guest") {
@@ -40,7 +57,7 @@ const AdminHomePage: React.FC = () => {
       setTools(false);
     }
   };
-
+  console.log("organ ID", organID);
   return (
     <IonPage>
       <IonHeader>
@@ -59,7 +76,8 @@ const AdminHomePage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
-        {selectedGuest && <AdminGuestSeg />}
+        Hello {orgDetail?.name}
+        {selectedGuest && <AdminGuestSeg ID={`${organID}`} />}
         {selectedHome && <AdminHomeSeg />}
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton>

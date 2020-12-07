@@ -65,6 +65,7 @@ export const toGuestProfile = (doc: { id: any; data: () => any }) => {
 export interface orgList {
     map(arg0: (entry: any) => JSX.Element): import("react").ReactNode;
     id: string,
+    orgID: string,
     name: string,
   
 }

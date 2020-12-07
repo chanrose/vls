@@ -105,6 +105,7 @@ const EntriesPage: React.FC = () => {
   const [hasGreenBook, setGreenBook] = useState(entry?.hasGreenBook);
   const [greenBookOwner, setGB] = useState(entry?.greenBookOwner);
   const [messageRemark, setMessage] = useState(entry?.messageRemark);
+
   return (
     <IonPage>
       <IonHeader>
