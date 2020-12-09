@@ -40,9 +40,13 @@ const RequestCard: React.FC<props> = ({
   const { organization } = useContext(UserContext);
   const history = useHistory();
   const [isUpdating, setUpdate] = useState(false);
+  const [editReq, setEdit] = useState(false);
 
   const handleEdit = () => {
     setUpdate(!isUpdating);
+    if (collection == "requests") {
+      setEdit(editReq);
+    }
   };
 
   const handleUpdate = async () => {
@@ -56,6 +60,13 @@ const RequestCard: React.FC<props> = ({
       await announcementRef.update({ subtitle: eSubtitle });
     if (eContent != content)
       await announcementRef.update({ content: eContent });
+    if (collection == "requests") {
+      if (eContent != content)
+        await announcementRef.update({ messageRemark: eContent });
+
+      if (eTitle != title)
+        await announcementRef.update({ requestType: eTitle });
+    }
 
     handleEdit();
   };
@@ -68,7 +79,6 @@ const RequestCard: React.FC<props> = ({
       .doc(pId)
       .delete();
   };
-
   return (
     <IonCard>
       <IonCardHeader>

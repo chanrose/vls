@@ -19,6 +19,7 @@ import AdminHomeSeg from "../../components/admin/AdminHomeSeg";
 import { useAuth } from "../../auth";
 import { firestore } from "../../firebase";
 import { orgList, toEntry } from "../../model";
+import { stringify } from "querystring";
 
 const AdminHomePage: React.FC = () => {
   const { userId } = useAuth();
@@ -26,6 +27,7 @@ const AdminHomePage: React.FC = () => {
   const [selectedGuest, setGuest] = useState(false);
   const [selectedTools, setTools] = useState(false);
   const [orgDetail, setOrg] = useState<orgList>();
+  const [selectedSeg, setSeg] = useState("home");
 
   useEffect(() => {
     firestore
@@ -44,14 +46,17 @@ const AdminHomePage: React.FC = () => {
       setGuest(true);
       setHome(false);
       setTools(false);
+      setSeg("guest");
     } else if (selectedSegment === "tools") {
       setGuest(false);
       setHome(false);
       setTools(true);
+      setSeg("tool");
     } else if (selectedSegment === "home") {
       setGuest(false);
       setHome(true);
       setTools(false);
+      setSeg("home");
     }
   };
 
@@ -59,7 +64,10 @@ const AdminHomePage: React.FC = () => {
     <IonPage>
       <IonHeader translucent>
         <IonToolbar>
-          <IonSegment onIonChange={(e) => returnSegment(e.detail.value!)}>
+          <IonSegment
+            value={selectedSeg}
+            onIonChange={(e) => returnSegment(e.detail.value!)}
+          >
             <IonSegmentButton value="home">
               <IonLabel>Home</IonLabel>
             </IonSegmentButton>
