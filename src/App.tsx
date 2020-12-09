@@ -1,6 +1,12 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { IonApp, IonLoading, IonText } from "@ionic/react";
+import {
+  IonApp,
+  IonImg,
+  IonLoading,
+  IonProgressBar,
+  IonText,
+} from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import GettingStartedPage from "./pages/GettingStartedPage";
 import GettingStartedS2Page from "./pages/GettingStartedS2Page";
@@ -9,11 +15,15 @@ import RegistrationPage from "./pages/RegistrationPage";
 import AdminAppTabs from "./AdminAppTabs";
 import { AuthContext, useAuthInit } from "./auth";
 import GuestAppTabs from "./GuestAppTabs";
+import PageNotFound from "./pages/PageNotFound";
 
 const App: React.FC = () => {
   const { loading, auth } = useAuthInit();
-  if (loading) {
+  /*   if (loading) {
     return <IonLoading isOpen />;
+  } */
+  if (loading) {
+    return <IonProgressBar type="indeterminate"></IonProgressBar>;
   }
   return (
     <IonApp>
@@ -37,7 +47,7 @@ const App: React.FC = () => {
               exact={true}
             />
             <Route>
-              <IonText>Path Not found!</IonText>
+              <PageNotFound />
             </Route>
           </Switch>
         </IonReactRouter>

@@ -21,10 +21,6 @@ export interface Entry {
     messageRemark: string,
 }
 
-/* export function toEntry(doc): Entry {
-    return { id: doc.id, ...doc.data() };
-}
- */
 export const toEntry = (doc: { id: any; data: () => any }) => {
     return {id: doc.id, ...doc.data() }
 }
@@ -37,35 +33,16 @@ export interface PostEntry {
     content: string
 }
 
-/* export function toEntry(doc): Entry {
-    return { id: doc.id, ...doc.data() };
-}
- */
-export const toPostEntry = (doc: { id: any; data: () => any }) => {
-    return {id: doc.id, ...doc.data() }
-}
-
-
-export interface guestProfile {
+export interface userProfile {
     map(arg0: (entry: any) => JSX.Element): import("react").ReactNode;
     id?: string,
     name?: string,
     isAdmin?: boolean,
-    organization: string
+    organId: string
 }
-
-
 export interface guestDetail {
     name?: string,
     organization: string
-}
-
-/* export function toEntry(doc): Entry {
-    return { id: doc.id, ...doc.data() };
-}
- */
-export const toGuestProfile = (doc: { id: any; data: () => any }) => {
-    return {id: doc.id, ...doc.data() }
 }
 
 export interface orgList {
@@ -76,7 +53,16 @@ export interface orgList {
   
 }
 
-export const toOrgList = (doc: { id: any; data: () => any }) => {
-    return {id: doc.id, ...doc.data() }
+
+export interface reqList {
+    map(arg0: (entry: any) => JSX.Element): import("react").ReactNode;
+    id: string,    
+    name: string,
+    idNo: string,
+    guestEmail: string,
+    guestTele: string,
+    requestType: string,
+    messageRemark : string,
+  
 }
 

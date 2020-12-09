@@ -6,6 +6,7 @@ import {
   IonPage,
   IonSegment,
   IonSegmentButton,
+  IonTitle,
   IonToolbar,
 } from "@ionic/react";
 import "../styles/GettingStartedPage.css";
@@ -15,9 +16,9 @@ import AdminAddTicSeg from "../../components/admin/AdminAddTicSeg";
 
 const AdminAddPage: React.FC = () => {
   const [selectedVehicle, setVehicle] = useState(true);
-  const [selectedTicket, setTicket] = useState(false);
+  /*   const [selectedTicket, setTicket] = useState(false); */
 
-  const returnSeg = (selectedSeg: string) => {
+  /*   const returnSeg = (selectedSeg: string) => {
     if (selectedSeg == "ticket") {
       setTicket(true);
       setVehicle(false);
@@ -25,25 +26,29 @@ const AdminAddPage: React.FC = () => {
       setTicket(false);
       setVehicle(true);
     }
-  };
+  }; */
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader translucent>
         <IonToolbar>
-          <IonSegment onIonChange={(e) => returnSeg(e.detail.value!)}>
+          <IonTitle>
+            <div className="ion-text-center">Add Vehicle</div>
+          </IonTitle>
+          {/* <IonSegment onIonChange={(e) => returnSeg(e.detail.value!)}>
             <IonSegmentButton value="vehicle">
               <IonLabel>Vehicle</IonLabel>
             </IonSegmentButton>
             <IonSegmentButton value="ticket">
               <IonLabel>Ticket</IonLabel>
             </IonSegmentButton>
-          </IonSegment>
+          </IonSegment> */}
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className="ion-padding">
         {selectedVehicle && <AdminAddVehSeg />}
-        {selectedTicket && <AdminAddTicSeg />}
+        {/* 
+        {selectedTicket && <AdminAddTicSeg />} */}
       </IonContent>
     </IonPage>
   );

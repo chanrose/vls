@@ -1,36 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { firestore } from "../../firebase";
-import { guestProfile, PostEntry, toPostEntry } from "../../model";
-import AnnouncementCard from "../../components/AnnouncementCard";
-import { useRouteMatch } from "react-router";
-import { useAuth } from "../../auth";
+import { PostEntry, toEntry, userProfile } from "../../model";
 
-interface props {
-  organId: string;
-}
+import RequestCard from "../../components/RequestCard";
+import { UserContext } from "../../auth";
 
-const GuestAnnouncementList: React.FC<props> = ({ organId }) => {
-  const [guestInfo, setGuest] = useState<guestProfile>();
+const GuestAnnouncementList: React.FC = () => {
   const [postList, setPostList] = useState<PostEntry[]>([]);
-
+  const { organization } = useContext(UserContext);
   useEffect(() => {
     const postEntriesRef = firestore
       .collection("public")
-      .doc(organId)
+      .doc(organization)
       .collection("posts");
     return postEntriesRef.onSnapshot(({ docs }) =>
-      setPostList(docs.map(toPostEntry))
+      setPostList(docs.map(toEntry))
     );
-  }, [organId]);
+  }, [organization]);
   return (
     <div>
       {postList.map((entry) => (
-        <AnnouncementCard
+        <RequestCard
           key={entry.id}
           title={entry.title}
           subtitle={entry.subtitle}
           content={entry.content}
+          collection={"posts"}
         />
       ))}
     </div>

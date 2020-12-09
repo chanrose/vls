@@ -18,7 +18,7 @@ import AdminGuestSeg from "../../components/admin/AdminGuestSeg";
 import AdminHomeSeg from "../../components/admin/AdminHomeSeg";
 import { useAuth } from "../../auth";
 import { firestore } from "../../firebase";
-import { orgList, toOrgList } from "../../model";
+import { orgList, toEntry } from "../../model";
 
 const AdminHomePage: React.FC = () => {
   const { userId } = useAuth();
@@ -35,7 +35,7 @@ const AdminHomePage: React.FC = () => {
       .doc(userId)
       .get()
       .then((doc) => {
-        setOrg(toOrgList(doc));
+        setOrg(toEntry(doc));
       });
   }, [userId]);
 
@@ -57,7 +57,7 @@ const AdminHomePage: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader translucent>
         <IonToolbar>
           <IonSegment onIonChange={(e) => returnSegment(e.detail.value!)}>
             <IonSegmentButton value="home">
@@ -66,9 +66,9 @@ const AdminHomePage: React.FC = () => {
             <IonSegmentButton value="guest">
               <IonLabel>Guest's Post</IonLabel>
             </IonSegmentButton>
-            <IonSegmentButton value="tools">
+            {/* <IonSegmentButton value="tools">
               <IonLabel>Admin tools</IonLabel>
-            </IonSegmentButton>
+            </IonSegmentButton> */}
           </IonSegment>
         </IonToolbar>
       </IonHeader>

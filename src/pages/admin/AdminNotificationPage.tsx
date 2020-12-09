@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   IonContent,
   IonHeader,
@@ -8,17 +8,48 @@ import {
 } from "@ionic/react";
 import "../styles/GettingStartedPage.css";
 import "../styles/admin.css";
+import { UserContext } from "../../auth";
+import { firestore } from "../../firebase";
+import { reqList, toEntry } from "../../model";
+import RequestCard from "../../components/RequestCard";
 
 const AdminNotificationPage: React.FC = () => {
+  const { organization } = useContext(UserContext);
+  const [reqList, setReqList] = useState<reqList[]>([]);
+
+  useEffect(() => {
+    const postEntriesRef = firestore
+      .collection("public")
+      .doc(organization)
+      .collection("requests");
+    return postEntriesRef.onSnapshot(({ docs }) =>
+      setReqList(docs.map(toEntry))
+    );
+  }, [organization]);
+
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader translucent>
         <IonToolbar>
-          <IonTitle>Admin Notification Page</IonTitle>
+          <IonTitle>
+            <div className="ion-text-center">Notification</div>{" "}
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className="ion-padding">
-        See list of reminder here as well
+        <div>
+          {reqList.map((entry) => (
+            <RequestCard
+              key={entry.id}
+              title={entry.requestType}
+              subtitle={entry.name}
+              content={entry.messageRemark}
+              isAdmin={true}
+              pId={entry.id}
+              collection={"requests"}
+            />
+          ))}
+        </div>
       </IonContent>
     </IonPage>
   );

@@ -14,7 +14,7 @@ import {
 import { trash } from "ionicons/icons";
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router";
-import { OrgContext, useAuth } from "../auth";
+import { OrgContext, useAuth, UserContext } from "../auth";
 import { firestore } from "../firebase";
 import "../pages/styles/admin.css";
 
@@ -24,19 +24,20 @@ interface props {
   content: string;
   isAdmin?: boolean;
   pId?: string;
+  collection?: string;
 }
-const AnnouncementCard: React.FC<props> = ({
+const RequestCard: React.FC<props> = ({
   title,
   subtitle,
   content,
   isAdmin,
   pId,
+  collection,
 }) => {
   const [eTitle, setTitle] = useState(title);
   const [eSubtitle, setSubtitle] = useState(subtitle);
   const [eContent, setContent] = useState(content);
-
-  const { organization } = useContext(OrgContext);
+  const { organization } = useContext(UserContext);
   const history = useHistory();
   const [isUpdating, setUpdate] = useState(false);
 
@@ -48,7 +49,7 @@ const AnnouncementCard: React.FC<props> = ({
     const announcementRef = firestore
       .collection("public")
       .doc(organization)
-      .collection("posts")
+      .collection(collection!)
       .doc(pId);
     if (eTitle != title) await announcementRef.update({ title: eTitle });
     if (eSubtitle != subtitle)
@@ -63,7 +64,7 @@ const AnnouncementCard: React.FC<props> = ({
     firestore
       .collection("public")
       .doc(organization)
-      .collection("posts")
+      .collection(collection!)
       .doc(pId)
       .delete();
   };
@@ -135,4 +136,4 @@ const AnnouncementCard: React.FC<props> = ({
   );
 };
 
-export default AnnouncementCard;
+export default RequestCard;

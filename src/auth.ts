@@ -11,12 +11,10 @@ interface AuthInit {
     auth?: Auth;
 }
 
-
-
 export const AuthContext = React.createContext<Auth>({ loggedIn: false });
+export const OrgContext = React.createContext({organization: ""});
+export const UserContext = React.createContext({organization: "", name: ""});
 
-
-export const OrgContext = React.createContext("");
 
 
 export function useAuth(): Auth {

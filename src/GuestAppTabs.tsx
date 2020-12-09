@@ -14,39 +14,44 @@ import {
 } from "ionicons/icons";
 import { Redirect, Route, Switch } from "react-router-dom";
 import React, { useState } from "react";
-import { OrgContext, useAuth } from "./auth";
+import { useAuth, UserContext } from "./auth";
 import GuestHomePage from "./pages/guest/GuestHomePage";
-import GuestViewPage from "./pages/guest/GuestViewPage";
 import GuestRequestPage from "./pages/guest/GuestRequestPage";
 import GuestSettingPage from "./pages/guest/GuestSettingPage";
 import { guestDetail } from "./model";
 import { Storage } from "@capacitor/core";
+import PageNotFound from "./pages/PageNotFound";
 
 const GuestAppTabs: React.FC = () => {
   const { userId } = useAuth();
   const [orgId, setOrg] = useState("Default");
+  const [guestName, setName] = useState("Default");
+
   const getUserDetail = async () => {
     const ret = await Storage.get({ key: "userDetail" });
     const getObj = JSON.parse(ret.value);
     setOrg(getObj.organization);
+    setName(getObj.name);
   };
   getUserDetail();
   return (
     <IonTabs>
       <IonRouterOutlet>
-        <OrgContext.Provider value={`${orgId}`}>
+        <UserContext.Provider
+          value={{ organization: `${orgId}`, name: `${guestName}` }}
+        >
           <Switch>
             <Route exact path="/guest/request/" component={GuestRequestPage} />
-            <Route exact path="/guest/viewlist/" component={GuestViewPage} />
+            {/* <Route exact path="/guest/viewlist/" component={GuestViewPage} /> */}
             <Route exact path="/guest/settings/" component={GuestSettingPage} />
             <Route exact path="/guest/home/">
               <GuestHomePage />
             </Route>
             <Route>
-              <GuestHomePage />
+              <PageNotFound />
             </Route>
           </Switch>
-        </OrgContext.Provider>
+        </UserContext.Provider>
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
         <IonTabButton tab="home" href={`/guest/home/`}>

@@ -108,13 +108,15 @@ const EntriesPage: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader translucent>
         <IonToolbar>
           <IonButtons slot="start">
             <IonBackButton />
           </IonButtons>
           <IonTitle>
-            {entry?.vehicleBrand} {entry?.vehicleModel}{" "}
+            <div className="ion-text-center">
+              {entry?.vehicleBrand} {entry?.vehicleModel}
+            </div>
           </IonTitle>
         </IonToolbar>
       </IonHeader>

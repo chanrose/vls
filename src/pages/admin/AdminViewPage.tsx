@@ -19,9 +19,10 @@ import {
   IonSegment,
   IonSegmentButton,
   IonText,
+  IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import "../styles/GettingStartedPage.css";
+import "../styles/components.css";
 import { add, bicycle, car, filter, image } from "ionicons/icons";
 import { useAuth } from "../../auth";
 import { firestore } from "../../firebase";
@@ -42,10 +43,6 @@ const formatDate = (inputDate: string, type: string) => {
   }
 };
 
-const SORT_OPTIONS = {
-  TAX_ASC: { column: "taxExpire", direction: "asc" },
-  TAX_DESC: { column: "taxExpire", direction: "desc" },
-};
 const vehicleDiff = (inputData: string) => {
   const bikePic = "/assets/media/bikeLogo.png";
   const carPic = "/assets/media/carLogo.png";
@@ -63,13 +60,23 @@ const AdminViewPage: React.FC = () => {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [searchText, setSearch] = useState("");
   const [filterSearch, setFSearch] = useState<Entry[]>([]);
-  console.log("Search Text:", searchText);
+
   const viewEntry = async () => {
     await entriesRef.get().then(({ docs }) => setEntries(docs.map(toEntry)));
   };
+
+  const [btnFilter, setFilter] = useState(false);
+  const [filterName, setListFilter] = useState("Tax Expire");
+  const [vehicleType, setVFilter] = useState(false);
+  const [typeName, setVType] = useState("Motorbike");
+  const [selectedTax, setTax] = useState(true);
+  const [selectedOwn, setOwn] = useState(false);
+  const [selectedInsure, setInsure] = useState(false);
+  const [showAddModal, setAddModal] = useState(false);
+
   useEffect(() => {
     viewEntry();
-  }, [userId]);
+  }, []);
 
   useEffect(() => {
     setFSearch(
@@ -81,22 +88,10 @@ const AdminViewPage: React.FC = () => {
       })
     );
   }, [searchText, entries]);
-
-  console.log("Filter: ", filterSearch);
-  console.log("entry: ", entries);
-  const [btnFilter, setFilter] = useState(false);
-  const [filterName, setListFilter] = useState("Tax Expire");
-  const [vehicleType, setVFilter] = useState(false);
-  const [typeName, setVType] = useState("Motorbike");
-  const [selectedTax, setTax] = useState(true);
-  const [selectedOwn, setOwn] = useState(false);
-  const [selectedInsure, setInsure] = useState(false);
-  const [showAddModal, setAddModal] = useState(false);
-
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
+      <IonHeader translucent>
+        {/*         <IonToolbar>
           <IonSegment
             onIonChange={(e) => console.log("Segment selected", e.detail.value)}
           >
@@ -107,19 +102,26 @@ const AdminViewPage: React.FC = () => {
               <IonLabel>Ticket</IonLabel>
             </IonSegmentButton>
           </IonSegment>
-        </IonToolbar>
+        </IonToolbar> */}
         <IonToolbar>
-          <IonSearchbar
-            value={searchText}
-            onIonChange={(e) => setSearch(e.detail.value!)}
-          ></IonSearchbar>
-
-          <IonButton slot="end">
-            <IonIcon icon={filter} />
-          </IonButton>
+          <IonTitle>
+            {" "}
+            <div className="ion-text-center"> Vehicle's List</div>
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
+        <IonSearchbar
+          className={"searchBarCustom"}
+          cancelButtonIcon="true"
+          autocomplete="on"
+          value={searchText}
+          onIonChange={(e) => setSearch(e.detail.value!)}
+        ></IonSearchbar>
+
+        {/*     <IonButton slot="end">
+            <IonIcon icon={filter} />
+          </IonButton> */}
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton>
             <IonIcon icon={add} />
@@ -202,16 +204,18 @@ const AdminViewPage: React.FC = () => {
         />
 
         <IonList>
-          <IonListHeader>
-            <IonLabel>
-              <IonButton onClick={() => setVFilter(true)}>
-                <IonText>{typeName} </IonText>
-              </IonButton>
-            </IonLabel>
-            <IonButton onClick={() => setFilter(true)}>
+          <IonItem>
+            <IonButton fill="clear" onClick={() => setVFilter(true)}>
+              <IonText>{typeName} </IonText>
+            </IonButton>
+
+            <IonButton fill="clear" slot="end" onClick={() => setFilter(true)}>
               <IonText>{filterName} </IonText>
             </IonButton>
-          </IonListHeader>
+          </IonItem>
+          {/*    <IonListHeader>
+            <div className="ion-text-center"></div>
+          </IonListHeader> */}
           {filterSearch.map((entry) => (
             <IonItem
               button
@@ -221,14 +225,21 @@ const AdminViewPage: React.FC = () => {
               <IonAvatar>
                 <IonImg src={vehicleDiff(entry.vehicleType)} />
               </IonAvatar>
-              <IonText>
-                {entry.vehicleBrand} {entry.vehicleModel}
-              </IonText>
-              <IonText slot="end">
-                {selectedTax && formatDate(entry.taxExpire, "format")}
-                {selectedOwn && entry.vehicleOwner}
-                {selectedInsure && formatDate(entry.insuranceExpire, "format")}
-              </IonText>
+              <div>
+                <div>
+                  <IonText>
+                    {entry.vehicleBrand} {entry.vehicleModel}
+                  </IonText>
+                </div>
+                <div>
+                  <IonText slot="end">
+                    {selectedTax && formatDate(entry.taxExpire, "format")}
+                    {selectedOwn && entry.vehicleOwner}
+                    {selectedInsure &&
+                      formatDate(entry.insuranceExpire, "format")}
+                  </IonText>
+                </div>
+              </div>
             </IonItem>
           ))}
         </IonList>
