@@ -15,8 +15,15 @@ interface AuthInit {
 
 export const AuthContext = React.createContext<Auth>({ loggedIn: false });
 
+interface userDetail {
+    organization: string;
+    name?: string;
+}
 
-export const OrgContext = React.createContext("");
+export const OrgContext = React.createContext({organization: ""});
+
+
+export const GuestContext = React.createContext({organization: "", name: ""});
 
 
 export function useAuth(): Auth {

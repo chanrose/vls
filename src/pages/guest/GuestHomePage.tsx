@@ -11,7 +11,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { firestore } from "../../firebase";
-import { OrgContext, useAuth } from "../../auth";
+import { GuestContext, OrgContext, useAuth } from "../../auth";
 import {
   guestDetail,
   guestProfile,
@@ -29,25 +29,20 @@ interface props {
 }
 
 const GuestHomePage: React.FC = () => {
-  const orgId = useContext(OrgContext);
-
-  /*   const userProfile = firestore.collection("guest").doc(userId);
-
-  useEffect(() => {
-    userProfile.get().then((entry) => setGuest(toGuestProfile(entry)));
-  }, [userProfile]); */
+  const { organization } = useContext(GuestContext);
+  const { name } = useContext(GuestContext);
 
   const [postList, setPostList] = useState<PostEntry[]>([]);
 
   useEffect(() => {
     const postEntriesRef = firestore
       .collection("public")
-      .doc(orgId)
+      .doc(organization)
       .collection("posts");
     return postEntriesRef.onSnapshot(({ docs }) =>
       setPostList(docs.map(toPostEntry))
     );
-  }, [orgId]);
+  }, [organization]);
   return (
     <IonPage>
       <IonHeader>
@@ -66,6 +61,7 @@ const GuestHomePage: React.FC = () => {
           </IonSegment>
         </IonToolbar>
       </IonHeader>
+
       <IonContent className="ion-padding" fullscreen>
         <div className="ion-text-center">
           {" "}
@@ -74,17 +70,8 @@ const GuestHomePage: React.FC = () => {
             <br />
           </div>
         </div>
-        {/*        <div>
-          {postList.map((entry) => (
-            <AnnouncementCard
-              key={entry.id}
-              title={entry.title}
-              subtitle={entry.subtitle}
-              content={entry.content}
-            />
-          ))}
-        </div> */}
-        <GuestAnnouncementList organId={`${orgId}`} />
+        Hello {name}
+        <GuestAnnouncementList organId={`${organization}`} />
       </IonContent>
     </IonPage>
   );

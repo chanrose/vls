@@ -53,7 +53,7 @@ const AdminGuestSeg: React.FC<props> = ({ organId }) => {
   };
   return (
     <div>
-      <OrgContext.Provider value={`${organId}`}>
+      <OrgContext.Provider value={{organization: `${organId}`}}>
         {postList.map((entry) => (
           <AnnouncementCard
             key={entry.id}

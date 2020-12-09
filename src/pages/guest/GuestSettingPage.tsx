@@ -5,20 +5,28 @@ import {
   IonContent,
   IonHeader,
   IonItem,
+  IonLabel,
   IonList,
   IonPage,
   IonRouterLink,
   IonTitle,
+  IonToggle,
   IonToolbar,
 } from "@ionic/react";
 import "../styles/GettingStartedPage.css";
 import { auth } from "../../firebase";
 import { Storage } from "@capacitor/core";
+import { Redirect } from "react-router";
 
 const GuestSettingPage: React.FC = () => {
   const logout = async () => {
     await Storage.clear();
   };
+
+  const toggleDarkModeHandler = () => {
+    document.body.classList.toggle("dark");
+  };
+
   return (
     <IonPage>
       <IonHeader>
@@ -51,8 +59,21 @@ const GuestSettingPage: React.FC = () => {
               Account Management
             </IonRouterLink>
           </IonItem>
+          <IonItem>
+            <IonLabel>Night Mode</IonLabel>
+            <IonToggle
+              slot="end"
+              name="darkMode"
+              onIonChange={toggleDarkModeHandler}
+            />
+          </IonItem>
         </IonCard>
-        <IonButton color="medium" expand="block" onClick={logout}>
+        <IonButton
+          color="medium"
+          expand="block"
+          onClick={logout}
+          routerLink="/gettingstarted2"
+        >
           Logout
         </IonButton>
       </IonContent>

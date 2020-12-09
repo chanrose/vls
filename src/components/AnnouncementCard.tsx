@@ -36,7 +36,7 @@ const AnnouncementCard: React.FC<props> = ({
   const [eSubtitle, setSubtitle] = useState(subtitle);
   const [eContent, setContent] = useState(content);
 
-  const organId = useContext(OrgContext);
+  const { organization } = useContext(OrgContext);
   const history = useHistory();
   const [isUpdating, setUpdate] = useState(false);
 
@@ -47,7 +47,7 @@ const AnnouncementCard: React.FC<props> = ({
   const handleUpdate = async () => {
     const announcementRef = firestore
       .collection("public")
-      .doc(organId)
+      .doc(organization)
       .collection("posts")
       .doc(pId);
     if (eTitle != title) await announcementRef.update({ title: eTitle });
@@ -62,7 +62,7 @@ const AnnouncementCard: React.FC<props> = ({
   const handleDelete = () => {
     firestore
       .collection("public")
-      .doc(organId)
+      .doc(organization)
       .collection("posts")
       .doc(pId)
       .delete();

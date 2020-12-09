@@ -42,10 +42,6 @@ const formatDate = (inputDate: string, type: string) => {
   }
 };
 
-const SORT_OPTIONS = {
-  TAX_ASC: { column: "taxExpire", direction: "asc" },
-  TAX_DESC: { column: "taxExpire", direction: "desc" },
-};
 const vehicleDiff = (inputData: string) => {
   const bikePic = "/assets/media/bikeLogo.png";
   const carPic = "/assets/media/carLogo.png";
