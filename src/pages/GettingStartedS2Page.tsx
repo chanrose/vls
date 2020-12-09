@@ -20,8 +20,11 @@ import { useAuth } from "../auth";
 import { auth, firestore } from "../firebase";
 import { Redirect } from "react-router";
 import { orgList, toOrgList } from "../model";
+import { Plugins } from "@capacitor/core";
 
 const GettingStartedS2Page: React.FC = () => {
+  const { Storage } = Plugins;
+
   const [name, setName] = useState("");
   const [organization, setOrg] = useState("");
 
@@ -35,14 +38,23 @@ const GettingStartedS2Page: React.FC = () => {
       .get()
       .then(({ docs }) => setOrgEntries(docs.map(toOrgList)));
   };
+
   useEffect(() => {
     publicOrg();
   }, [userId]);
 
   const handleLogin = async () => {
-    const credential = await auth.signInAnonymously().catch((error) => {});
-  };
+    await Storage.set({
+      key: "userDetail",
+      value: JSON.stringify({
+        name,
+        organization,
+      }),
+    });
 
+    /* const credential = await auth.signInAnonymously().catch((error) => {}); */
+  };
+  /* 
   if (loggedIn && organization != "") {
     firestore.collection("guest").doc(userId).set({
       name,
@@ -50,7 +62,7 @@ const GettingStartedS2Page: React.FC = () => {
       isAdmin: false,
     });
     return <Redirect to={`/guest/home/`} />;
-  }
+  } */
   return (
     <IonPage>
       <IonContent color="light" fullscreen>
@@ -96,6 +108,7 @@ const GettingStartedS2Page: React.FC = () => {
 
             <br />
             <IonButton
+              color="primary"
               onClick={handleLogin}
               className="IonButtonRadius"
               expand="block"
@@ -103,16 +116,16 @@ const GettingStartedS2Page: React.FC = () => {
               Enter as Guest
             </IonButton>
             <IonButton
+              fill="clear"
               routerLink="/login"
-              color="secondary"
               className="IonButtonRadius"
               expand="block"
             >
               Login as Admin
             </IonButton>
-            <IonButton routerLink="/register" fill="clear" expand="block">
+            {/*     <IonButton routerLink="/register" fill="clear" expand="block">
               Sign up for organization?
-            </IonButton>
+            </IonButton> */}
           </IonCardContent>
         </IonCard>
       </IonContent>

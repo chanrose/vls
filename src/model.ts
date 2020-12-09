@@ -48,9 +48,15 @@ export const toPostEntry = (doc: { id: any; data: () => any }) => {
 
 export interface guestProfile {
     map(arg0: (entry: any) => JSX.Element): import("react").ReactNode;
-    id: string,
-    name: string,
-    isAdmin: boolean,
+    id?: string,
+    name?: string,
+    isAdmin?: boolean,
+    organization: string
+}
+
+
+export interface guestDetail {
+    name?: string,
     organization: string
 }
 
