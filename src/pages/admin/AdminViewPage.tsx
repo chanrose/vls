@@ -204,19 +204,18 @@ const AdminViewPage: React.FC = () => {
         />
 
         <IonList>
-          <IonListHeader>
-            <div className="ion-text-center">
-              <IonLabel>
-                <IonButton onClick={() => setVFilter(true)}>
-                  <IonText>{typeName} </IonText>
-                </IonButton>
-              </IonLabel>
+          <IonItem>
+            <IonButton fill="clear" onClick={() => setVFilter(true)}>
+              <IonText>{typeName} </IonText>
+            </IonButton>
 
-              <IonButton onClick={() => setFilter(true)}>
-                <IonText>{filterName} </IonText>
-              </IonButton>
-            </div>
-          </IonListHeader>
+            <IonButton fill="clear" slot="end" onClick={() => setFilter(true)}>
+              <IonText>{filterName} </IonText>
+            </IonButton>
+          </IonItem>
+          {/*    <IonListHeader>
+            <div className="ion-text-center"></div>
+          </IonListHeader> */}
           {filterSearch.map((entry) => (
             <IonItem
               button
