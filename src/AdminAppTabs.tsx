@@ -31,15 +31,17 @@ const AdminAppTabs: React.FC = () => {
   console.log("Auth", auth);
 
   useEffect(() => {
-    firestore
-      .collection("users")
-      .doc(userId)
-      .collection("detail")
-      .doc(userId)
-      .get()
-      .then((doc) => {
-        setDetail(toEntry(doc));
-      });
+    try {
+      firestore
+        .collection("users")
+        .doc(userId)
+        .collection("detail")
+        .doc(userId)
+        .get()
+        .then((doc) => {
+          setDetail(toEntry(doc));
+        });
+    } catch (error) {}
   }, [userId]);
   if (!loggedIn) {
     return <Redirect to="/login" />;

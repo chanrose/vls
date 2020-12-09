@@ -90,7 +90,7 @@ const AdminViewPage: React.FC = () => {
   }, [searchText, entries]);
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader translucent>
         {/*         <IonToolbar>
           <IonSegment
             onIonChange={(e) => console.log("Segment selected", e.detail.value)}
@@ -104,23 +104,24 @@ const AdminViewPage: React.FC = () => {
           </IonSegment>
         </IonToolbar> */}
         <IonToolbar>
-          <IonTitle>Vehicle List</IonTitle>
+          <IonTitle>
+            {" "}
+            <div className="ion-text-center"> Vehicle's List</div>
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
-        <div>
-          <IonSearchbar
-            className={"searchBarCustom"}
-            cancelButtonIcon="true"
-            autocomplete="on"
-            value={searchText}
-            onIonChange={(e) => setSearch(e.detail.value!)}
-          ></IonSearchbar>
+        <IonSearchbar
+          className={"searchBarCustom"}
+          cancelButtonIcon="true"
+          autocomplete="on"
+          value={searchText}
+          onIonChange={(e) => setSearch(e.detail.value!)}
+        ></IonSearchbar>
 
-          {/*     <IonButton slot="end">
+        {/*     <IonButton slot="end">
             <IonIcon icon={filter} />
           </IonButton> */}
-        </div>
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton>
             <IonIcon icon={add} />
@@ -204,14 +205,17 @@ const AdminViewPage: React.FC = () => {
 
         <IonList>
           <IonListHeader>
-            <IonLabel>
-              <IonButton onClick={() => setVFilter(true)}>
-                <IonText>{typeName} </IonText>
+            <div className="ion-text-center">
+              <IonLabel>
+                <IonButton onClick={() => setVFilter(true)}>
+                  <IonText>{typeName} </IonText>
+                </IonButton>
+              </IonLabel>
+
+              <IonButton onClick={() => setFilter(true)}>
+                <IonText>{filterName} </IonText>
               </IonButton>
-            </IonLabel>
-            <IonButton onClick={() => setFilter(true)}>
-              <IonText>{filterName} </IonText>
-            </IonButton>
+            </div>
           </IonListHeader>
           {filterSearch.map((entry) => (
             <IonItem
@@ -222,14 +226,21 @@ const AdminViewPage: React.FC = () => {
               <IonAvatar>
                 <IonImg src={vehicleDiff(entry.vehicleType)} />
               </IonAvatar>
-              <IonText>
-                {entry.vehicleBrand} {entry.vehicleModel}
-              </IonText>
-              <IonText slot="end">
-                {selectedTax && formatDate(entry.taxExpire, "format")}
-                {selectedOwn && entry.vehicleOwner}
-                {selectedInsure && formatDate(entry.insuranceExpire, "format")}
-              </IonText>
+              <div>
+                <div>
+                  <IonText>
+                    {entry.vehicleBrand} {entry.vehicleModel}
+                  </IonText>
+                </div>
+                <div>
+                  <IonText slot="end">
+                    {selectedTax && formatDate(entry.taxExpire, "format")}
+                    {selectedOwn && entry.vehicleOwner}
+                    {selectedInsure &&
+                      formatDate(entry.insuranceExpire, "format")}
+                  </IonText>
+                </div>
+              </div>
             </IonItem>
           ))}
         </IonList>

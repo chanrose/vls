@@ -25,9 +25,12 @@ const AdminSettingPage: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader translucent>
         <IonToolbar>
-          <IonTitle>Settings</IonTitle>
+          <IonTitle>
+            {" "}
+            <div className="ion-text-center">Settings</div>{" "}
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
@@ -56,7 +59,7 @@ const AdminSettingPage: React.FC = () => {
             </IonRouterLink>
           </IonItem>
           <IonItem>
-            <IonLabel>{"Night"} Mode</IonLabel>
+            <IonLabel> Switch Theme</IonLabel>
             <IonToggle
               checked={ToggleDark}
               slot="end"

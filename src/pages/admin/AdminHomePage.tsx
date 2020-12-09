@@ -57,7 +57,7 @@ const AdminHomePage: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader translucent>
         <IonToolbar>
           <IonSegment onIonChange={(e) => returnSegment(e.detail.value!)}>
             <IonSegmentButton value="home">

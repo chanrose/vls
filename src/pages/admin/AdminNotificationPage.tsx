@@ -29,9 +29,11 @@ const AdminNotificationPage: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader translucent>
         <IonToolbar>
-          <IonTitle>Admin Notification Page</IonTitle>
+          <IonTitle>
+            <div className="ion-text-center">Notification</div>{" "}
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className="ion-padding">

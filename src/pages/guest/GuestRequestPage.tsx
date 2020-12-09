@@ -67,9 +67,11 @@ const GuestRequestPage: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader translucent>
         <IonToolbar>
-          <IonTitle>Request</IonTitle>
+          <IonTitle>
+            <div className="ion-text-center">Request</div>{" "}
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>

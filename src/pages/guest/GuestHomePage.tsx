@@ -23,7 +23,7 @@ const GuestHomePage: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader translucent>
         <IonToolbar>
           <IonSegment
             onIonChange={(e: { detail: { value: any } }) =>

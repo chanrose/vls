@@ -1,3 +1,7 @@
 .searchBarCustom {
     --border-radius: 1em;
 }
+
+.centerImg {
+    margin-top: 10vh;
+}
