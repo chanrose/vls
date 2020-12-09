@@ -13,32 +13,40 @@ import {
   settings as settingsIcon,
 } from "ionicons/icons";
 import { Redirect, Route, Switch } from "react-router-dom";
-import React from "react";
-import { useAuth } from "./auth";
+import React, { useState } from "react";
+import { OrgContext, useAuth } from "./auth";
 import GuestHomePage from "./pages/guest/GuestHomePage";
 import GuestViewPage from "./pages/guest/GuestViewPage";
 import GuestRequestPage from "./pages/guest/GuestRequestPage";
 import GuestSettingPage from "./pages/guest/GuestSettingPage";
+import { guestDetail } from "./model";
+import { Storage } from "@capacitor/core";
 
 const GuestAppTabs: React.FC = () => {
-  const { loggedIn } = useAuth();
-  if (!loggedIn) {
-    return <Redirect to="/gettingstarted2" />;
-  }
+  const { userId } = useAuth();
+  const [orgId, setOrg] = useState("Default");
+  const getUserDetail = async () => {
+    const ret = await Storage.get({ key: "userDetail" });
+    const getObj = JSON.parse(ret.value);
+    setOrg(getObj.organization);
+  };
+  getUserDetail();
   return (
     <IonTabs>
       <IonRouterOutlet>
-        <Switch>
-          <Route exact path="/guest/request/" component={GuestRequestPage} />
-          <Route exact path="/guest/viewlist/" component={GuestViewPage} />
-          <Route exact path="/guest/settings/" component={GuestSettingPage} />
-          <Route exact path="/guest/home/">
-            <GuestHomePage />
-          </Route>
-          <Route>
-            <GuestHomePage />
-          </Route>
-        </Switch>
+        <OrgContext.Provider value={`${orgId}`}>
+          <Switch>
+            <Route exact path="/guest/request/" component={GuestRequestPage} />
+            <Route exact path="/guest/viewlist/" component={GuestViewPage} />
+            <Route exact path="/guest/settings/" component={GuestSettingPage} />
+            <Route exact path="/guest/home/">
+              <GuestHomePage />
+            </Route>
+            <Route>
+              <GuestHomePage />
+            </Route>
+          </Switch>
+        </OrgContext.Provider>
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
         <IonTabButton tab="home" href={`/guest/home/`}>

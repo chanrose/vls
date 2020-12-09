@@ -15,7 +15,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../../auth";
+import { OrgContext, useAuth } from "../../auth";
 import { firestore } from "../../firebase";
 import { orgList, PostEntry, toOrgList, toPostEntry } from "../../model";
 import AnnouncementCard from "../AnnouncementCard";
@@ -53,15 +53,18 @@ const AdminGuestSeg: React.FC<props> = ({ organId }) => {
   };
   return (
     <div>
-      {postList.map((entry) => (
-        <AnnouncementCard
-          key={entry.id}
-          title={entry.title}
-          subtitle={entry.subtitle}
-          content={entry.content}
-          isAdmin={true}
-        />
-      ))}
+      <OrgContext.Provider value={`${organId}`}>
+        {postList.map((entry) => (
+          <AnnouncementCard
+            key={entry.id}
+            title={entry.title}
+            subtitle={entry.subtitle}
+            content={entry.content}
+            isAdmin={true}
+            pId={entry.id}
+          />
+        ))}
+      </OrgContext.Provider>
       <IonButton expand="block" onClick={() => setModal(true)}>
         Add New Post
       </IonButton>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   IonContent,
   IonHeader,
@@ -11,8 +11,9 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { firestore } from "../../firebase";
-import { useAuth } from "../../auth";
+import { OrgContext, useAuth } from "../../auth";
 import {
+  guestDetail,
   guestProfile,
   PostEntry,
   toGuestProfile,
@@ -21,34 +22,32 @@ import {
 import GuestAnnouncementList from "./GuestAnnouncementList";
 import AnnouncementCard from "../../components/AnnouncementCard";
 import { useRouteMatch } from "react-router";
+import { Storage } from "@capacitor/core";
 
 interface props {
   organId1: string;
 }
-const GuestHomePage: React.FC = () => {
-  const { userId } = useAuth();
-  /*   const match = useRouteMatch<props>();
-  const { organId1 } = match.params; */
-  const [guestInfo, setGuest] = useState<guestProfile>();
 
-  const userProfile = firestore.collection("guest").doc(userId);
+const GuestHomePage: React.FC = () => {
+  const orgId = useContext(OrgContext);
+
+  /*   const userProfile = firestore.collection("guest").doc(userId);
 
   useEffect(() => {
     userProfile.get().then((entry) => setGuest(toGuestProfile(entry)));
-  }, [userProfile]);
+  }, [userProfile]); */
 
   const [postList, setPostList] = useState<PostEntry[]>([]);
 
-  /*   useEffect(() => {
+  useEffect(() => {
     const postEntriesRef = firestore
       .collection("public")
-      .doc(organId1)
+      .doc(orgId)
       .collection("posts");
     return postEntriesRef.onSnapshot(({ docs }) =>
       setPostList(docs.map(toPostEntry))
     );
-  }, [organId1]); */
-
+  }, [orgId]);
   return (
     <IonPage>
       <IonHeader>
@@ -85,7 +84,7 @@ const GuestHomePage: React.FC = () => {
             />
           ))}
         </div> */}
-        <GuestAnnouncementList organId={`${guestInfo?.organization}`} />
+        <GuestAnnouncementList organId={`${orgId}`} />
       </IonContent>
     </IonPage>
   );

@@ -13,8 +13,12 @@ import {
 } from "@ionic/react";
 import "../styles/GettingStartedPage.css";
 import { auth } from "../../firebase";
+import { Storage } from "@capacitor/core";
 
 const GuestSettingPage: React.FC = () => {
+  const logout = async () => {
+    await Storage.clear();
+  };
   return (
     <IonPage>
       <IonHeader>
@@ -48,7 +52,7 @@ const GuestSettingPage: React.FC = () => {
             </IonRouterLink>
           </IonItem>
         </IonCard>
-        <IonButton color="medium" expand="block" onClick={() => auth.signOut()}>
+        <IonButton color="medium" expand="block" onClick={logout}>
           Logout
         </IonButton>
       </IonContent>
