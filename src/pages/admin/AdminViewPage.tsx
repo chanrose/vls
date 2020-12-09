@@ -22,7 +22,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import "../styles/GettingStartedPage.css";
+import "../styles/components.css";
 import { add, bicycle, car, filter, image } from "ionicons/icons";
 import { useAuth } from "../../auth";
 import { firestore } from "../../firebase";
@@ -110,6 +110,9 @@ const AdminViewPage: React.FC = () => {
       <IonContent className="ion-padding" fullscreen>
         <div>
           <IonSearchbar
+            className={"searchBarCustom"}
+            cancelButtonIcon="true"
+            autocomplete="on"
             value={searchText}
             onIonChange={(e) => setSearch(e.detail.value!)}
           ></IonSearchbar>

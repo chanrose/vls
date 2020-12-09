@@ -14,7 +14,7 @@ import {
 import { trash } from "ionicons/icons";
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router";
-import { OrgContext, useAuth } from "../auth";
+import { OrgContext, useAuth, UserContext } from "../auth";
 import { firestore } from "../firebase";
 import "../pages/styles/admin.css";
 
@@ -37,8 +37,7 @@ const RequestCard: React.FC<props> = ({
   const [eTitle, setTitle] = useState(title);
   const [eSubtitle, setSubtitle] = useState(subtitle);
   const [eContent, setContent] = useState(content);
-
-  const { organization } = useContext(OrgContext);
+  const { organization } = useContext(UserContext);
   const history = useHistory();
   const [isUpdating, setUpdate] = useState(false);
 
