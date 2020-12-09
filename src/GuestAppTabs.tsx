@@ -14,7 +14,7 @@ import {
 } from "ionicons/icons";
 import { Redirect, Route, Switch } from "react-router-dom";
 import React, { useState } from "react";
-import { GuestContext, OrgContext, useAuth } from "./auth";
+import { useAuth, UserContext } from "./auth";
 import GuestHomePage from "./pages/guest/GuestHomePage";
 import GuestViewPage from "./pages/guest/GuestViewPage";
 import GuestRequestPage from "./pages/guest/GuestRequestPage";
@@ -37,7 +37,7 @@ const GuestAppTabs: React.FC = () => {
   return (
     <IonTabs>
       <IonRouterOutlet>
-        <GuestContext.Provider
+        <UserContext.Provider
           value={{ organization: `${orgId}`, name: `${guestName}` }}
         >
           <Switch>
@@ -51,7 +51,7 @@ const GuestAppTabs: React.FC = () => {
               <GuestHomePage />
             </Route>
           </Switch>
-        </GuestContext.Provider>
+        </UserContext.Provider>
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
         <IonTabButton tab="home" href={`/guest/home/`}>

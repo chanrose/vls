@@ -19,7 +19,7 @@ import "./styles/GettingStartedPage.css";
 import { useAuth } from "../auth";
 import { auth, firestore } from "../firebase";
 import { Redirect, useHistory } from "react-router";
-import { orgList, toOrgList } from "../model";
+import { orgList, toEntry } from "../model";
 import { Plugins } from "@capacitor/core";
 
 const GettingStartedS2Page: React.FC = () => {
@@ -46,9 +46,7 @@ const GettingStartedS2Page: React.FC = () => {
 
   const entriesPub = firestore.collection("public");
   const publicOrg = async () => {
-    await entriesPub
-      .get()
-      .then(({ docs }) => setOrgEntries(docs.map(toOrgList)));
+    await entriesPub.get().then(({ docs }) => setOrgEntries(docs.map(toEntry)));
   };
 
   useEffect(() => {
@@ -64,7 +62,6 @@ const GettingStartedS2Page: React.FC = () => {
       }),
     });
     history.go(0);
-    
 
     /* const credential = await auth.signInAnonymously().catch((error) => {}); */
   };

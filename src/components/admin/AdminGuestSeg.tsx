@@ -17,8 +17,9 @@ import {
 import React, { useEffect, useState } from "react";
 import { OrgContext, useAuth } from "../../auth";
 import { firestore } from "../../firebase";
-import { orgList, PostEntry, toOrgList, toPostEntry } from "../../model";
+import { orgList, PostEntry, toEntry } from "../../model";
 import AnnouncementCard from "../AnnouncementCard";
+import RequestCard from "../RequestCard";
 
 interface props {
   organId: string;
@@ -39,7 +40,7 @@ const AdminGuestSeg: React.FC<props> = ({ organId }) => {
       .doc(organId)
       .collection("posts");
     return postEntriesRef.onSnapshot(({ docs }) =>
-      setPostList(docs.map(toPostEntry))
+      setPostList(docs.map(toEntry))
     );
   }, [organId]);
 
@@ -53,15 +54,16 @@ const AdminGuestSeg: React.FC<props> = ({ organId }) => {
   };
   return (
     <div>
-      <OrgContext.Provider value={{organization: `${organId}`}}>
+      <OrgContext.Provider value={{ organization: `${organId}` }}>
         {postList.map((entry) => (
-          <AnnouncementCard
+          <RequestCard
             key={entry.id}
             title={entry.title}
             subtitle={entry.subtitle}
             content={entry.content}
             isAdmin={true}
             pId={entry.id}
+            collection={"posts"}
           />
         ))}
       </OrgContext.Provider>
