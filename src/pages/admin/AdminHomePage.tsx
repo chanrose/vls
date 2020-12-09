@@ -66,9 +66,9 @@ const AdminHomePage: React.FC = () => {
             <IonSegmentButton value="guest">
               <IonLabel>Guest's Post</IonLabel>
             </IonSegmentButton>
-            <IonSegmentButton value="tools">
+            {/* <IonSegmentButton value="tools">
               <IonLabel>Admin tools</IonLabel>
-            </IonSegmentButton>
+            </IonSegmentButton> */}
           </IonSegment>
         </IonToolbar>
       </IonHeader>

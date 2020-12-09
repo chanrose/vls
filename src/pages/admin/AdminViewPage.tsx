@@ -19,6 +19,7 @@ import {
   IonSegment,
   IonSegmentButton,
   IonText,
+  IonTitle,
   IonToolbar,
 } from "@ionic/react";
 import "../styles/GettingStartedPage.css";
@@ -59,13 +60,23 @@ const AdminViewPage: React.FC = () => {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [searchText, setSearch] = useState("");
   const [filterSearch, setFSearch] = useState<Entry[]>([]);
-  console.log("Search Text:", searchText);
+
   const viewEntry = async () => {
     await entriesRef.get().then(({ docs }) => setEntries(docs.map(toEntry)));
   };
+
+  const [btnFilter, setFilter] = useState(false);
+  const [filterName, setListFilter] = useState("Tax Expire");
+  const [vehicleType, setVFilter] = useState(false);
+  const [typeName, setVType] = useState("Motorbike");
+  const [selectedTax, setTax] = useState(true);
+  const [selectedOwn, setOwn] = useState(false);
+  const [selectedInsure, setInsure] = useState(false);
+  const [showAddModal, setAddModal] = useState(false);
+
   useEffect(() => {
     viewEntry();
-  }, [userId]);
+  }, []);
 
   useEffect(() => {
     setFSearch(
@@ -77,22 +88,10 @@ const AdminViewPage: React.FC = () => {
       })
     );
   }, [searchText, entries]);
-
-  console.log("Filter: ", filterSearch);
-  console.log("entry: ", entries);
-  const [btnFilter, setFilter] = useState(false);
-  const [filterName, setListFilter] = useState("Tax Expire");
-  const [vehicleType, setVFilter] = useState(false);
-  const [typeName, setVType] = useState("Motorbike");
-  const [selectedTax, setTax] = useState(true);
-  const [selectedOwn, setOwn] = useState(false);
-  const [selectedInsure, setInsure] = useState(false);
-  const [showAddModal, setAddModal] = useState(false);
-
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
+        {/*         <IonToolbar>
           <IonSegment
             onIonChange={(e) => console.log("Segment selected", e.detail.value)}
           >
@@ -103,19 +102,22 @@ const AdminViewPage: React.FC = () => {
               <IonLabel>Ticket</IonLabel>
             </IonSegmentButton>
           </IonSegment>
-        </IonToolbar>
+        </IonToolbar> */}
         <IonToolbar>
+          <IonTitle>Vehicle List</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent className="ion-padding" fullscreen>
+        <div>
           <IonSearchbar
             value={searchText}
             onIonChange={(e) => setSearch(e.detail.value!)}
           ></IonSearchbar>
 
-          <IonButton slot="end">
+          {/*     <IonButton slot="end">
             <IonIcon icon={filter} />
-          </IonButton>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent className="ion-padding" fullscreen>
+          </IonButton> */}
+        </div>
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton>
             <IonIcon icon={add} />

@@ -5,16 +5,24 @@ import {
   IonContent,
   IonHeader,
   IonItem,
+  IonLabel,
   IonList,
   IonPage,
   IonRouterLink,
   IonTitle,
+  IonToggle,
   IonToolbar,
 } from "@ionic/react";
 import "../styles/GettingStartedPage.css";
 import { auth } from "../../firebase";
 
 const AdminSettingPage: React.FC = () => {
+  const [ToggleDark, setToggle] = useState(false);
+  const toggleDarkModeHandler = () => {
+    document.body.classList.toggle("dark");
+    setToggle(true);
+  };
+
   return (
     <IonPage>
       <IonHeader>
@@ -46,6 +54,15 @@ const AdminSettingPage: React.FC = () => {
             <IonRouterLink href="/admin/home/">
               Account Management
             </IonRouterLink>
+          </IonItem>
+          <IonItem>
+            <IonLabel>{"Night"} Mode</IonLabel>
+            <IonToggle
+              checked={ToggleDark}
+              slot="end"
+              name="darkMode"
+              onIonChange={toggleDarkModeHandler}
+            />
           </IonItem>
         </IonCard>
         <IonButton color="medium" expand="block" onClick={() => auth.signOut()}>
