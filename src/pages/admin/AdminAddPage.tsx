@@ -2,17 +2,13 @@ import React, { useState } from "react";
 import {
   IonContent,
   IonHeader,
-  IonLabel,
   IonPage,
-  IonSegment,
-  IonSegmentButton,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
 import "../styles/GettingStartedPage.css";
 import "../styles/admin.css";
 import AdminAddVehSeg from "../../components/admin/AdminAddVehSeg";
-import AdminAddTicSeg from "../../components/admin/AdminAddTicSeg";
 
 const AdminAddPage: React.FC = () => {
   const [selectedVehicle, setVehicle] = useState(true);

@@ -1,21 +1,5 @@
-import React, { useState } from "react";
-import {
-  IonButton,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonContent,
-  IonHeader,
-  IonImg,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonPage,
-  IonRouterLink,
-  IonTitle,
-  IonToggle,
-  IonToolbar,
-} from "@ionic/react";
+import React from "react";
+import { IonButton, IonContent, IonPage } from "@ionic/react";
 import { useHistory } from "react-router";
 import "./styles/components.css";
 

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import { firestore } from "../../firebase";
-import { PostEntry, toEntry, userProfile } from "../../model";
+import { PostEntry, toEntry } from "../../model";
 
 import RequestCard from "../../components/RequestCard";
 import { UserContext } from "../../auth";

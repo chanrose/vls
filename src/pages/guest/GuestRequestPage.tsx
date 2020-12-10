@@ -1,21 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
   IonButton,
-  IonCheckbox,
   IonContent,
   IonHeader,
   IonInput,
   IonItem,
-  IonItemDivider,
   IonLabel,
-  IonList,
-  IonListHeader,
   IonModal,
   IonPage,
-  IonRadioGroup,
   IonSelect,
   IonSelectOption,
-  IonText,
   IonTextarea,
   IonTitle,
   IonToolbar,
@@ -47,7 +41,7 @@ const GuestRequestPage: React.FC = () => {
     return postEntriesRef.onSnapshot(({ docs }) =>
       setReqList(docs.map(toEntry))
     );
-  }, [organization]);
+  }, [organization, name]);
 
   const handleRequest = () => {
     firestore

@@ -13,8 +13,7 @@ import {
 } from "@ionic/react";
 import { trash } from "ionicons/icons";
 import React, { useContext, useState } from "react";
-import { useHistory } from "react-router";
-import { OrgContext, useAuth, UserContext } from "../auth";
+import { UserContext } from "../auth";
 import { firestore } from "../firebase";
 import "../pages/styles/admin.css";
 
@@ -38,13 +37,12 @@ const RequestCard: React.FC<props> = ({
   const [eSubtitle, setSubtitle] = useState(subtitle);
   const [eContent, setContent] = useState(content);
   const { organization } = useContext(UserContext);
-  const history = useHistory();
   const [isUpdating, setUpdate] = useState(false);
   const [editReq, setEdit] = useState(false);
 
   const handleEdit = () => {
     setUpdate(!isUpdating);
-    if (collection == "requests") {
+    if (collection === "requests") {
       setEdit(editReq);
     }
   };
@@ -55,16 +53,16 @@ const RequestCard: React.FC<props> = ({
       .doc(organization)
       .collection(collection!)
       .doc(pId);
-    if (eTitle != title) await announcementRef.update({ title: eTitle });
-    if (eSubtitle != subtitle)
+    if (eTitle !== title) await announcementRef.update({ title: eTitle });
+    if (eSubtitle !== subtitle)
       await announcementRef.update({ subtitle: eSubtitle });
-    if (eContent != content)
+    if (eContent !== content)
       await announcementRef.update({ content: eContent });
-    if (collection == "requests") {
-      if (eContent != content)
+    if (collection === "requests") {
+      if (eContent !== content)
         await announcementRef.update({ messageRemark: eContent });
 
-      if (eTitle != title)
+      if (eTitle !== title)
         await announcementRef.update({ requestType: eTitle });
     }
 

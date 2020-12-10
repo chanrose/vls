@@ -1,13 +1,4 @@
-import {
-  IonCol,
-  IonGrid,
-  IonImg,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonRow,
-  IonText,
-} from "@ionic/react";
+import { IonImg, IonItem, IonLabel, IonList, IonText } from "@ionic/react";
 import React from "react";
 import "../../pages/styles/admin.css";
 

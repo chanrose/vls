@@ -3,20 +3,12 @@ import {
   IonContent,
   IonHeader,
   IonImg,
-  IonLabel,
   IonPage,
-  IonSegment,
-  IonSegmentButton,
-  IonText,
+  IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { firestore } from "../../firebase";
-import { OrgContext, useAuth, UserContext } from "../../auth";
-import { PostEntry, toEntry } from "../../model";
+import { UserContext } from "../../auth";
 import GuestAnnouncementList from "./GuestAnnouncementList";
-interface props {
-  organId1: string;
-}
 
 const GuestHomePage: React.FC = () => {
   const { name } = useContext(UserContext);
@@ -25,7 +17,10 @@ const GuestHomePage: React.FC = () => {
     <IonPage>
       <IonHeader translucent>
         <IonToolbar>
-          <IonSegment
+          <IonTitle>
+            <div className="ion-text-center">Home</div>
+          </IonTitle>
+          {/*           <IonSegment
             onIonChange={(e: { detail: { value: any } }) =>
               console.log(e.detail.value!)
             }
@@ -33,10 +28,10 @@ const GuestHomePage: React.FC = () => {
             <IonSegmentButton value="home">
               <IonLabel>Home</IonLabel>
             </IonSegmentButton>
-            {/*     <IonSegmentButton value="info">
+              <IonSegmentButton value="info">
               <IonLabel>Cost</IonLabel>
-            </IonSegmentButton> */}
-          </IonSegment>
+            </IonSegmentButton> 
+          </IonSegment> */}
         </IonToolbar>
       </IonHeader>
 
