@@ -15,7 +15,7 @@ import {
   IonSelect,
   IonSelectOption,
 } from "@ionic/react";
-import "./styles/GettingStartedPage.css";
+import "./styles/components.css";
 import { firestore } from "../firebase";
 import { Redirect, useHistory } from "react-router";
 import { orgList, toEntry } from "../model";
@@ -71,28 +71,30 @@ const GettingStartedS2Page: React.FC = () => {
       <IonContent color="light" fullscreen>
         <IonCard className="ionCardstyle">
           <IonCardHeader>
-            <IonImg className="imageSize" src={"/assets/icon/app2Logo.png"} />
+            {/*  <IonImg className="imageSize" src={"/assets/icon/app2Logo.png"} /> */}
+            <div className="ion-text-center centerImg">
+              <img src="/assets/media/login.svg" height="200 px" />
+            </div>
 
-            <IonCardTitle className="centerText">
-              Enter your Information
-            </IonCardTitle>
+            <IonCardTitle className="centerText">Enter as Guest</IonCardTitle>
           </IonCardHeader>
 
           <IonCardContent>
             <IonList>
               <IonItem>
-                <IonLabel>Set your name</IonLabel>
+                <IonLabel>Name</IonLabel>
                 <IonInput
+                  slot="end"
                   value={name}
                   onIonChange={(e) => setName(e.detail.value!)}
                   type="text"
-                  placeholder="Lastname firstname"
+                  placeholder="Full Name"
                   required={true}
                 />
               </IonItem>
 
               <IonItem>
-                <IonLabel>Select Your Organization</IonLabel>
+                <IonLabel>Organization</IonLabel>
                 <IonSelect
                   value={organization}
                   placeholder="Select One"

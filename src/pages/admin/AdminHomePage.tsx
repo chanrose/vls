@@ -12,7 +12,7 @@ import {
   IonSegmentButton,
   IonToolbar,
 } from "@ionic/react";
-import "../styles/GettingStartedPage.css";
+import "../styles/components.css";
 import { add, bicycle, car, easel, ticket } from "ionicons/icons";
 import AdminGuestSeg from "../../components/admin/AdminGuestSeg";
 import AdminHomeSeg from "../../components/admin/AdminHomeSeg";

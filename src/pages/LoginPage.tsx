@@ -12,7 +12,7 @@ import {
   IonPage,
   IonToast,
 } from "@ionic/react";
-import "./styles/GettingStartedPage.css";
+import "./styles/components.css";
 import { useAuth } from "../auth";
 import { Redirect } from "react-router";
 import { auth } from "../firebase";
@@ -45,15 +45,18 @@ const LoginPage: React.FC = () => {
       <IonContent color="light" fullscreen>
         <IonCard className="ionCardstyle">
           <IonCardHeader>
-            <img
-              className="imageSize"
-              src={"/assets/icon/app2Logo.png"}
-              alt="App logo"
-            />
+            <div className="ion-text-center centerImg">
+              <img
+                height="200 px"
+                src={"/assets/media/authentication.svg"}
+                alt="Login Logo"
+              />
+            </div>
             <IonCardTitle className="centerText">Login</IonCardTitle>
           </IonCardHeader>
 
           <IonCardContent>
+            <br />
             <IonList>
               <IonItem>
                 <IonInput
@@ -81,7 +84,7 @@ const LoginPage: React.FC = () => {
               className="IonButtonRadius"
               expand="block"
             >
-              Sign in
+              LOGIN AS ADMIN
             </IonButton>
             <IonButton
               routerLink="/gettingstarted2"
@@ -89,7 +92,10 @@ const LoginPage: React.FC = () => {
               className="IonButtonRadius"
               expand="block"
             >
-              Previous
+              PREVIOUS
+            </IonButton>
+            <IonButton routerLink="/register" fill="clear" expand="block">
+              Sign up for organization?
             </IonButton>
           </IonCardContent>
         </IonCard>

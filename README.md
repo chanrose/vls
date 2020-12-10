@@ -1,11 +1,11 @@
-# Vehicle Legal System Updated on Dec 10, 2020
+# Latest Updated on Dec 10, 2020
 
 - Updated Admin's Guest Seg to Post, Edit, Update, Delete
 - Update Notification page for admin to see, review, edit, update, and delete all the posts
 - Update on Guest's homepage to see the posts from organization
 - Update Guest's RequestPage to request and send to notification to the Organization Administrators
 
-# What is VLS?
+# What is Vehicle Legal System?
 
 To increase the efficiency of vehicle information for legality, Vehicle Legal
 System is an app to help the organization’s administrators in managing the information regarding

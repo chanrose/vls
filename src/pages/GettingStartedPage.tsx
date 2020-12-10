@@ -13,8 +13,9 @@ import {
   IonLabel,
   IonPage,
   IonRow,
+  IonText,
 } from "@ionic/react";
-import "./styles/GettingStartedPage.css";
+import "./styles/components.css";
 
 const GettingStartedPage: React.FC = () => {
   return (
@@ -22,7 +23,10 @@ const GettingStartedPage: React.FC = () => {
       <IonContent color="light" fullscreen>
         <IonCard className="ionCardstyle">
           <IonCardHeader>
-            <IonImg className="imageSize" src={"/assets/icon/app2Logo.png"} />
+            {/* <IonImg className="imageSize" src={"/assets/icon/app2Logo.png"} /> */}
+            <div className="ion-text-center centerImg">
+              <img src="/assets/media/setup.svg" height="200 px" />
+            </div>
             <IonCardTitle className="centerText">Getting started</IonCardTitle>
             <IonCardSubtitle className="centerText">
               Updated on Dec 03
@@ -30,7 +34,7 @@ const GettingStartedPage: React.FC = () => {
           </IonCardHeader>
 
           <IonCardContent>
-            <IonGrid>
+            {/* <IonGrid>
               <IonRow className="centerText">
                 <IonCol>
                   <IonImg
@@ -52,14 +56,22 @@ const GettingStartedPage: React.FC = () => {
                   <IonLabel>Thai</IonLabel>
                 </IonCol>
               </IonRow>
-            </IonGrid>
+            </IonGrid> */}
+            <br />
+            <IonText>
+              <div className="ion-text-center">
+                {" "}
+                Welcome to VLS's App, you will be ask to sign in as guest or as
+                administrators. Please proceed.
+              </div>
+            </IonText>
             <br />
             <IonButton
               routerLink="/gettingstarted2"
               className="IonButtonRadius"
               expand="block"
             >
-              NEXT
+              START
             </IonButton>
           </IonCardContent>
         </IonCard>
