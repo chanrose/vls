@@ -5,10 +5,6 @@
 - Update on Guest's homepage to see the posts from organization
 - Update Guest's RequestPage to request and send to notification to the Organization Administrators
 
-## Enjoy some random image from picsum
-
- <img src="https://picsum.photos/seed/picsum/536/354" />
-
 # What is VLS?
 
 To increase the efficiency of vehicle information for legality, Vehicle Legal
@@ -16,11 +12,9 @@ System is an app to help the organization’s administrators in managing the inf
 the vehicle details such as vehicle models, greenbook, tax renewal, and the current owner detail
 such as the owner’s id, name, residential address, and driver license
 
-# In response to
+### Problem: How to improve and enhance vehicle legality within organization?
 
-## Problem: How to improve and enhance vehicle legality within organization?
-
-## Proposed Solution:
+### Proposed Solution:
 
 To increase the efficiency of vehicle information for legality, Vehicle Legal
 System is an app to help the organization’s administrators in managing the information regarding
@@ -30,7 +24,7 @@ Stakeholders involvement: as the organization’s administrator, it is very impo
 complete detail of the vehicle inside the organization in case that there is any legal concern from
 the government and other parties. The same way as it applies to the current owner of the vehicle.
 
-## Specific Objectives:
+### Specific Objectives:
 
 Vehicle Legal System allows the administrators to create, view,
 modify, and delete the vehicle’s information. As it also has another main component in which to
@@ -39,3 +33,7 @@ insurance for example. Not just that, it also helps the users or guests to under
 information regarding legality with the vehicle and also price estimation in regarding vehicle
 ownership. Guard or special user is also implemented in which allows issuing a ticket system
 when there is a parking issue among the organizations.
+
+### Enjoy some random image from picsum
+
+ <img src="https://picsum.photos/seed/picsum/536/354" />
