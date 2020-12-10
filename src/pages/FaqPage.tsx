@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   IonButton,
   IonCard,
@@ -18,13 +18,16 @@ import {
   IonSlides,
   IonText,
   IonTitle,
+  IonToggle,
   IonToolbar,
 } from "@ionic/react";
 import "./styles/components.css";
 import { useHistory } from "react-router";
+import { ThemeContext } from "../auth";
 
 const FaqPage: React.FC = () => {
   const history = useHistory();
+  const { mode, setMode } = useContext(ThemeContext);
 
   return (
     <IonPage>
@@ -33,11 +36,82 @@ const FaqPage: React.FC = () => {
           <IonTitle>
             {" "}
             <div className="ion-text-center">FAQ</div>{" "}
+            {/* <IonToggle name="darkMode" onIonChange={toggleDarkModeHandler} /> */}
           </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent color="light" fullscreen>
         <IonSlides>
+          <IonSlide>
+            <IonCard className="IonCardFaq">
+              <br /> <br />
+              <IonCardHeader>
+                <div className="ion-text-center centerImg">
+                  <img src="/assets/media/faq.svg" />
+                </div>{" "}
+                <br />
+                <IonCardSubtitle className="centerText">
+                  Information
+                </IonCardSubtitle>
+                <IonCardTitle className="centerText">Learn More</IonCardTitle>
+              </IonCardHeader>
+              <IonCardContent>
+                <IonText>
+                  <div className="ion-text-center">
+                    Swipe Left or Swipe Right
+                  </div>
+                </IonText>
+              </IonCardContent>
+            </IonCard>
+          </IonSlide>
+          <IonSlide>
+            <IonCard className="IonCardFaq">
+              <IonCardHeader>
+                <div className="ion-text-center centerImg">
+                  <img src="/assets/media/personalData.svg" height="50 px" />
+                </div>{" "}
+                <IonCardSubtitle className="centerText">
+                  What about
+                </IonCardSubtitle>
+                <IonCardTitle className="centerText">
+                  Privacy Policy
+                </IonCardTitle>
+              </IonCardHeader>
+
+              <IonCardContent>
+                <IonText>
+                  <div className="ion-text-center">
+                    VLS does not make use of any collected data
+                  </div>
+                </IonText>
+              </IonCardContent>
+            </IonCard>
+          </IonSlide>
+          <IonSlide>
+            <IonCard className="IonCardFaq">
+              <br />
+              <br />
+              <IonCardHeader>
+                <div className="ion-text-center centerImg">
+                  <img src="/assets/media/contactUs.svg" height="100 px" />
+                </div>{" "}
+                <IonCardSubtitle className="centerText">
+                  Contact Us
+                </IonCardSubtitle>
+                <IonCardTitle className="centerText">Email</IonCardTitle>
+              </IonCardHeader>
+
+              <IonCardContent>
+                <br />
+                <IonText>
+                  <div className="ion-text-center">
+                    bdchanbroset@gmail.com <br /> andreas.christian.m@gmail.com
+                  </div>
+                </IonText>
+                <br />
+              </IonCardContent>
+            </IonCard>
+          </IonSlide>
           <IonSlide>
             <IonCard className="IonCardFaq">
               <IonCardHeader>
@@ -53,7 +127,11 @@ const FaqPage: React.FC = () => {
               <IonCardContent>
                 <br />
                 <IonText>
-                  <div className="ion-text-center">Swipe More</div>
+                  <div className="ion-text-center">
+                    <a href="https://ionicframework.com/docs">
+                      Ionic Framework
+                    </a>
+                  </div>
                 </IonText>
                 <br />
               </IonCardContent>
@@ -61,7 +139,6 @@ const FaqPage: React.FC = () => {
           </IonSlide>
           <IonSlide>
             <IonCard className="IonCardFaq">
-              <br />
               <IonCardHeader>
                 <div className="ion-text-center centerImg">
                   <img src="/assets/media/openSource.svg" height="100 px" />
@@ -76,7 +153,7 @@ const FaqPage: React.FC = () => {
                 <br />
                 <IonText>
                   <div className="ion-text-center">
-                    gh repo clone chanrose/vls
+                    Get started with <br /> gh repo clone chanrose/vls
                   </div>
                 </IonText>
                 <br />
@@ -85,7 +162,7 @@ const FaqPage: React.FC = () => {
           </IonSlide>
         </IonSlides>
         <IonButton fill="clear" expand="full" onClick={history.goBack}>
-          GO BACk
+          GO BACK
         </IonButton>
       </IonContent>
     </IonPage>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import {
   IonButton,
   IonCard,
@@ -13,32 +13,37 @@ import {
   IonToggle,
   IonToolbar,
 } from "@ionic/react";
-import "../styles/GettingStartedPage.css";
-import { auth } from "../../firebase";
-import { Storage } from "@capacitor/core";
-import { Redirect } from "react-router";
+import "./styles/components.css";
+import { auth } from "../firebase";
+import { ThemeContext } from "../auth";
 
-const GuestSettingPage: React.FC = () => {
-  const logout = async () => {
-    await Storage.clear();
-  };
+const SettingPage: React.FC = () => {
+  const { mode, setMode } = useContext(ThemeContext);
+  console.log("Mode: ", mode);
 
   const toggleDarkModeHandler = () => {
     document.body.classList.toggle("dark");
   };
-
   return (
     <IonPage>
       <IonHeader translucent>
         <IonToolbar>
           <IonTitle>
             {" "}
-            <div className="ion-text-center"> Settings</div>
+            <div className="ion-text-center">Settings</div>{" "}
           </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
         <IonCard>
+          <div className="ion-text-center centerImg">
+            <img
+              height="150 px"
+              src={"/assets/media/preference.svg"}
+              alt="Login Logo"
+            />
+          </div>
+          <br />
           <IonList>
             <IonItem>
               <IonRouterLink href="/public/app/faq">
@@ -64,12 +69,7 @@ const GuestSettingPage: React.FC = () => {
             </IonItem>
           </IonList>
         </IonCard>
-        <IonButton
-          color="medium"
-          expand="block"
-          onClick={logout}
-          routerLink="/gettingstarted2"
-        >
+        <IonButton color="medium" expand="block" onClick={() => auth.signOut()}>
           Logout
         </IonButton>
       </IonContent>
@@ -77,4 +77,4 @@ const GuestSettingPage: React.FC = () => {
   );
 };
 
-export default GuestSettingPage;
+export default SettingPage;

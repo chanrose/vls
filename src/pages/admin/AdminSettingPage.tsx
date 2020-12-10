@@ -15,12 +15,11 @@ import {
 } from "@ionic/react";
 import "../styles/components.css";
 import { auth } from "../../firebase";
+import { ThemeContext } from "../../auth";
 
 const AdminSettingPage: React.FC = () => {
-  const [ToggleDark, setToggle] = useState(false);
   const toggleDarkModeHandler = () => {
     document.body.classList.toggle("dark");
-    setToggle(true);
   };
 
   return (
@@ -49,18 +48,7 @@ const AdminSettingPage: React.FC = () => {
                 FAQ and Service Information
               </IonRouterLink>
             </IonItem>
-            {/*  <IonItem>
-              <IonRouterLink href="/admin/home/">Notification</IonRouterLink>
-            </IonItem>
-         
-          <IonItem>
-            <IonRouterLink href="/admin/home/">Language</IonRouterLink>
-          </IonItem>
-          <IonItem>
-            <IonRouterLink href="/admin/home/">
-              Application Version
-            </IonRouterLink>
-          </IonItem> */}
+
             <IonItem>
               <IonRouterLink href="/admin/detail/">
                 Account Management
@@ -72,7 +60,6 @@ const AdminSettingPage: React.FC = () => {
             <IonItem>
               <IonLabel> Switch Theme</IonLabel>
               <IonToggle
-                checked={ToggleDark}
                 slot="end"
                 name="darkMode"
                 onIonChange={toggleDarkModeHandler}
