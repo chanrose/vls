@@ -6,7 +6,8 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import "../styles/GettingStartedPage.css";
+
+import "../styles/components.css";
 import "../styles/admin.css";
 import AdminAddVehSeg from "../../components/admin/AdminAddVehSeg";
 

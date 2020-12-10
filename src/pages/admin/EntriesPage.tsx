@@ -21,7 +21,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import "../styles/GettingStartedPage.css";
+import "../styles/components.css";
 import { useHistory, useRouteMatch } from "react-router";
 import { useAuth } from "../../auth";
 import { Entry, toEntry } from "../../model";

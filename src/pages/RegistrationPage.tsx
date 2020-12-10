@@ -13,7 +13,7 @@ import {
   IonPage,
   IonText,
 } from "@ionic/react";
-import "./styles/GettingStartedPage.css";
+import "./styles/components.css";
 import { useAuth } from "../auth";
 import { Redirect } from "react-router";
 import { auth, firestore } from "../firebase";
@@ -73,9 +73,13 @@ const RegistrationPage: React.FC = () => {
     <IonPage>
       <IonContent color="light" fullscreen>
         <IonCard className="ionCardstyle">
-          <br />
-          <br />
-          <br />
+          <div className="ion-text-center centerImg">
+            <img
+              height="100 px"
+              src={"/assets/media/fillForm.svg"}
+              alt="App logo"
+            />
+          </div>
           <IonCardHeader>
             <IonCardTitle className="centerText">Registration</IonCardTitle>
           </IonCardHeader>
@@ -85,6 +89,7 @@ const RegistrationPage: React.FC = () => {
               <IonItem>
                 <IonLabel>First name:</IonLabel>
                 <IonInput
+                  slot="end"
                   value={fname}
                   onIonChange={(e) => setFname(e.detail.value!)}
                   type="text"
@@ -95,6 +100,7 @@ const RegistrationPage: React.FC = () => {
               <IonItem>
                 <IonLabel>Last name:</IonLabel>
                 <IonInput
+                  slot="end"
                   value={lname}
                   onIonChange={(e) => setLname(e.detail.value!)}
                   type="text"
@@ -105,6 +111,7 @@ const RegistrationPage: React.FC = () => {
               <IonItem>
                 <IonLabel>Email:</IonLabel>
                 <IonInput
+                  slot="end"
                   value={email}
                   onIonChange={(e) => setEmailString(e.detail.value!)}
                   type="email"
@@ -115,6 +122,7 @@ const RegistrationPage: React.FC = () => {
               <IonItem>
                 <IonLabel>Password:</IonLabel>
                 <IonInput
+                  slot="end"
                   value={password}
                   onIonChange={(e) => setPassword(e.detail.value!)}
                   type="password"
@@ -124,29 +132,24 @@ const RegistrationPage: React.FC = () => {
               <IonItem>
                 <IonLabel>Organization ID:</IonLabel>
                 <IonInput
+                  slot="end"
                   value={organId}
                   onIonChange={(e) => setOrganId(e.detail.value!)}
                   type="text"
-                  placeholder="11232020"
+                  placeholder="UniqueORGID"
                 />
                 <br />
               </IonItem>
               <IonItem>
                 <IonLabel>Organization Name:</IonLabel>
                 <IonInput
+                  slot="end"
                   value={organName}
                   onIonChange={(e) => setOrganName(e.detail.value!)}
                   type="text"
-                  placeholder="AIU"
+                  placeholder="Organization Name"
                 />
                 <br />
-              </IonItem>
-              <IonItem>
-                <IonText>
-                  <p>
-                    Other users will use Organ ID to identify your organization.
-                  </p>
-                </IonText>
               </IonItem>
             </IonList>
 
@@ -159,8 +162,8 @@ const RegistrationPage: React.FC = () => {
               SIGN UP
             </IonButton>
             <IonButton
+              fill="clear"
               routerLink="/gettingstarted2"
-              color="secondary"
               className="IonButtonRadius"
               expand="block"
             >
