@@ -1,72 +1,72 @@
 .ionContent {
-    --color: light blue;
+  --color: light blue;
 }
 
 .imageSize {
-    display: block;
-    margin-top: 5vh;
-    margin-left: auto;
-    margin-right: auto;
-    width: 200px;
+  display: block;
+  margin-top: 5vh;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
 }
 
 .ionCardstyle {
-    border-radius: 20px;
-    margin-top: 8vh;
-    margin-left: 5vw;
-    margin-right: 5vw;
+  border-radius: 20px;
+  margin-top: 5vh;
+  margin-left: 5vw;
+  margin-right: 5vw;
 }
 
 .centerDiv {
-    display: block;
-    text-align: center;
-    width: 15vw;
+  display: block;
+  text-align: center;
+  width: 15vw;
 }
 
 .centerText {
-    text-align: center;
+  text-align: center;
 }
 
 .centerText img {
-    display: block;
-    border-radius: 50%;
-    border: 100px solid #12E3D7;
-    background-color: #12E3D7;
+  display: block;
+  border-radius: 50%;
+  border: 100px solid #12e3d7;
+  background-color: #12e3d7;
 }
 
 .flagIcon {
-    display: block;
-    width: 60px;
-    border-radius: 50%;
-    background-color: #12E3D7;
-    margin-left: auto;
-    margin-right: auto;
+  display: block;
+  width: 60px;
+  border-radius: 50%;
+  background-color: #12e3d7;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .grayStraightLine {
-    margin-left: 0vw;
-    border-left: 1px solid grey;
-    border-right: 1px solid grey;
-    height: 15vh;
-    margin-bottom: 1vh;
+  margin-left: 0vw;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  height: 15vh;
+  margin-bottom: 1vh;
 }
 
 .IonButtonRadius {
-    --border-radius: 30px;
+  --border-radius: 30px;
 }
 
 .searchBarCustom {
-    --border-radius: 1em;
+  --border-radius: 1em;
 }
 
 .centerImg {
-    margin-top: 10vh;
+  margin-top: 10vh;
 }
 
 .IonCardFaq {
-    border-radius: 20px;
-    margin-top: 8vh;
-    margin-left: 5vw;
-    margin-right: 5vw;
-    padding-bottom: 5vh;
+  border-radius: 20px;
+  margin-top: 5vh;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  padding-bottom: 5vh;
 }

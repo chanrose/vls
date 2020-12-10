@@ -19,7 +19,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import "../styles/components.css";
-import { add, bicycle, car, filter, image } from "ionicons/icons";
+import { add, bicycle, car, image } from "ionicons/icons";
 import { useAuth } from "../../auth";
 import { firestore } from "../../firebase";
 import { Entry, toEntry } from "../../model";
@@ -31,6 +31,7 @@ const formatDate = (inputDate: string, type: string) => {
     const date = dayjs(inputDate);
     const now = dayjs();
     date.toISOString();
+
     if (type === "format") {
       return (
         date.format("MMM DD, YYYY") + " | " + date.diff(now, "days") + " left"
@@ -56,15 +57,21 @@ const AdminViewPage: React.FC = () => {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [searchText, setSearch] = useState("");
   const [filterSearch, setFSearch] = useState<Entry[]>([]);
+  const [showNoData, setShow] = useState(false);
 
-  const viewEntry = async () => {
-    await entriesRef.get().then(({ docs }) => setEntries(docs.map(toEntry)));
+  const viewEntry = () => {
+    entriesRef.onSnapshot(({ docs }) => setEntries(docs.map(toEntry)));
+    entriesRef.onSnapshot((snapshot) => {
+      if (snapshot.size) {
+        setShow(false);
+      } else {
+        setShow(true);
+      }
+    });
   };
 
   const [btnFilter, setFilter] = useState(false);
   const [filterName, setListFilter] = useState("Tax Expire");
-  const [vehicleType, setVFilter] = useState(false);
-  const [typeName, setVType] = useState("Motorbike");
   const [selectedTax, setTax] = useState(true);
   const [selectedOwn, setOwn] = useState(false);
   const [selectedInsure, setInsure] = useState(false);
@@ -115,9 +122,6 @@ const AdminViewPage: React.FC = () => {
           onIonChange={(e) => setSearch(e.detail.value!)}
         ></IonSearchbar>
 
-        {/*     <IonButton slot="end">
-            <IonIcon icon={filter} />
-          </IonButton> */}
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton>
             <IonIcon icon={add} />
@@ -140,30 +144,7 @@ const AdminViewPage: React.FC = () => {
           </IonFabList>
         </IonFab>
 
-        <IonActionSheet
-          isOpen={vehicleType}
-          onDidDismiss={() => setVFilter(false)}
-          buttons={[
-            {
-              text: "Motorbike",
-              handler: () => {
-                setVType("Motorbike");
-              },
-            },
-            {
-              text: "Car",
-              handler: () => {
-                setVType("Car");
-              },
-            },
-            {
-              text: "Others",
-              handler: () => {
-                setVType("other");
-              },
-            },
-          ]}
-        />
+ 
 
         <IonActionSheet
           isOpen={btnFilter}
@@ -201,17 +182,21 @@ const AdminViewPage: React.FC = () => {
 
         <IonList>
           <IonItem>
-            <IonButton fill="clear" onClick={() => setVFilter(true)}>
-              <IonText>{typeName} </IonText>
+            <IonButton fill="clear">
+              <IonText>Vehicle </IonText>
             </IonButton>
 
             <IonButton fill="clear" slot="end" onClick={() => setFilter(true)}>
               <IonText>{filterName} </IonText>
             </IonButton>
           </IonItem>
-          {/*    <IonListHeader>
-            <div className="ion-text-center"></div>
-          </IonListHeader> */}
+
+          {showNoData && (
+            <div className="ion-text-center centerImg">
+              <img src="/assets/media/noData.svg" height="200 px" />
+              <p>You have not added any vehicle yet</p>
+            </div>
+          )}
           {filterSearch.map((entry) => (
             <IonItem
               button

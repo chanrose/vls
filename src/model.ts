@@ -66,3 +66,7 @@ export interface reqList {
   
 }
 
+
+export interface turnOffModal {
+    turnOffModal: any;
+  }

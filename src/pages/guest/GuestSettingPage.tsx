@@ -7,8 +7,10 @@ import {
   IonItem,
   IonLabel,
   IonList,
+  IonModal,
   IonPage,
   IonRouterLink,
+  IonText,
   IonTitle,
   IonToggle,
   IonToolbar,
@@ -17,10 +19,22 @@ import "../styles/GettingStartedPage.css";
 import { auth } from "../../firebase";
 import { Storage } from "@capacitor/core";
 import { Redirect } from "react-router";
+import FaqPage from "../FaqPage";
+import CreditsPage from "../CreditsPage";
 
 const GuestSettingPage: React.FC = () => {
   const logout = async () => {
     await Storage.clear();
+  };
+
+  const [showCreditModal, setCreditModal] = useState(false);
+  const turnOffCredit = () => {
+    setCreditModal(false);
+  };
+
+  const [showFaqModal, setFaqModal] = useState(false);
+  const turnOffFaq = () => {
+    setFaqModal(false);
   };
 
   const toggleDarkModeHandler = () => {
@@ -39,20 +53,24 @@ const GuestSettingPage: React.FC = () => {
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
         <IonCard>
+          <div className="ion-text-center centerImg">
+            <img
+              height="150 px"
+              src={"/assets/media/preference.svg"}
+              alt="Login Logo"
+            />
+          </div>
           <IonList>
             <IonItem>
-              <IonRouterLink href="/public/app/faq">
+              <IonText color="primary" onClick={() => setFaqModal(true)}>
                 FAQ and Service Information
-              </IonRouterLink>
+              </IonText>
             </IonItem>
 
             <IonItem>
-              <IonRouterLink href="/admin/detail/">
-                Account Management
-              </IonRouterLink>
-            </IonItem>
-            <IonItem>
-              <IonRouterLink href="/public/app/credits">Credits</IonRouterLink>
+              <IonText color="primary" onClick={() => setCreditModal(true)}>
+                Credits
+              </IonText>
             </IonItem>
             <IonItem>
               <IonLabel> Switch Theme</IonLabel>
@@ -70,8 +88,22 @@ const GuestSettingPage: React.FC = () => {
           onClick={logout}
           routerLink="/gettingstarted2"
         >
-          Logout
+          RESET
         </IonButton>
+
+        <IonModal
+          isOpen={showFaqModal}
+          onDidDismiss={() => setFaqModal(false)!}
+        >
+          <FaqPage turnOffModal={turnOffFaq} />
+        </IonModal>
+
+        <IonModal
+          isOpen={showCreditModal}
+          onDidDismiss={() => setCreditModal(false)!}
+        >
+          <CreditsPage turnOffModal={turnOffCredit} />
+        </IonModal>
       </IonContent>
     </IonPage>
   );

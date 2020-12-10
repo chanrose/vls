@@ -21,6 +21,7 @@ import RequestCard from "../../components/RequestCard";
 
 const GuestRequestPage: React.FC = () => {
   const [reqList, setReqList] = useState<reqList[]>([]);
+  const [showNoData, setShow] = useState(false);
   const [idNo, setIdNo] = useState("");
 
   const [guestEmail, setEmail] = useState("");
@@ -42,6 +43,20 @@ const GuestRequestPage: React.FC = () => {
       setReqList(docs.map(toEntry))
     );
   }, [organization, name]);
+
+  useEffect(() => {
+    const postEntriesRef = firestore
+      .collection("public")
+      .doc(organization)
+      .collection("requests");
+    return postEntriesRef.where("name", "==", name).onSnapshot((snapshot) => {
+      if (snapshot.size) {
+        setShow(false);
+      } else {
+        setShow(true);
+      }
+    });
+  }, [organization]);
 
   const handleRequest = () => {
     firestore
@@ -69,6 +84,12 @@ const GuestRequestPage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
+        {showNoData && (
+          <div className="ion-text-center centerImg">
+            <img src="/assets/media/noData.svg" height="200 px" />
+            <p>You haven't make any request yet!</p>
+          </div>
+        )}
         <div>
           {" "}
           <OrgContext.Provider value={{ organization: `${organization}` }}>

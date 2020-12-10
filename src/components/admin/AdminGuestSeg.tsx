@@ -30,6 +30,8 @@ const AdminGuestSeg: React.FC = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [showModal, setModal] = useState(false);
+  const [showNoData, setShow] = useState(false);
+
   const postEntriesRef = firestore
     .collection("public")
     .doc(organization)
@@ -38,6 +40,15 @@ const AdminGuestSeg: React.FC = () => {
     return postEntriesRef.onSnapshot(({ docs }) =>
       setPostList(docs.map(toEntry))
     );
+  }, [organization]);
+  useEffect(() => {
+    return postEntriesRef.onSnapshot((snapshot) => {
+      if (snapshot.size) {
+        setShow(false);
+      } else {
+        setShow(true);
+      }
+    });
   }, [organization]);
 
   const handleAdd = () => {
@@ -50,6 +61,13 @@ const AdminGuestSeg: React.FC = () => {
   };
   return (
     <div>
+      {showNoData && (
+        <div className="ion-text-center centerImg">
+          <img src="/assets/media/noData.svg" height="200 px" />
+          <p>You haven't added any posts yet</p>
+        </div>
+      )}
+
       {postList.map((entry) => (
         <RequestCard
           key={entry.id}

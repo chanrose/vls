@@ -17,17 +17,17 @@ import {
 } from "@ionic/react";
 import "../styles/components.css";
 import { useHistory } from "react-router";
+import { turnOffModal } from "../../model";
 
-const AdminAccountManagementPage: React.FC = () => {
-  const history = useHistory();
-
+const AdminAccountManagementPage: React.FC<turnOffModal> = ({ turnOffModal }) => {
+ 
   return (
-    <IonPage>
+    <>
       <IonContent color="light" fullscreen>
         <IonCard className="ionCardstyle">
           <IonCardHeader>
             <div className="ion-text-center centerImg">
-              <img src="/assets/media/personalInfo.svg" height="200 px" />
+              <img src="/assets/media/personalInfo.svg" height="50 px" />
             </div>
             <IonCardTitle className="centerText">Account Detail</IonCardTitle>
             <IonCardSubtitle className="centerText">
@@ -47,13 +47,13 @@ const AdminAccountManagementPage: React.FC = () => {
             </IonText>
             <br />
 
-            <IonButton fill="clear" expand="full" onClick={history.goBack}>
-              Go Back
+            <IonButton fill="clear" expand="full" onClick={turnOffModal}>
+              CLOSE
             </IonButton>
           </IonCardContent>
         </IonCard>
       </IonContent>
-    </IonPage>
+    </>
   );
 };
 

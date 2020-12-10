@@ -20,18 +20,7 @@ const GuestHomePage: React.FC = () => {
           <IonTitle>
             <div className="ion-text-center">Home</div>
           </IonTitle>
-          {/*           <IonSegment
-            onIonChange={(e: { detail: { value: any } }) =>
-              console.log(e.detail.value!)
-            }
-          >
-            <IonSegmentButton value="home">
-              <IonLabel>Home</IonLabel>
-            </IonSegmentButton>
-              <IonSegmentButton value="info">
-              <IonLabel>Cost</IonLabel>
-            </IonSegmentButton> 
-          </IonSegment> */}
+        
         </IonToolbar>
       </IonHeader>
 
@@ -43,7 +32,7 @@ const GuestHomePage: React.FC = () => {
             <br />
           </div>
         </div>
-        Hello {name}
+       
         <GuestAnnouncementList />
       </IonContent>
     </IonPage>

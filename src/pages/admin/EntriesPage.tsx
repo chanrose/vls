@@ -8,6 +8,7 @@ import {
   IonContent,
   IonDatetime,
   IonHeader,
+  IonIcon,
   IonInput,
   IonItem,
   IonItemDivider,
@@ -26,6 +27,7 @@ import { useHistory, useRouteMatch } from "react-router";
 import { useAuth } from "../../auth";
 import { Entry, toEntry } from "../../model";
 import { firestore } from "../../firebase";
+import { trash } from "ionicons/icons";
 
 interface RouterParams {
   id: string;
@@ -117,6 +119,14 @@ const EntriesPage: React.FC = () => {
               {entry?.vehicleBrand} {entry?.vehicleModel}
             </div>
           </IonTitle>
+          <IonButton
+            slot="end"
+            fill="clear"
+            onClick={handleDelete}
+            color="danger"
+          >
+            <IonIcon icon={trash} />
+          </IonButton>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -320,12 +330,13 @@ const EntriesPage: React.FC = () => {
  */}
             <IonRow>
               <IonCol>
-                <IonButton onClick={handleDelete} color="danger">
-                  Delete
+                <IonButton fill="clear" onClick={history.goBack}>
+                  Cancel
                 </IonButton>
               </IonCol>
               <IonCol>
                 <IonButton
+                  fill="clear"
                   onClick={handleUpdate}
                   color="primary"
                   className="floatRight"

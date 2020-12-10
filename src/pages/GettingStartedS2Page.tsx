@@ -83,19 +83,21 @@ const GettingStartedS2Page: React.FC = () => {
             <IonList>
               <IonItem>
                 <IonLabel>Name</IonLabel>
-                <IonInput
-                  slot="end"
-                  value={name}
-                  onIonChange={(e) => setName(e.detail.value!)}
-                  type="text"
-                  placeholder="Full Name"
-                  required={true}
-                />
+                <div className="ion-text-end">
+                  <IonInput
+                    value={name}
+                    onIonChange={(e) => setName(e.detail.value!)}
+                    type="text"
+                    placeholder="Full Name"
+                    required={true}
+                  />
+                </div>
               </IonItem>
 
               <IonItem>
                 <IonLabel>Organization</IonLabel>
                 <IonSelect
+                  slot="end"
                   value={organization}
                   placeholder="Select One"
                   onIonChange={(e) => setOrg(e.detail.value)}
@@ -106,8 +108,6 @@ const GettingStartedS2Page: React.FC = () => {
                       {entry.name}
                     </IonSelectOption>
                   ))}
-                  {/* <IonSelectOption value="aiu18180">AIU</IonSelectOption>
-                  <IonSelectOption value="hope18180">HC</IonSelectOption> */}
                 </IonSelect>
               </IonItem>
             </IonList>
@@ -130,9 +130,6 @@ const GettingStartedS2Page: React.FC = () => {
             >
               Login as Admin
             </IonButton>
-            {/*     <IonButton routerLink="/register" fill="clear" expand="block">
-              Sign up for organization?
-            </IonButton> */}
           </IonCardContent>
         </IonCard>
       </IonContent>
