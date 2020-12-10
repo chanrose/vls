@@ -72,7 +72,7 @@ const AdminHomePage: React.FC = () => {
             onIonChange={(e) => returnSegment(e.detail.value!)}
           >
             <IonSegmentButton value="home">
-              <IonLabel>Home</IonLabel>
+              <IonLabel>Home 1</IonLabel>
             </IonSegmentButton>
             <IonSegmentButton value="guest">
               <IonLabel>Guest's Post</IonLabel>

@@ -11,24 +11,30 @@ import {
   home as homeIcon,
   settings as settingsIcon,
 } from "ionicons/icons";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import React, { useState } from "react";
 import { UserContext } from "./auth";
 import GuestHomePage from "./pages/guest/GuestHomePage";
 import GuestRequestPage from "./pages/guest/GuestRequestPage";
 import GuestSettingPage from "./pages/guest/GuestSettingPage";
-import { Storage } from "@capacitor/core";
+import { Plugins } from "@capacitor/core";
 import PageNotFound from "./pages/PageNotFound";
 
 const GuestAppTabs: React.FC = () => {
+  const { Storage } = Plugins;
+
   const [orgId, setOrg] = useState("Default");
   const [guestName, setName] = useState("Default");
 
   const getUserDetail = async () => {
+    const keys = await Storage.keys();
     const ret = await Storage.get({ key: "userDetail" });
-    const getObj = JSON.parse(ret.value);
-    setOrg(getObj.organization);
-    setName(getObj.name);
+    const getObj = JSON.parse(ret.value!);
+    if (ret == null) {
+    } else {
+      setOrg(getObj.organization);
+      setName(getObj.name);
+    }
   };
   getUserDetail();
   return (
@@ -39,7 +45,6 @@ const GuestAppTabs: React.FC = () => {
         >
           <Switch>
             <Route exact path="/guest/request/" component={GuestRequestPage} />
-            {/* <Route exact path="/guest/viewlist/" component={GuestViewPage} /> */}
             <Route exact path="/guest/settings/" component={GuestSettingPage} />
             <Route exact path="/guest/home/">
               <GuestHomePage />

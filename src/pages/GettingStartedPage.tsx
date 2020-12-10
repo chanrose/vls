@@ -29,7 +29,7 @@ const GettingStartedPage: React.FC = () => {
             </div>
             <IonCardTitle className="centerText">Getting started</IonCardTitle>
             <IonCardSubtitle className="centerText">
-              Updated on Dec 03
+              Updated on Dec 10
             </IonCardSubtitle>
           </IonCardHeader>
 

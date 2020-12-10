@@ -16,15 +16,15 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import "../styles/GettingStartedPage.css";
-import { auth } from "../../firebase";
-import { Storage } from "@capacitor/core";
-import { Redirect } from "react-router";
+import { Plugins } from "@capacitor/core";
 import FaqPage from "../FaqPage";
 import CreditsPage from "../CreditsPage";
 
 const GuestSettingPage: React.FC = () => {
+  const { Storage } = Plugins;
   const logout = async () => {
     await Storage.clear();
+    console.log("Key", await Storage.keys());
   };
 
   const [showCreditModal, setCreditModal] = useState(false);
@@ -86,7 +86,7 @@ const GuestSettingPage: React.FC = () => {
           color="medium"
           expand="block"
           onClick={logout}
-          routerLink="/gettingstarted2"
+          routerLink="/gettingstarted"
         >
           RESET
         </IonButton>

@@ -28,14 +28,16 @@ const GettingStartedS2Page: React.FC = () => {
   const [organization, setOrg] = useState("");
   const [logIn, setLog] = useState(false);
   const [orgEntries, setOrgEntries] = useState<orgList[]>([]);
-
+  const [userDetail, setUserDetail] = useState({ name: "", organization: "" });
   const getUserDetail = async () => {
     try {
       const ret = await Storage.get({ key: "userDetail" });
       const getObj = JSON.parse(ret.value!);
-
-      if (getObj) {
+      if (getObj.organization == "" || getObj.name == "") {
+        setLog(false);
+      } else {
         setLog(true);
+        setUserDetail({ name: getObj.name, organization: getObj.organization });
       }
     } catch (error) {}
   };
@@ -50,6 +52,10 @@ const GettingStartedS2Page: React.FC = () => {
     publicOrg();
   }, [orgEntries]);
 
+  if (logIn) {
+    return <Redirect to={`/guest/home/`} />;
+  }
+
   const handleLogin = async () => {
     await Storage.set({
       key: "userDetail",
@@ -59,13 +65,10 @@ const GettingStartedS2Page: React.FC = () => {
       }),
     });
     history.go(0);
-
+    console.log(organization);
     /* const credential = await auth.signInAnonymously().catch((error) => {}); */
   };
 
-  if (logIn) {
-    return <Redirect to={`/guest/home/`} />;
-  }
   return (
     <IonPage>
       <IonContent color="light" fullscreen>
@@ -76,7 +79,9 @@ const GettingStartedS2Page: React.FC = () => {
               <img src="/assets/media/login.svg" height="200 px" />
             </div>
 
-            <IonCardTitle className="centerText">Enter as Guest</IonCardTitle>
+            <IonCardTitle className="centerText">
+              Enter as Guest (t)
+            </IonCardTitle>
           </IonCardHeader>
 
           <IonCardContent>
