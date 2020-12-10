@@ -17,12 +17,13 @@ import {
 } from "@ionic/react";
 import "./styles/components.css";
 import { useHistory } from "react-router";
+import { turnOffModal } from "../model";
 
-const CreditsPage: React.FC = () => {
+const CreditsPage: React.FC<turnOffModal> = ({ turnOffModal }) => {
   const history = useHistory();
 
   return (
-    <IonPage>
+    <>
       <IonContent color="light" fullscreen>
         <IonCard className="ionCardstyle">
           <IonCardHeader>
@@ -50,13 +51,13 @@ const CreditsPage: React.FC = () => {
             </IonText>
             <br />
 
-            <IonButton fill="clear" expand="full" onClick={history.goBack}>
-              Go Back
+            <IonButton fill="clear" expand="full" onClick={turnOffModal}>
+              CLOSE
             </IonButton>
           </IonCardContent>
         </IonCard>
       </IonContent>
-    </IonPage>
+    </>
   );
 };
 

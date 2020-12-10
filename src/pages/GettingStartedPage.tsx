@@ -25,7 +25,7 @@ const GettingStartedPage: React.FC = () => {
           <IonCardHeader>
             {/* <IonImg className="imageSize" src={"/assets/icon/app2Logo.png"} /> */}
             <div className="ion-text-center centerImg">
-              <img src="/assets/media/setup.svg" height="200 px" />
+              <img src="/assets/icon/app2Logo.png" height="200 px" />
             </div>
             <IonCardTitle className="centerText">Getting started</IonCardTitle>
             <IonCardSubtitle className="centerText">

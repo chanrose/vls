@@ -75,22 +75,25 @@ const AdminAddVehSeg: React.FC = () => {
       </IonItemDivider>
       <IonItem>
         <IonLabel>Sticker No.</IonLabel>
-        <IonInput
-          slot="end"
-          type="text"
-          value={sticker}
-          onIonChange={(e) => setSticker(e.detail.value!)}
-        />
+        <div className="ion-text-end">
+          <IonInput
+            type="text"
+            value={sticker}
+            onIonChange={(e) => setSticker(e.detail.value!)}
+          />{" "}
+        </div>
       </IonItem>
 
       <IonItem>
         <IonLabel>Owner: </IonLabel>
-        <IonInput
-          slot="end"
-          type="text"
-          value={vehicleOwner}
-          onIonChange={(e) => setOwner(e.detail.value!)}
-        />
+        <div className="ion-text-end">
+          <IonInput
+            slot="end"
+            type="text"
+            value={vehicleOwner}
+            onIonChange={(e) => setOwner(e.detail.value!)}
+          />
+        </div>
       </IonItem>
       <IonItem>
         <IonLabel>Who is the owner?</IonLabel>
@@ -108,36 +111,43 @@ const AdminAddVehSeg: React.FC = () => {
 
       <IonItem>
         <IonLabel>ID No: </IonLabel>
-        <IonInput
-          type="text"
-          slot="end"
-          value={idNo}
-          onIonChange={(e) => setIdNo(e.detail.value!)}
-        />
+        <div className="ion-text-end">
+          <IonInput
+            type="text"
+            slot="end"
+            value={idNo}
+            onIonChange={(e) => setIdNo(e.detail.value!)}
+          />{" "}
+        </div>
       </IonItem>
 
       <IonItem>
         <IonLabel>Email: </IonLabel>
-        <IonInput
-          type="text"
-          slot="end"
-          value={ownerEmail}
-          onIonChange={(e) => setEmail(e.detail.value!)}
-        />
+        <div className="ion-text-end">
+          <IonInput
+            type="text"
+            slot="end"
+            value={ownerEmail}
+            onIonChange={(e) => setEmail(e.detail.value!)}
+          />
+        </div>
       </IonItem>
       <IonItem>
         <IonLabel>Phone: </IonLabel>
-        <IonInput
-          type="text"
-          slot="end"
-          value={ownerTele}
-          onIonChange={(e) => setTele(e.detail.value!)}
-        />
+        <div className="ion-text-end">
+          <IonInput
+            type="text"
+            slot="end"
+            value={ownerTele}
+            onIonChange={(e) => setTele(e.detail.value!)}
+          />
+        </div>
       </IonItem>
       <IonItem>
         <IonLabel>Driving License: </IonLabel>
         <IonDatetime
           max="2030-12-20"
+          placeholder="Select Date"
           slot="end"
           value={drivingExpire}
           onIonChange={(e) => setDrivingExpire(e.detail.value!)}
@@ -157,58 +167,69 @@ const AdminAddVehSeg: React.FC = () => {
       </IonItem>
       <IonItem>
         <IonLabel>Plate: </IonLabel>
-        <IonInput
-          type="text"
-          slot="end"
-          value={vehiclePlate}
-          onIonChange={(e) => setPlate(e.detail.value!)}
-        />
+        <div className="ion-text-end">
+          <IonInput
+            type="text"
+            slot="end"
+            value={vehiclePlate}
+            onIonChange={(e) => setPlate(e.detail.value!)}
+          />{" "}
+        </div>
       </IonItem>
 
       <IonItem>
         <IonLabel>Province: </IonLabel>
-        <IonInput
-          type="text"
-          value={province}
-          slot="end"
-          onIonChange={(e) => setProvince(e.detail.value!)}
-        />
+        <div className="ion-text-end">
+          <IonInput
+            type="text"
+            value={province}
+            slot="end"
+            onIonChange={(e) => setProvince(e.detail.value!)}
+          />{" "}
+        </div>
       </IonItem>
 
       <IonItem>
         <IonLabel>Brand: </IonLabel>
-        <IonInput
-          type="text"
-          value={vehicleBrand}
-          slot="end"
-          onIonChange={(e) => setBrand(e.detail.value!)}
-        />
+        <div className="ion-text-end">
+          <IonInput
+            type="text"
+            value={vehicleBrand}
+            slot="end"
+            onIonChange={(e) => setBrand(e.detail.value!)}
+          />
+        </div>
       </IonItem>
 
       <IonItem>
         <IonLabel>Model: </IonLabel>
-        <IonInput
-          type="text"
-          value={vehicleModel}
-          slot="end"
-          onIonChange={(e) => setModel(e.detail.value!)}
-        />
+        <div className="ion-text-end">
+          <IonInput
+            type="text"
+            value={vehicleModel}
+            slot="end"
+            onIonChange={(e) => setModel(e.detail.value!)}
+          />
+        </div>
       </IonItem>
 
       <IonItem>
         <IonLabel>Colour: </IonLabel>
-        <IonInput
-          type="text"
-          slot="end"
-          value={vehicleColour}
-          onIonChange={(e) => setColour(e.detail.value!)}
-        />
+        <div className="ion-text-end">
+          <IonInput
+            type="text"
+            slot="end"
+            value={vehicleColour}
+            onIonChange={(e) => setColour(e.detail.value!)}
+          />
+        </div>
       </IonItem>
 
       <IonItem>
         <IonLabel>Tax Expire: </IonLabel>
         <IonDatetime
           max="2030-12-20"
+          placeholder="Select Date"
           slot="end"
           value={taxExpire}
           onIonChange={(e) => setTax(e.detail.value!)}

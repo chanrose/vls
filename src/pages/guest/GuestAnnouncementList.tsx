@@ -9,6 +9,8 @@ import { UserContext } from "../../auth";
 const GuestAnnouncementList: React.FC = () => {
   const [postList, setPostList] = useState<PostEntry[]>([]);
   const { organization } = useContext(UserContext);
+  const [showNoData, setShow] = useState(false);
+
   useEffect(() => {
     const postEntriesRef = firestore
       .collection("public")
@@ -18,8 +20,28 @@ const GuestAnnouncementList: React.FC = () => {
       setPostList(docs.map(toEntry))
     );
   }, [organization]);
+
+  useEffect(() => {
+    const postEntriesRef = firestore
+      .collection("public")
+      .doc(organization)
+      .collection("posts");
+    return postEntriesRef.onSnapshot((snapshot) => {
+      if (snapshot.size) {
+        setShow(false);
+      } else {
+        setShow(true);
+      }
+    });
+  }, [organization]);
   return (
     <div>
+      {showNoData && (
+        <div className="ion-text-center centerImg">
+          <p>Your organization doesn't send any post yet!</p>
+        </div>
+      )}
+
       {postList.map((entry) => (
         <RequestCard
           key={entry.id}

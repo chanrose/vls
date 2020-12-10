@@ -36,6 +36,7 @@ const AdminNotificationPage: React.FC = () => {
     return postEntriesRef.onSnapshot((snapshot) => {
       if (snapshot.size) {
         setShow(false);
+      
       } else {
         setShow(true);
       }

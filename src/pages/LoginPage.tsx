@@ -47,7 +47,7 @@ const LoginPage: React.FC = () => {
           <IonCardHeader>
             <div className="ion-text-center centerImg">
               <img
-                height="200 px"
+                height="150 px"
                 src={"/assets/media/authentication.svg"}
                 alt="Login Logo"
               />
@@ -56,7 +56,6 @@ const LoginPage: React.FC = () => {
           </IonCardHeader>
 
           <IonCardContent>
-            <br />
             <IonList>
               <IonItem>
                 <IonInput

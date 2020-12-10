@@ -23,23 +23,14 @@ import {
 } from "@ionic/react";
 import "./styles/components.css";
 import { useHistory } from "react-router";
-import { ThemeContext } from "../auth";
+import { turnOffModal } from "../model";
 
-const FaqPage: React.FC = () => {
-  const history = useHistory(); /* 
-  const { mode, setMode } = useContext(ThemeContext); */
+const FaqPage: React.FC<turnOffModal> = ({ turnOffModal }) => {
+  const history = useHistory();
 
   return (
-    <IonPage>
-      <IonHeader translucent>
-        <IonToolbar>
-          <IonTitle>
-            {" "}
-            <div className="ion-text-center">FAQ</div>{" "}
-            {/* <IonToggle name="darkMode" onIonChange={toggleDarkModeHandler} /> */}
-          </IonTitle>
-        </IonToolbar>
-      </IonHeader>
+    <>
+      
       <IonContent color="light" fullscreen>
         <IonSlides>
           <IonSlide>
@@ -47,7 +38,7 @@ const FaqPage: React.FC = () => {
               <br /> <br />
               <IonCardHeader>
                 <div className="ion-text-center centerImg">
-                  <img src="/assets/media/faq.svg" />
+                  <img height="150 px" src="/assets/media/faq.svg" />
                 </div>{" "}
                 <br />
                 <IonCardSubtitle className="centerText">
@@ -68,8 +59,8 @@ const FaqPage: React.FC = () => {
             <IonCard className="IonCardFaq">
               <IonCardHeader>
                 <div className="ion-text-center centerImg">
-                  <img src="/assets/media/personalData.svg" height="50 px" />
-                </div>{" "}
+                  <img height="150 px" src="/assets/media/personalData.svg" />
+                </div>
                 <IonCardSubtitle className="centerText">
                   What about
                 </IonCardSubtitle>
@@ -93,7 +84,7 @@ const FaqPage: React.FC = () => {
               <br />
               <IonCardHeader>
                 <div className="ion-text-center centerImg">
-                  <img src="/assets/media/contactUs.svg" height="100 px" />
+                  <img height="150 px" src="/assets/media/contactUs.svg" />
                 </div>{" "}
                 <IonCardSubtitle className="centerText">
                   Contact Us
@@ -116,7 +107,7 @@ const FaqPage: React.FC = () => {
             <IonCard className="IonCardFaq">
               <IonCardHeader>
                 <div className="ion-text-center centerImg">
-                  <img src="/assets/media/react.svg" height="100 px" />
+                  <img height="150 px" src="/assets/media/react.svg" />
                 </div>
                 <IonCardSubtitle className="centerText">
                   Developed with
@@ -141,7 +132,7 @@ const FaqPage: React.FC = () => {
             <IonCard className="IonCardFaq">
               <IonCardHeader>
                 <div className="ion-text-center centerImg">
-                  <img src="/assets/media/openSource.svg" height="100 px" />
+                  <img height="150 px" src="/assets/media/openSource.svg" />
                 </div>{" "}
                 <IonCardSubtitle className="centerText">
                   Source Code?
@@ -161,11 +152,11 @@ const FaqPage: React.FC = () => {
             </IonCard>
           </IonSlide>
         </IonSlides>
-        <IonButton fill="clear" expand="full" onClick={history.goBack}>
-          GO BACK
+        <IonButton fill="clear" expand="full" onClick={turnOffModal}>
+          CLOSE
         </IonButton>
       </IonContent>
-    </IonPage>
+    </>
   );
 };
 
