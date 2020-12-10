@@ -26,8 +26,8 @@ import { useHistory } from "react-router";
 import { ThemeContext } from "../auth";
 
 const FaqPage: React.FC = () => {
-  const history = useHistory();
-  const { mode, setMode } = useContext(ThemeContext);
+  const history = useHistory(); /* 
+  const { mode, setMode } = useContext(ThemeContext); */
 
   return (
     <IonPage>

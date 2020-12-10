@@ -18,9 +18,9 @@ import { auth } from "../firebase";
 import { ThemeContext } from "../auth";
 
 const SettingPage: React.FC = () => {
-  const { mode, setMode } = useContext(ThemeContext);
+  /*   const { mode, setMode } = useContext(ThemeContext);
   console.log("Mode: ", mode);
-
+ */
   const toggleDarkModeHandler = () => {
     document.body.classList.toggle("dark");
   };

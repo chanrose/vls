@@ -43,8 +43,10 @@ const AdminSettingPage: React.FC = () => {
           </div>
           <br />
           <IonList>
+         
+
             <IonItem>
-              <IonRouterLink href="/public/app/faq">
+              <IonRouterLink href="/admin/faq/">
                 FAQ and Service Information
               </IonRouterLink>
             </IonItem>
@@ -55,7 +57,7 @@ const AdminSettingPage: React.FC = () => {
               </IonRouterLink>
             </IonItem>
             <IonItem>
-              <IonRouterLink href="/public/app/credits">Credits</IonRouterLink>
+              <IonRouterLink href="/admin/credits/">Credits</IonRouterLink>
             </IonItem>
             <IonItem>
               <IonLabel> Switch Theme</IonLabel>

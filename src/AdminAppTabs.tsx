@@ -24,6 +24,8 @@ import AdminNotificationPage from "./pages/admin/AdminNotificationPage";
 import { auth, firestore } from "./firebase";
 import { toEntry, userProfile } from "./model";
 import AdminAccountManagementPage from "./pages/admin/AdminAccountManagementPage";
+import CreditsPage from "./pages/CreditsPage";
+import FaqPage from "./pages/FaqPage";
 
 const AdminAppTabs: React.FC = () => {
   const { loggedIn } = useAuth();
@@ -62,6 +64,9 @@ const AdminAppTabs: React.FC = () => {
             <Route exact path="/admin/addnew/" component={AdminAddPage} />
             <Route exact path="/admin/viewlist/" component={AdminViewPage} />
             <Route exact path="/admin/settings/" component={AdminSettingPage} />
+
+            <Route path="/admin/credits/" component={CreditsPage} />
+            <Route path="/admin/faq/" component={FaqPage} />
             <Route
               exact
               path="/admin/detail/"
