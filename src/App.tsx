@@ -1,12 +1,6 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import {
-  IonApp,
-  IonImg,
-  IonLoading,
-  IonProgressBar,
-  IonText,
-} from "@ionic/react";
+import { IonApp, IonProgressBar } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import GettingStartedPage from "./pages/GettingStartedPage";
 import GettingStartedS2Page from "./pages/GettingStartedS2Page";

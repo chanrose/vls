@@ -16,8 +16,7 @@ import {
   IonSelectOption,
 } from "@ionic/react";
 import "./styles/GettingStartedPage.css";
-import { useAuth } from "../auth";
-import { auth, firestore } from "../firebase";
+import { firestore } from "../firebase";
 import { Redirect, useHistory } from "react-router";
 import { orgList, toEntry } from "../model";
 import { Plugins } from "@capacitor/core";
@@ -28,8 +27,6 @@ const GettingStartedS2Page: React.FC = () => {
   const [name, setName] = useState("");
   const [organization, setOrg] = useState("");
   const [logIn, setLog] = useState(false);
-
-  const { userId } = useAuth();
   const [orgEntries, setOrgEntries] = useState<orgList[]>([]);
 
   const getUserDetail = async () => {
@@ -51,7 +48,7 @@ const GettingStartedS2Page: React.FC = () => {
 
   useEffect(() => {
     publicOrg();
-  }, [userId]);
+  }, [orgEntries]);
 
   const handleLogin = async () => {
     await Storage.set({
@@ -103,7 +100,7 @@ const GettingStartedS2Page: React.FC = () => {
                 >
                   {" "}
                   {orgEntries.map((entry) => (
-                    <IonSelectOption value={entry.id}>
+                    <IonSelectOption key={entry.id} value={entry.id}>
                       {entry.name}
                     </IonSelectOption>
                   ))}

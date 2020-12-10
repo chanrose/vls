@@ -17,7 +17,6 @@ import {
   IonRow,
   IonSelect,
   IonSelectOption,
-  IonText,
   IonTextarea,
   IonTitle,
   IonToolbar,
@@ -66,25 +65,25 @@ const EntriesPage: React.FC = () => {
 
   /* Updating Existing entry*/
   const handleUpdate = async () => {
-    if (sticker != undefined) await entryRef.update({ sticker });
-    if (vehicleOwner != undefined) await entryRef.update({ vehicleOwner });
-    if (ownerRole != undefined) await entryRef.update({ ownerRole });
-    if (idNo != undefined) await entryRef.update({ idNo });
-    if (ownerEmail != undefined) await entryRef.update({ ownerEmail });
-    if (ownerTele != undefined) await entryRef.update({ ownerTele });
-    if (drivingExpire != undefined) await entryRef.update({ drivingExpire });
-    if (vehicleType != undefined) await entryRef.update({ vehicleType });
-    if (vehiclePlate != undefined) await entryRef.update({ vehiclePlate });
-    if (province != undefined) await entryRef.update({ province });
-    if (vehicleBrand != undefined) await entryRef.update({ vehicleBrand });
-    if (vehicleModel != undefined) await entryRef.update({ vehicleModel });
-    if (vehicleColour != undefined) await entryRef.update({ vehicleColour });
-    if (taxExpire != undefined) await entryRef.update({ taxExpire });
-    if (insuranceExpire != undefined)
+    if (sticker !== undefined) await entryRef.update({ sticker });
+    if (vehicleOwner !== undefined) await entryRef.update({ vehicleOwner });
+    if (ownerRole !== undefined) await entryRef.update({ ownerRole });
+    if (idNo !== undefined) await entryRef.update({ idNo });
+    if (ownerEmail !== undefined) await entryRef.update({ ownerEmail });
+    if (ownerTele !== undefined) await entryRef.update({ ownerTele });
+    if (drivingExpire !== undefined) await entryRef.update({ drivingExpire });
+    if (vehicleType !== undefined) await entryRef.update({ vehicleType });
+    if (vehiclePlate !== undefined) await entryRef.update({ vehiclePlate });
+    if (province !== undefined) await entryRef.update({ province });
+    if (vehicleBrand !== undefined) await entryRef.update({ vehicleBrand });
+    if (vehicleModel !== undefined) await entryRef.update({ vehicleModel });
+    if (vehicleColour !== undefined) await entryRef.update({ vehicleColour });
+    if (taxExpire !== undefined) await entryRef.update({ taxExpire });
+    if (insuranceExpire !== undefined)
       await entryRef.update({ insuranceExpire });
-    if (hasGreenBook != undefined) await entryRef.update({ hasGreenBook });
-    if (greenBookOwner != undefined) await entryRef.update({ greenBookOwner });
-    if (messageRemark != undefined) await entryRef.update({ messageRemark });
+    if (hasGreenBook !== undefined) await entryRef.update({ hasGreenBook });
+    if (greenBookOwner !== undefined) await entryRef.update({ greenBookOwner });
+    if (messageRemark !== undefined) await entryRef.update({ messageRemark });
     history.goBack();
   };
   const [sticker, setSticker] = useState(entry?.sticker);

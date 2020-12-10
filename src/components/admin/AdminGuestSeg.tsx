@@ -9,43 +9,39 @@ import {
   IonHeader,
   IonInput,
   IonModal,
-  IonText,
   IonTextarea,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import React, { useEffect, useState } from "react";
-import { OrgContext, useAuth } from "../../auth";
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../auth";
 import { firestore } from "../../firebase";
-import { orgList, PostEntry, toEntry } from "../../model";
-import AnnouncementCard from "../AnnouncementCard";
+import { PostEntry, toEntry } from "../../model";
 import RequestCard from "../RequestCard";
 
 interface props {
   organId: string;
 }
 
-const AdminGuestSeg: React.FC<props> = ({ organId }) => {
-  const { userId } = useAuth();
+const AdminGuestSeg: React.FC = () => {
+  const { organization } = useContext(UserContext);
   const [postList, setPostList] = useState<PostEntry[]>([]);
   const [subtitle, setSubtitle] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [orgDetail, setOrg] = useState<orgList>();
   const [showModal, setModal] = useState(false);
-
+  const postEntriesRef = firestore
+    .collection("public")
+    .doc(organization)
+    .collection("posts");
   useEffect(() => {
-    const postEntriesRef = firestore
-      .collection("public")
-      .doc(organId)
-      .collection("posts");
     return postEntriesRef.onSnapshot(({ docs }) =>
       setPostList(docs.map(toEntry))
     );
-  }, [organId]);
+  }, [organization]);
 
   const handleAdd = () => {
-    firestore.collection("public").doc(organId).collection("posts").add({
+    postEntriesRef.add({
       subtitle,
       title,
       content,
@@ -54,19 +50,18 @@ const AdminGuestSeg: React.FC<props> = ({ organId }) => {
   };
   return (
     <div>
-      <OrgContext.Provider value={{ organization: `${organId}` }}>
-        {postList.map((entry) => (
-          <RequestCard
-            key={entry.id}
-            title={entry.title}
-            subtitle={entry.subtitle}
-            content={entry.content}
-            isAdmin={true}
-            pId={entry.id}
-            collection={"posts"}
-          />
-        ))}
-      </OrgContext.Provider>
+      {postList.map((entry) => (
+        <RequestCard
+          key={entry.id}
+          title={entry.title}
+          subtitle={entry.subtitle}
+          content={entry.content}
+          isAdmin={true}
+          pId={entry.id}
+          collection={"posts"}
+        />
+      ))}
+
       <IonButton expand="block" onClick={() => setModal(true)}>
         Add New Post
       </IonButton>

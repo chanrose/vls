@@ -23,9 +23,12 @@ import { orgList, toEntry } from "../../model";
 const AdminHomePage: React.FC = () => {
   const { userId } = useAuth();
   const [selectedHome, setHome] = useState(true);
-  const [selectedGuest, setGuest] = useState(false);
-  const [selectedTools, setTools] = useState(false);
+  const [selectedGuest, setGuest] = useState(
+    false
+  ); /* 
+  const [selectedTools, setTools] = useState(false); */
   const [orgDetail, setOrg] = useState<orgList>();
+  const [selectedSeg, setSeg] = useState("home");
 
   useEffect(() => {
     firestore
@@ -42,16 +45,21 @@ const AdminHomePage: React.FC = () => {
   const returnSegment = (selectedSegment: string) => {
     if (selectedSegment === "guest") {
       setGuest(true);
-      setHome(false);
-      setTools(false);
-    } else if (selectedSegment === "tools") {
+      setHome(false); /* 
+      setTools(false); */
+      setSeg("guest");
+    } /* else if (selectedSegment === "tools") {
       setGuest(false);
       setHome(false);
       setTools(true);
-    } else if (selectedSegment === "home") {
+      setSeg("tool");
+    } */ else if (
+      selectedSegment === "home"
+    ) {
       setGuest(false);
-      setHome(true);
-      setTools(false);
+      setHome(true); /* 
+      setTools(false); */
+      setSeg("home");
     }
   };
 
@@ -59,7 +67,10 @@ const AdminHomePage: React.FC = () => {
     <IonPage>
       <IonHeader translucent>
         <IonToolbar>
-          <IonSegment onIonChange={(e) => returnSegment(e.detail.value!)}>
+          <IonSegment
+            value={selectedSeg}
+            onIonChange={(e) => returnSegment(e.detail.value!)}
+          >
             <IonSegmentButton value="home">
               <IonLabel>Home</IonLabel>
             </IonSegmentButton>
@@ -73,7 +84,7 @@ const AdminHomePage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
-        {selectedGuest && <AdminGuestSeg organId={`${orgDetail?.organId!}`} />}
+        {selectedGuest && <AdminGuestSeg />}
         {selectedHome && <AdminHomeSeg />}
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton>

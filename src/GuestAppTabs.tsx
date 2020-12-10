@@ -9,21 +9,18 @@ import {
 import {
   addCircleOutline,
   home as homeIcon,
-  listOutline,
   settings as settingsIcon,
 } from "ionicons/icons";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import React, { useState } from "react";
-import { useAuth, UserContext } from "./auth";
+import { UserContext } from "./auth";
 import GuestHomePage from "./pages/guest/GuestHomePage";
 import GuestRequestPage from "./pages/guest/GuestRequestPage";
 import GuestSettingPage from "./pages/guest/GuestSettingPage";
-import { guestDetail } from "./model";
 import { Storage } from "@capacitor/core";
 import PageNotFound from "./pages/PageNotFound";
 
 const GuestAppTabs: React.FC = () => {
-  const { userId } = useAuth();
   const [orgId, setOrg] = useState("Default");
   const [guestName, setName] = useState("Default");
 

@@ -42,7 +42,7 @@ const AdminNotificationPage: React.FC = () => {
             <RequestCard
               key={entry.id}
               title={entry.requestType}
-              subtitle={entry.name}
+              subtitle={`${entry.name}, ${entry.guestEmail}, ${entry.guestTele}`}
               content={entry.messageRemark}
               isAdmin={true}
               pId={entry.id}

@@ -45,7 +45,11 @@ const LoginPage: React.FC = () => {
       <IonContent color="light" fullscreen>
         <IonCard className="ionCardstyle">
           <IonCardHeader>
-            <img className="imageSize" src={"/assets/icon/app2Logo.png"} />
+            <img
+              className="imageSize"
+              src={"/assets/icon/app2Logo.png"}
+              alt="App logo"
+            />
             <IonCardTitle className="centerText">Login</IonCardTitle>
           </IonCardHeader>
 
