@@ -11,7 +11,7 @@ import {
   home as homeIcon,
   settings as settingsIcon,
 } from "ionicons/icons";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import React, { useState } from "react";
 import { UserContext } from "./auth";
 import GuestHomePage from "./pages/guest/GuestHomePage";
@@ -64,10 +64,6 @@ const GuestAppTabs: React.FC = () => {
           <IonIcon icon={addCircleOutline} />
           <IonLabel>Request</IonLabel>
         </IonTabButton>
-        {/*         <IonTabButton tab="listItem" href="/guest/viewlist/">
-          <IonIcon icon={listOutline} />
-          <IonLabel>View List</IonLabel>
-        </IonTabButton> */}
         <IonTabButton tab="settings" href="/guest/settings">
           <IonIcon icon={settingsIcon} />
           <IonLabel>Settings</IonLabel>

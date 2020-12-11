@@ -7,6 +7,7 @@ import {
   IonCardTitle,
   IonCol,
   IonIcon,
+  IonImg,
   IonInput,
   IonRow,
   IonText,
@@ -21,6 +22,7 @@ interface props {
   title: string;
   subtitle: string;
   content: string;
+  picture?: string;
   isAdmin?: boolean;
   pId?: string;
   collection?: string;
@@ -29,6 +31,7 @@ const RequestCard: React.FC<props> = ({
   title,
   subtitle,
   content,
+  picture,
   isAdmin,
   pId,
   collection,
@@ -79,6 +82,7 @@ const RequestCard: React.FC<props> = ({
   };
   return (
     <IonCard>
+      <img src={picture} />
       <IonCardHeader>
         <IonCardSubtitle>
           {!isUpdating && <IonText>{subtitle}</IonText>}

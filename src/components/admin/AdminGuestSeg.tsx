@@ -1,3 +1,4 @@
+import { Camera, CameraResultType, CameraSource } from "@capacitor/core";
 import {
   IonButton,
   IonCard,
@@ -8,20 +9,30 @@ import {
   IonContent,
   IonHeader,
   IonInput,
+  IonLabel,
   IonModal,
   IonTextarea,
   IonTitle,
   IonToolbar,
+  isPlatform,
 } from "@ionic/react";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { UserContext } from "../../auth";
-import { firestore } from "../../firebase";
+import { useAuth, UserContext } from "../../auth";
+import { firestore, storage } from "../../firebase";
 import { PostEntry, toEntry } from "../../model";
 import RequestCard from "../RequestCard";
 
-
+async function savePicture(blobUrl: any, userId: any) {
+  const pictureRef = storage.ref(`/users/${userId}/pictures/${Date.now()}`);
+  const response = await fetch(blobUrl);
+  const blob = await response.blob();
+  const snapshot = await pictureRef.put(blob);
+  const url = await snapshot.ref.getDownloadURL();
+  return url;
+}
 
 const AdminGuestSeg: React.FC = () => {
+  const { userId } = useAuth();
   const { organization } = useContext(UserContext);
   const [postList, setPostList] = useState<PostEntry[]>([]);
   const [subtitle, setSubtitle] = useState("");
@@ -29,8 +40,8 @@ const AdminGuestSeg: React.FC = () => {
   const [content, setContent] = useState("");
   const [showModal, setModal] = useState(false);
   const [showNoData, setShow] = useState(false);
-  const [pictureUrl, setPictureUrl] = useState("/assets/placeholder.png");
-  const fileInputRef = useRef<HTMLInputElement>();
+  const [pictureUrl, setPictureUrl] = useState("/assets/media/photo.svg");
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [date, setSelectedDate] = useState<string>(`${new Date()}`);
 
   const postEntriesRef = firestore
@@ -62,17 +73,17 @@ const AdminGuestSeg: React.FC = () => {
     },
     [pictureUrl]
   );
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files.length > 0) {
-      const file = event.target.files.item(0);
-      const pictureUrl1 = URL.createObjectURL(file);
-      console.log("Created URL:", pictureUrl1);
-      setPictureUrl(pictureUrl1);
+    if (event.target.files!.length > 0) {
+      const file = event.target.files!.item(0);
+      const pictureUrl = URL.createObjectURL(file);
+      console.log("file:", pictureUrl);
+      setPictureUrl(pictureUrl);
     }
   };
 
   const handlePictureClick = async () => {
-    // fileInputRef.current.click();
     if (isPlatform("capacitor")) {
       try {
         const photo = await Camera.getPhoto({
@@ -80,33 +91,35 @@ const AdminGuestSeg: React.FC = () => {
           source: CameraSource.Prompt,
           width: 600,
         });
-        setPictureUrl(photo.webPath);
+        setPictureUrl(photo.webPath!);
       } catch (error) {
         console.log("Camera error:", error);
       }
     } else {
-      fileInputRef.current.click();
+      console.log("Not using capacitor");
+      fileInputRef.current!.click();
     }
   };
 
-  const handleAdd = () => {
+  const handleAdd = async () => {
     const entryData = {
       subtitle,
       title,
       content,
       date,
-      pictureUrl
+      pictureUrl,
+    };
+    if (!pictureUrl.startsWith("/assets")) {
+      entryData.pictureUrl = await savePicture(pictureUrl, userId);
     }
-/*     postEntriesRef.add({
+    /*  postEntriesRef.add({
       subtitle,
       title,
       content,
       date,
       pictureUrl
     }); */
-    if (!pictureUrl.startsWith("/assets")) {
-      entryData.pictureUrl = await savePicture(pictureUrl, userId);
-    }
+
     const entryRef = await postEntriesRef.add(entryData);
     setModal(false);
   };
@@ -124,6 +137,7 @@ const AdminGuestSeg: React.FC = () => {
           key={entry.id}
           title={entry.title}
           subtitle={entry.subtitle}
+          picture={entry.pictureUrl}
           content={entry.content}
           isAdmin={true}
           pId={entry.id}
@@ -146,20 +160,6 @@ const AdminGuestSeg: React.FC = () => {
         </IonHeader>
         <IonContent>
           <IonCard>
-          <IonLabel position="stacked">Picture</IonLabel> <br />
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-              ref={fileInputRef}
-              hidden
-            />
-            <img
-              onClick={handlePictureClick}
-              src={pictureUrl}
-              alt="placeholder"
-              style={{ cursor: "pointer" }}
-            />
             <IonCardHeader>
               <IonCardSubtitle>
                 <IonInput
@@ -184,7 +184,21 @@ const AdminGuestSeg: React.FC = () => {
                 onIonChange={(e) => setContent(e.detail.value!)}
                 placeholder="Fill the content"
               />
-
+              <br />
+              <IonLabel>Upload Picture</IonLabel> <br />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                ref={fileInputRef}
+                hidden
+              />
+              <img
+                src={pictureUrl}
+                alt="placeholder"
+                height="100 px"
+                onClick={handlePictureClick}
+              />
               <div className="ion-text-end">
                 <IonButton onClick={handleAdd} type="submit">
                   Post
