@@ -2,7 +2,6 @@
     float: right;
 }
 
-
 .imageSize {
     display: block;
     margin-top: 5vh;
@@ -13,4 +12,8 @@
 
 .announcementCard {
     margin-top: 0 auto;
+}
+
+.centerScreen {
+    margin-top: 10vh !important;
 }

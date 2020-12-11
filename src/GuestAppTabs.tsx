@@ -9,6 +9,7 @@ import {
 import {
   addCircleOutline,
   home as homeIcon,
+  listCircle,
   settings as settingsIcon,
 } from "ionicons/icons";
 import { Route, Switch } from "react-router-dom";
@@ -18,7 +19,7 @@ import GuestHomePage from "./pages/guest/GuestHomePage";
 import GuestRequestPage from "./pages/guest/GuestRequestPage";
 import GuestSettingPage from "./pages/guest/GuestSettingPage";
 import { Plugins } from "@capacitor/core";
-import PageNotFound from "./pages/PageNotFound";
+import GuestViewPage from "./pages/guest/GuestViewPage";
 
 const GuestAppTabs: React.FC = () => {
   const { Storage } = Plugins;
@@ -38,38 +39,47 @@ const GuestAppTabs: React.FC = () => {
   };
   getUserDetail();
   return (
-    <IonTabs>
-      <IonRouterOutlet>
-        <UserContext.Provider
-          value={{ organization: `${orgId}`, name: `${guestName}` }}
-        >
+    <UserContext.Provider
+      value={{ organization: `${orgId}`, name: `${guestName}` }}
+    >
+      <IonTabs>
+        <IonRouterOutlet>
           <Switch>
+            <Route exact path="/guest/viewPosts/" component={GuestViewPage} />
+
             <Route exact path="/guest/request/" component={GuestRequestPage} />
             <Route exact path="/guest/settings/" component={GuestSettingPage} />
             <Route exact path="/guest/home/">
               <GuestHomePage />
             </Route>
+            {/*  <Route exact path="/guest/viewPosts/">
+              <GuestViewPage organization={orgId} />
+            </Route> */}
             <Route>
-              <PageNotFound />
+              <GuestHomePage />
             </Route>
           </Switch>
-        </UserContext.Provider>
-      </IonRouterOutlet>
-      <IonTabBar slot="bottom">
-        <IonTabButton tab="home" href={`/guest/home/`}>
-          <IonIcon icon={homeIcon} />
-          <IonLabel>Home</IonLabel>
-        </IonTabButton>
-        <IonTabButton tab="addnew" href="/guest/request/">
-          <IonIcon icon={addCircleOutline} />
-          <IonLabel>Request</IonLabel>
-        </IonTabButton>
-        <IonTabButton tab="settings" href="/guest/settings">
-          <IonIcon icon={settingsIcon} />
-          <IonLabel>Settings</IonLabel>
-        </IonTabButton>
-      </IonTabBar>
-    </IonTabs>
+        </IonRouterOutlet>
+        <IonTabBar slot="bottom">
+          <IonTabButton tab="home" href={`/guest/home/`}>
+            <IonIcon icon={homeIcon} />
+            <IonLabel>Home</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="viewPosts" href={`/guest/viewPosts/`}>
+            <IonIcon icon={listCircle} />
+            <IonLabel>View Posts</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="addnew" href="/guest/request/">
+            <IonIcon icon={addCircleOutline} />
+            <IonLabel>Request</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="settings" href="/guest/settings">
+            <IonIcon icon={settingsIcon} />
+            <IonLabel>Settings</IonLabel>
+          </IonTabButton>
+        </IonTabBar>
+      </IonTabs>
+    </UserContext.Provider>
   );
 };
 

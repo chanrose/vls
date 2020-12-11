@@ -88,7 +88,6 @@ const AdminAddVehSeg: React.FC = () => {
         <IonLabel>Owner: </IonLabel>
         <div className="ion-text-end">
           <IonInput
-            slot="end"
             type="text"
             value={vehicleOwner}
             onIonChange={(e) => setOwner(e.detail.value!)}
@@ -114,7 +113,6 @@ const AdminAddVehSeg: React.FC = () => {
         <div className="ion-text-end">
           <IonInput
             type="text"
-            slot="end"
             value={idNo}
             onIonChange={(e) => setIdNo(e.detail.value!)}
           />{" "}
@@ -126,7 +124,6 @@ const AdminAddVehSeg: React.FC = () => {
         <div className="ion-text-end">
           <IonInput
             type="text"
-            slot="end"
             value={ownerEmail}
             onIonChange={(e) => setEmail(e.detail.value!)}
           />
@@ -137,7 +134,6 @@ const AdminAddVehSeg: React.FC = () => {
         <div className="ion-text-end">
           <IonInput
             type="text"
-            slot="end"
             value={ownerTele}
             onIonChange={(e) => setTele(e.detail.value!)}
           />
@@ -148,7 +144,6 @@ const AdminAddVehSeg: React.FC = () => {
         <IonDatetime
           max="2030-12-20"
           placeholder="Select Date"
-          slot="end"
           value={drivingExpire}
           onIonChange={(e) => setDrivingExpire(e.detail.value!)}
         />
@@ -170,7 +165,6 @@ const AdminAddVehSeg: React.FC = () => {
         <div className="ion-text-end">
           <IonInput
             type="text"
-            slot="end"
             value={vehiclePlate}
             onIonChange={(e) => setPlate(e.detail.value!)}
           />{" "}
@@ -183,7 +177,6 @@ const AdminAddVehSeg: React.FC = () => {
           <IonInput
             type="text"
             value={province}
-            slot="end"
             onIonChange={(e) => setProvince(e.detail.value!)}
           />{" "}
         </div>
@@ -195,7 +188,6 @@ const AdminAddVehSeg: React.FC = () => {
           <IonInput
             type="text"
             value={vehicleBrand}
-            slot="end"
             onIonChange={(e) => setBrand(e.detail.value!)}
           />
         </div>
@@ -207,7 +199,6 @@ const AdminAddVehSeg: React.FC = () => {
           <IonInput
             type="text"
             value={vehicleModel}
-            slot="end"
             onIonChange={(e) => setModel(e.detail.value!)}
           />
         </div>
@@ -218,7 +209,6 @@ const AdminAddVehSeg: React.FC = () => {
         <div className="ion-text-end">
           <IonInput
             type="text"
-            slot="end"
             value={vehicleColour}
             onIonChange={(e) => setColour(e.detail.value!)}
           />
@@ -230,7 +220,6 @@ const AdminAddVehSeg: React.FC = () => {
         <IonDatetime
           max="2030-12-20"
           placeholder="Select Date"
-          slot="end"
           value={taxExpire}
           onIonChange={(e) => setTax(e.detail.value!)}
         />
@@ -240,7 +229,6 @@ const AdminAddVehSeg: React.FC = () => {
         <IonLabel>Insurance Expire: </IonLabel>
         <IonDatetime
           max="2030-12-20"
-          slot="end"
           value={insuranceExpire}
           onIonChange={(e) => setInsurance(e.detail.value!)}
         />
@@ -262,7 +250,6 @@ const AdminAddVehSeg: React.FC = () => {
         <IonLabel>Greenbook Owner: </IonLabel>
         <IonInput
           type="text"
-          slot="end"
           value={greenBookOwner}
           onIonChange={(e) => setGB(e.detail.value!)}
         />

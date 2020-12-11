@@ -6,13 +6,7 @@ import {
   IonCardHeader,
   IonCardSubtitle,
   IonCardTitle,
-  IonCol,
   IonContent,
-  IonGrid,
-  IonImg,
-  IonLabel,
-  IonPage,
-  IonRow,
   IonText,
 } from "@ionic/react";
 import "./styles/components.css";
@@ -27,34 +21,29 @@ const CreditsPage: React.FC<turnOffModal> = ({ turnOffModal }) => {
       <IonContent color="light" fullscreen>
         <IonCard className="ionCardstyle">
           <IonCardHeader>
-            {/* <IonImg className="imageSize" src={"/assets/icon/app2Logo.png"} /> */}
-            <div className="ion-text-center centerImg">
-              <img src="/assets/media/specialThanks.svg" height="200 px" />
+            <div className="ion-text-center">
+              <img height="150 px" src="/assets/media/faq.svg" />
             </div>
-            <IonCardTitle className="centerText">
-              Special Thanks to
-            </IonCardTitle>
-            <IonCardSubtitle className="centerText">
-              Updated on Dec 03
-            </IonCardSubtitle>
+            <IonCardSubtitle className="centerText">VLS v1.00</IonCardSubtitle>
+            <IonCardTitle className="centerText">Changelog</IonCardTitle>
           </IonCardHeader>
-
           <IonCardContent>
-            <br />
+            <div className="ion-text-center">Added Feature List:</div>
+
             <IonText>
-              <div className="ion-text-center">
-                - Undraw.co for the amazing illustration
-                <br />
-                - Asia-pacific International University
-                <br />
+              <div className="ion-text-start">
+                <li> Posting announcement at Guest's Post</li>
+                <li> Receives message from guest</li>
+                <li> Add vehicle entries </li>
+                <li> Switch vehicle's view </li>
+                <li> Search for vehicle</li>
+                <li> Switch theme mode </li>
               </div>
             </IonText>
-            <br />
-
-            <IonButton fill="clear" expand="full" onClick={turnOffModal}>
-              CLOSE
-            </IonButton>
           </IonCardContent>
+          <IonButton fill="clear" expand="full" onClick={turnOffModal}>
+            CLOSE
+          </IonButton>
         </IonCard>
       </IonContent>
     </>

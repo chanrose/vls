@@ -38,6 +38,12 @@ const GuestAnnouncementList: React.FC = () => {
     <div>
       {showNoData && (
         <div className="ion-text-center centerImg">
+          {showNoData && (
+            <div className="ion-text-center centerImg">
+              <img src="/assets/media/noData.svg" height="200 px" />
+              <p>You have no notification at a moment</p>
+            </div>
+          )}
           <p>Your organization doesn't send any post yet!</p>
         </div>
       )}

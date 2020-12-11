@@ -69,7 +69,7 @@ const GuestSettingPage: React.FC = () => {
 
             <IonItem>
               <IonText color="primary" onClick={() => setCreditModal(true)}>
-                Credits
+                Changelog
               </IonText>
             </IonItem>
             <IonItem>

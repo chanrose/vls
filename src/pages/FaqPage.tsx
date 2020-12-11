@@ -6,20 +6,10 @@ import {
   IonCardHeader,
   IonCardSubtitle,
   IonCardTitle,
-  IonCol,
   IonContent,
-  IonGrid,
-  IonHeader,
-  IonImg,
-  IonLabel,
-  IonPage,
-  IonRow,
   IonSlide,
   IonSlides,
   IonText,
-  IonTitle,
-  IonToggle,
-  IonToolbar,
 } from "@ionic/react";
 import "./styles/components.css";
 import { useHistory } from "react-router";
@@ -30,31 +20,38 @@ const FaqPage: React.FC<turnOffModal> = ({ turnOffModal }) => {
 
   return (
     <>
-      
       <IonContent color="light" fullscreen>
         <IonSlides>
           <IonSlide>
             <IonCard className="IonCardFaq">
-              <br /> <br />
               <IonCardHeader>
                 <div className="ion-text-center centerImg">
-                  <img height="150 px" src="/assets/media/faq.svg" />
-                </div>{" "}
-                <br />
-                <IonCardSubtitle className="centerText">
-                  Information
-                </IonCardSubtitle>
-                <IonCardTitle className="centerText">Learn More</IonCardTitle>
+                  <img
+                    alt="special thanks picture"
+                    src="/assets/media/specialThanks.svg"
+                    height="200 px"
+                  />
+                </div>
+                <IonCardTitle className="centerText">
+                  Special Thanks to
+                </IonCardTitle>
               </IonCardHeader>
+
               <IonCardContent>
+                <br />
                 <IonText>
                   <div className="ion-text-center">
-                    Swipe Left or Swipe Right
+                    - Undraw.co for the amazing illustration
+                    <br />
+                    - Asia-pacific International University
+                    <br />
                   </div>
                 </IonText>
+                <br />
               </IonCardContent>
             </IonCard>
           </IonSlide>
+
           <IonSlide>
             <IonCard className="IonCardFaq">
               <IonCardHeader>

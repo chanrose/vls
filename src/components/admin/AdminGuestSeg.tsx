@@ -39,7 +39,7 @@ const AdminGuestSeg: React.FC = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [showModal, setModal] = useState(false);
-  const [showNoData, setShow] = useState(false);
+  const [showNoData, setShow] = useState(true);
   const [pictureUrl, setPictureUrl] = useState("/assets/media/photo.svg");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [date, setSelectedDate] = useState<string>(`${new Date()}`);
@@ -88,7 +88,7 @@ const AdminGuestSeg: React.FC = () => {
       try {
         const photo = await Camera.getPhoto({
           resultType: CameraResultType.Uri,
-          source: CameraSource.Prompt,
+          source: CameraSource.Camera,
           width: 600,
         });
         setPictureUrl(photo.webPath!);
@@ -96,7 +96,6 @@ const AdminGuestSeg: React.FC = () => {
         console.log("Camera error:", error);
       }
     } else {
-      console.log("Not using capacitor");
       fileInputRef.current!.click();
     }
   };
@@ -131,7 +130,9 @@ const AdminGuestSeg: React.FC = () => {
           <p>You haven't added any posts yet</p>
         </div>
       )}
-
+      <IonButton expand="block" onClick={() => setModal(true)}>
+        Add New Post
+      </IonButton>
       {postList.map((entry) => (
         <RequestCard
           key={entry.id}
@@ -145,9 +146,6 @@ const AdminGuestSeg: React.FC = () => {
         />
       ))}
 
-      <IonButton expand="block" onClick={() => setModal(true)}>
-        Add New Post
-      </IonButton>
       <IonModal isOpen={showModal} onDidDismiss={() => setModal(false)!}>
         <IonHeader>
           <IonToolbar>
@@ -181,11 +179,12 @@ const AdminGuestSeg: React.FC = () => {
             <IonCardContent>
               <IonTextarea
                 value={content}
+                rows={4}
                 onIonChange={(e) => setContent(e.detail.value!)}
                 placeholder="Fill the content"
               />
               <br />
-              <IonLabel>Upload Picture</IonLabel> <br />
+              <IonLabel>Take or Upload Picture</IonLabel> <br />
               <input
                 type="file"
                 accept="image/*"

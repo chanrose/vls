@@ -23,10 +23,7 @@ import { orgList, toEntry } from "../../model";
 const AdminHomePage: React.FC = () => {
   const { userId } = useAuth();
   const [selectedHome, setHome] = useState(true);
-  const [selectedGuest, setGuest] = useState(
-    false
-  ); /* 
-  const [selectedTools, setTools] = useState(false); */
+  const [selectedGuest, setGuest] = useState(false);
   const [orgDetail, setOrg] = useState<orgList>();
   const [selectedSeg, setSeg] = useState("home");
 
@@ -45,20 +42,11 @@ const AdminHomePage: React.FC = () => {
   const returnSegment = (selectedSegment: string) => {
     if (selectedSegment === "guest") {
       setGuest(true);
-      setHome(false); /* 
-      setTools(false); */
-      setSeg("guest");
-    } /* else if (selectedSegment === "tools") {
-      setGuest(false);
       setHome(false);
-      setTools(true);
-      setSeg("tool");
-    } */ else if (
-      selectedSegment === "home"
-    ) {
+      setSeg("guest");
+    } else if (selectedSegment === "home") {
       setGuest(false);
-      setHome(true); /* 
-      setTools(false); */
+      setHome(true);
       setSeg("home");
     }
   };
@@ -77,36 +65,12 @@ const AdminHomePage: React.FC = () => {
             <IonSegmentButton value="guest">
               <IonLabel>Guest's Post</IonLabel>
             </IonSegmentButton>
-            {/* <IonSegmentButton value="tools">
-              <IonLabel>Admin tools</IonLabel>
-            </IonSegmentButton> */}
           </IonSegment>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
         {selectedGuest && <AdminGuestSeg />}
         {selectedHome && <AdminHomeSeg />}
-        <IonFab vertical="bottom" horizontal="end" slot="fixed">
-          <IonFabButton>
-            <IonIcon icon={add} />
-          </IonFabButton>
-          <IonFabList side="start">
-            <IonFabButton routerLink={"/admin/addnew/Motorbike"}>
-              <IonIcon icon={bicycle} />
-            </IonFabButton>
-            <IonFabButton routerLink={"/admin/addnew/Car"}>
-              <IonIcon icon={car} />
-            </IonFabButton>
-          </IonFabList>
-          <IonFabList side="top">
-            <IonFabButton>
-              <IonIcon icon={ticket} />
-            </IonFabButton>
-            <IonFabButton>
-              <IonIcon icon={easel} />
-            </IonFabButton>
-          </IonFabList>
-        </IonFab>
       </IonContent>
     </IonPage>
   );

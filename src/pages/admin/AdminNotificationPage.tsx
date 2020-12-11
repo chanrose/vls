@@ -16,7 +16,7 @@ import RequestCard from "../../components/RequestCard";
 const AdminNotificationPage: React.FC = () => {
   const { organization } = useContext(UserContext);
   const [reqList, setReqList] = useState<reqList[]>([]);
-  const [showNoData, setShow] = useState(false);
+  const [showNoData, setShow] = useState(true);
   useEffect(() => {
     const postEntriesRef = firestore
       .collection("public")
@@ -36,7 +36,6 @@ const AdminNotificationPage: React.FC = () => {
     return postEntriesRef.onSnapshot((snapshot) => {
       if (snapshot.size) {
         setShow(false);
-      
       } else {
         setShow(true);
       }

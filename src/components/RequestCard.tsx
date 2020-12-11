@@ -82,7 +82,7 @@ const RequestCard: React.FC<props> = ({
   };
   return (
     <IonCard>
-      <img src={picture} />
+      {picture && <img src={picture} />}
       <IonCardHeader>
         <IonCardSubtitle>
           {!isUpdating && <IonText>{subtitle}</IonText>}

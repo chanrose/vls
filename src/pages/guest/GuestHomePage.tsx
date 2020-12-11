@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
+  IonButton,
   IonContent,
   IonHeader,
   IonImg,
@@ -11,35 +12,14 @@ import { UserContext } from "../../auth";
 import { PostEntry, toEntry } from "../../model";
 import { firestore } from "../../firebase";
 import RequestCard from "../../components/RequestCard";
+import { useHistory } from "react-router";
 
 const GuestHomePage: React.FC = () => {
+  const { name, organization } = useContext(UserContext);
+
   const [postList, setPostList] = useState<PostEntry[]>([]);
-  const { organization } = useContext(UserContext);
   const [showNoData, setShow] = useState(false);
 
-  useEffect(() => {
-    const postEntriesRef = firestore
-      .collection("public")
-      .doc(organization)
-      .collection("posts");
-    return postEntriesRef.onSnapshot(({ docs }) =>
-      setPostList(docs.map(toEntry))
-    );
-  }, [organization]);
-
-  useEffect(() => {
-    const postEntriesRef = firestore
-      .collection("public")
-      .doc(organization)
-      .collection("posts");
-    return postEntriesRef.onSnapshot((snapshot) => {
-      if (snapshot.size) {
-        setShow(false);
-      } else {
-        setShow(true);
-      }
-    });
-  }, [organization]);
   return (
     <IonPage>
       <IonHeader translucent>
@@ -52,29 +32,18 @@ const GuestHomePage: React.FC = () => {
 
       <IonContent className="ion-padding" fullscreen>
         <div className="ion-text-center">
-          {" "}
-          <div>
-            <IonImg className="imageSize" src="/assets/icon/app2Logo.png" />
-            <br />
-          </div>
+          <img src="assets/icon/app2Logo.png" height="200 px" />
+          <br />
+          <br />
+          <br />
+          Hello {name} Your organization: {organization} might have posted
+          something, would you like to check that page?
         </div>
-
-        <div>
-          {showNoData && (
-            <div className="ion-text-center centerImg">
-              <p>Your organization doesn't send any post yet!</p>
-            </div>
-          )}
-
-          {postList.map((entry) => (
-            <RequestCard
-              key={entry.id}
-              title={entry.title}
-              subtitle={entry.subtitle}
-              content={entry.content}
-              collection={"posts"}
-            />
-          ))}
+        <div className="ion-text-end">
+          {" "}
+          <IonButton routerLink="/guest/viewPosts/" fill="clear">
+            View List
+          </IonButton>
         </div>
       </IonContent>
     </IonPage>

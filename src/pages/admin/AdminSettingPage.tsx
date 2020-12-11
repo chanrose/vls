@@ -74,7 +74,7 @@ const AdminSettingPage: React.FC = () => {
             </IonItem>
             <IonItem>
               <IonText color="primary" onClick={() => setCreditModal(true)}>
-                Credits
+                Changelog
               </IonText>
             </IonItem>
             <IonItem>

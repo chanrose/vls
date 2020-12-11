@@ -144,8 +144,6 @@ const AdminViewPage: React.FC = () => {
           </IonFabList>
         </IonFab>
 
- 
-
         <IonActionSheet
           isOpen={btnFilter}
           onDidDismiss={() => setFilter(false)}

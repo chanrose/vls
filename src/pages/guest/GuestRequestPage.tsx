@@ -21,7 +21,7 @@ import RequestCard from "../../components/RequestCard";
 
 const GuestRequestPage: React.FC = () => {
   const [reqList, setReqList] = useState<reqList[]>([]);
-  const [showNoData, setShow] = useState(false);
+  const [showNoData, setShow] = useState(true);
   const [idNo, setIdNo] = useState("");
 
   const [guestEmail, setEmail] = useState("");

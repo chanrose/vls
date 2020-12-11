@@ -6,7 +6,6 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonContent,
-  IonImg,
   IonInput,
   IonItem,
   IonLabel,
@@ -33,7 +32,7 @@ const GettingStartedS2Page: React.FC = () => {
     try {
       const ret = await Storage.get({ key: "userDetail" });
       const getObj = JSON.parse(ret.value!);
-      if (getObj.organization == "" || getObj.name == "") {
+      if (getObj.organization === "" || getObj.name === "") {
         setLog(false);
       } else {
         setLog(true);
@@ -53,7 +52,7 @@ const GettingStartedS2Page: React.FC = () => {
   }, [orgEntries]);
 
   if (logIn) {
-    return <Redirect to={`/guest/home/`} />;
+    return <Redirect to={`/guest`} />;
   }
 
   const handleLogin = async () => {
@@ -73,7 +72,11 @@ const GettingStartedS2Page: React.FC = () => {
         <IonCard className="ionCardstyle">
           <IonCardHeader>
             <div className="ion-text-center centerImg">
-              <img src="/assets/media/login.svg" height="200 px" />
+              <img
+                alt="Login illustrator"
+                src="/assets/media/login.svg"
+                height="200 px"
+              />
             </div>
 
             <IonCardTitle className="centerText">Enter as Guest</IonCardTitle>
@@ -82,25 +85,23 @@ const GettingStartedS2Page: React.FC = () => {
           <IonCardContent>
             <IonList>
               <IonItem>
-                <IonLabel>Name</IonLabel>
-                <div className="ion-text-end">
-                  <IonInput
-                    value={name}
-                    onIonChange={(e) => setName(e.detail.value!)}
-                    type="text"
-                    placeholder="Full Name"
-                    required={true}
-                  />
-                </div>
+                <IonInput
+                  value={name}
+                  onIonChange={(e) => setName(e.detail.value!)}
+                  type="text"
+                  placeholder="Full Name"
+                  required={true}
+                />
               </IonItem>
 
               <IonItem>
-                <IonLabel>Organization</IonLabel>
+                <IonLabel hidden> Your Organization</IonLabel>
+                <br />
                 <IonSelect
-                  slot="end"
+                  slot="start"
                   value={organization}
                   placeholder="Select One"
-                  onIonChange={(e) => setOrg(e.detail.value)}
+                  onIonChange={(e) => setOrg(e.detail.value!)}
                 >
                   {" "}
                   {orgEntries.map((entry) => (
