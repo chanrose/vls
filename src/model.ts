@@ -30,7 +30,9 @@ export interface PostEntry {
     id: string,
     title: string,
     subtitle: string,
-    content: string
+    content: string,
+    pictureUrl: string
+    date: string,
 }
 
 export interface userProfile {

@@ -6,13 +6,8 @@ import {
   IonCardHeader,
   IonCardSubtitle,
   IonCardTitle,
-  IonCol,
   IonContent,
-  IonGrid,
-  IonImg,
-  IonLabel,
   IonPage,
-  IonRow,
   IonText,
 } from "@ionic/react";
 import "./styles/components.css";
@@ -23,13 +18,12 @@ const GettingStartedPage: React.FC = () => {
       <IonContent color="light" fullscreen>
         <IonCard className="ionCardstyle">
           <IonCardHeader>
-            {/* <IonImg className="imageSize" src={"/assets/icon/app2Logo.png"} /> */}
             <div className="ion-text-center centerImg">
               <img src="/assets/icon/app2Logo.png" height="200 px" />
             </div>
             <IonCardTitle className="centerText">Getting started</IonCardTitle>
             <IonCardSubtitle className="centerText">
-              Updated on Dec 10
+              Updated on Dec 11
             </IonCardSubtitle>
           </IonCardHeader>
 
@@ -60,7 +54,6 @@ const GettingStartedPage: React.FC = () => {
             <br />
             <IonText>
               <div className="ion-text-center">
-                {" "}
                 Welcome to VLS's App, you will be ask to sign in as guest or as
                 administrators. Please proceed.
               </div>

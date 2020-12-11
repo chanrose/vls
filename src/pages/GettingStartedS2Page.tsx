@@ -65,8 +65,6 @@ const GettingStartedS2Page: React.FC = () => {
       }),
     });
     history.go(0);
-    console.log(organization);
-    /* const credential = await auth.signInAnonymously().catch((error) => {}); */
   };
 
   return (
@@ -74,14 +72,11 @@ const GettingStartedS2Page: React.FC = () => {
       <IonContent color="light" fullscreen>
         <IonCard className="ionCardstyle">
           <IonCardHeader>
-            {/*  <IonImg className="imageSize" src={"/assets/icon/app2Logo.png"} /> */}
             <div className="ion-text-center centerImg">
               <img src="/assets/media/login.svg" height="200 px" />
             </div>
 
-            <IonCardTitle className="centerText">
-              Enter as Guest (t)
-            </IonCardTitle>
+            <IonCardTitle className="centerText">Enter as Guest</IonCardTitle>
           </IonCardHeader>
 
           <IonCardContent>
