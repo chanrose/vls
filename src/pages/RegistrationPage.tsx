@@ -57,8 +57,7 @@ const RegistrationPage: React.FC = () => {
       .collection("detail")
       .doc(userId)
       .set({
-        email: email,
-        password: password,
+        email,
         firstName: fname,
         lastName: lname,
         organId: organId,
@@ -67,7 +66,7 @@ const RegistrationPage: React.FC = () => {
       });
     firestore.collection("public").doc(organId).set({ name: organName });
 
-    return <Redirect to="/admin/home/" />;
+    return <Redirect to="/admin/" />;
   }
   return (
     <IonPage>

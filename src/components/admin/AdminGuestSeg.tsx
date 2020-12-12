@@ -11,6 +11,7 @@ import {
   IonInput,
   IonLabel,
   IonModal,
+  IonProgressBar,
   IonTextarea,
   IonTitle,
   IonToolbar,
@@ -39,10 +40,14 @@ const AdminGuestSeg: React.FC = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [showModal, setModal] = useState(false);
-  const [showNoData, setShow] = useState(true);
+  const [showNoData, setShow] = useState(false);
   const [pictureUrl, setPictureUrl] = useState("/assets/media/photo.svg");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [date, setSelectedDate] = useState<string>(`${new Date()}`);
+  const [isLoading, setLoading] = useState(true);
+  setTimeout(() => {
+    setLoading(false);
+  }, 2000);
 
   const postEntriesRef = firestore
     .collection("public")
@@ -56,6 +61,7 @@ const AdminGuestSeg: React.FC = () => {
   }, [organization]);
 
   useEffect(() => {
+    setLoading(true);
     return postEntriesRef.onSnapshot((snapshot) => {
       if (snapshot.size) {
         setShow(false);
@@ -101,6 +107,7 @@ const AdminGuestSeg: React.FC = () => {
   };
 
   const handleAdd = async () => {
+    setLoading(true);
     const entryData = {
       subtitle,
       title,
@@ -121,9 +128,12 @@ const AdminGuestSeg: React.FC = () => {
 
     const entryRef = await postEntriesRef.add(entryData);
     setModal(false);
+    setLoading(false);
   };
   return (
     <div>
+      {isLoading && <IonProgressBar type="indeterminate"></IonProgressBar>}
+
       {showNoData && (
         <div className="ion-text-center centerImg">
           <img src="/assets/media/noData.svg" height="200 px" />

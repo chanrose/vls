@@ -12,8 +12,8 @@ import {
   listCircle,
   settings as settingsIcon,
 } from "ionicons/icons";
-import { Route, Switch } from "react-router-dom";
-import React, { useState } from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { UserContext } from "./auth";
 import GuestHomePage from "./pages/guest/GuestHomePage";
 import GuestRequestPage from "./pages/guest/GuestRequestPage";
@@ -23,21 +23,29 @@ import GuestViewPage from "./pages/guest/GuestViewPage";
 
 const GuestAppTabs: React.FC = () => {
   const { Storage } = Plugins;
-
   const [orgId, setOrg] = useState("Default");
   const [guestName, setName] = useState("Default");
+  const [loggedOut, setLog] = useState(false);
+
+  useEffect(() => {
+    getUserDetail();
+
+    if (orgId === "Default") {
+      setLog(true);
+    }
+  }, [orgId]);
 
   const getUserDetail = async () => {
     const keys = await Storage.keys();
     const ret = await Storage.get({ key: "userDetail" });
     const getObj = JSON.parse(ret.value!);
-    if (ret == null) {
+    if (getObj === null) {
+      return null;
     } else {
       setOrg(getObj.organization);
       setName(getObj.name);
     }
   };
-  getUserDetail();
   return (
     <UserContext.Provider
       value={{ organization: `${orgId}`, name: `${guestName}` }}

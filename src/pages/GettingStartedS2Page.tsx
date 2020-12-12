@@ -21,6 +21,7 @@ import { orgList, toEntry } from "../model";
 import { Plugins } from "@capacitor/core";
 
 const GettingStartedS2Page: React.FC = () => {
+  const [errorName, setErr] = useState({ Err: "", error: false });
   const { Storage } = Plugins;
   const history = useHistory();
   const [name, setName] = useState("");
@@ -40,7 +41,6 @@ const GettingStartedS2Page: React.FC = () => {
       }
     } catch (error) {}
   };
-  getUserDetail();
 
   const entriesPub = firestore.collection("public");
   const publicOrg = async () => {
@@ -48,6 +48,7 @@ const GettingStartedS2Page: React.FC = () => {
   };
 
   useEffect(() => {
+    getUserDetail();
     publicOrg();
   }, [orgEntries]);
 
@@ -56,6 +57,10 @@ const GettingStartedS2Page: React.FC = () => {
   }
 
   const handleLogin = async () => {
+    if (organization === "") {
+      setErr({ error: true, Err: "Please fill in the information correctly!" });
+      return null;
+    }
     await Storage.set({
       key: "userDetail",
       value: JSON.stringify({

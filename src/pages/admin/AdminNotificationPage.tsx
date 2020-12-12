@@ -3,6 +3,8 @@ import {
   IonContent,
   IonHeader,
   IonPage,
+  IonProgressBar,
+  IonSkeletonText,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
@@ -16,7 +18,13 @@ import RequestCard from "../../components/RequestCard";
 const AdminNotificationPage: React.FC = () => {
   const { organization } = useContext(UserContext);
   const [reqList, setReqList] = useState<reqList[]>([]);
-  const [showNoData, setShow] = useState(true);
+  const [showNoData, setShow] = useState(false);
+
+  const [isLoading, setLoading] = useState(true);
+  setTimeout(() => {
+    setLoading(false);
+  }, 2000);
+
   useEffect(() => {
     const postEntriesRef = firestore
       .collection("public")
@@ -38,6 +46,8 @@ const AdminNotificationPage: React.FC = () => {
         setShow(false);
       } else {
         setShow(true);
+
+        setLoading(false);
       }
     });
   }, [organization]);
@@ -52,6 +62,9 @@ const AdminNotificationPage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className="ion-padding">
+        {isLoading && (
+          <IonProgressBar color="primary" type="indeterminate"></IonProgressBar>
+        )}
         {showNoData && (
           <div className="ion-text-center centerImg">
             <img src="/assets/media/noData.svg" height="200 px" />

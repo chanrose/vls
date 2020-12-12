@@ -4,6 +4,7 @@ import {
   IonHeader,
   IonImg,
   IonPage,
+  IonProgressBar,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
@@ -11,19 +12,23 @@ import { PostEntry, toEntry } from "../../model";
 import { firestore } from "../../firebase";
 import RequestCard from "../../components/RequestCard";
 import { Storage } from "@capacitor/core";
-import { UserContext } from "../../auth";
+import { useAuth, useAuthInit, UserContext } from "../../auth";
 
 const GuestViewPage: React.FC = ({}) => {
   const [postList, setPostList] = useState<PostEntry[]>([]);
   const [showNoData, setShow] = useState(false);
-
-  const { organization } = useContext(UserContext);
+  const [{ organization }, setID] = useState(useContext(UserContext));
+  const [isLoading, setLoading] = useState(true);
+  setTimeout(() => {
+    setLoading(false);
+  }, 2000);
 
   useEffect(() => {
     const postEntriesRef = firestore
       .collection("public")
       .doc(organization)
       .collection("posts");
+
     return postEntriesRef.onSnapshot(({ docs }) =>
       setPostList(docs.map(toEntry))
     );
@@ -52,7 +57,7 @@ const GuestViewPage: React.FC = ({}) => {
           </IonTitle>
         </IonToolbar>
       </IonHeader>
-
+      {isLoading && <IonProgressBar type="indeterminate"></IonProgressBar>}
       <IonContent className="ion-padding" fullscreen>
         {/*        <div className="ion-text-center">
           <img src="/assets/media/building.svg" height="150 px" />

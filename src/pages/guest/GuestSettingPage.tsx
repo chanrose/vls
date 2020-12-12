@@ -21,6 +21,7 @@ import FaqPage from "../FaqPage";
 import CreditsPage from "../CreditsPage";
 
 const GuestSettingPage: React.FC = () => {
+  const [darkMode, setDarkMode] = useState(false);
   const { Storage } = Plugins;
   const logout = async () => {
     await Storage.clear();
@@ -39,6 +40,12 @@ const GuestSettingPage: React.FC = () => {
 
   const toggleDarkModeHandler = () => {
     document.body.classList.toggle("dark");
+    /*     setDarkMode(!darkMode);
+    if (darkMode) {
+      document.body.classList.toggle("dark");
+    } else {
+      document.body.classList.toggle("light");
+    } */
   };
 
   return (
