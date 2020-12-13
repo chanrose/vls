@@ -40,7 +40,12 @@ export interface userProfile {
     id?: string,
     name?: string,
     isAdmin?: boolean,
-    organId: string
+    organId: string,
+    email?: string,    
+    firstName?: string;
+    lastName?: string;
+    
+
 }
 export interface guestDetail {
     name?: string,
@@ -52,6 +57,7 @@ export interface orgList {
     id: string,
     organId: string,
     name: string,
+
   
 }
 
@@ -71,4 +77,8 @@ export interface reqList {
 
 export interface turnOffModal {
     turnOffModal: any;
+    name?: string;
+    organization?: string;
+    email?: string;
+    organId?: string;
   }

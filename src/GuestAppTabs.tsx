@@ -14,7 +14,7 @@ import {
 } from "ionicons/icons";
 import { Redirect, Route, Switch } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { UserContext } from "./auth";
+import { GuestContext, UserContext } from "./auth";
 import GuestHomePage from "./pages/guest/GuestHomePage";
 import GuestRequestPage from "./pages/guest/GuestRequestPage";
 import GuestSettingPage from "./pages/guest/GuestSettingPage";
@@ -47,7 +47,7 @@ const GuestAppTabs: React.FC = () => {
     }
   };
   return (
-    <UserContext.Provider
+    <GuestContext.Provider
       value={{ organization: `${orgId}`, name: `${guestName}` }}
     >
       <IonTabs>
@@ -87,7 +87,7 @@ const GuestAppTabs: React.FC = () => {
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
-    </UserContext.Provider>
+    </GuestContext.Provider>
   );
 };
 

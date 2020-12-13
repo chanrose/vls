@@ -23,7 +23,6 @@ import AdminSettingPage from "./pages/admin/AdminSettingPage";
 import AdminNotificationPage from "./pages/admin/AdminNotificationPage";
 import { auth, firestore } from "./firebase";
 import { toEntry, userProfile } from "./model";
-import CreditsPage from "./pages/CreditsPage";
 
 const AdminAppTabs: React.FC = () => {
   const { loggedIn } = useAuth();
@@ -53,6 +52,10 @@ const AdminAppTabs: React.FC = () => {
       value={{
         organization: `${userDetail?.organId}`,
         name: `${userDetail?.name}`,
+        organId: `${userDetail?.organId}`,
+        email: `${userDetail?.email}`,
+        fName: `${userDetail?.firstName}`,
+        lName: `${userDetail?.lastName}`,
       }}
     >
       <IonTabs>

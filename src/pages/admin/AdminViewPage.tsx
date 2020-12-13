@@ -62,7 +62,7 @@ const AdminViewPage: React.FC = () => {
   const [isLoading, setLoading] = useState(true);
   setTimeout(() => {
     setLoading(false);
-  }, 2000);
+  }, 500);
 
   const viewEntry = () => {
     entriesRef.onSnapshot(({ docs }) => setEntries(docs.map(toEntry)));

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   IonContent,
   IonFab,
@@ -13,31 +13,17 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import "../styles/components.css";
-import { add, bicycle, car, easel, ticket } from "ionicons/icons";
 import AdminGuestSeg from "../../components/admin/AdminGuestSeg";
 import AdminHomeSeg from "../../components/admin/AdminHomeSeg";
-import { useAuth } from "../../auth";
-import { firestore } from "../../firebase";
-import { orgList, toEntry } from "../../model";
+import { UserContext } from "../../auth";
 
 const AdminHomePage: React.FC = () => {
-  const { userId } = useAuth();
   const [selectedHome, setHome] = useState(true);
   const [selectedGuest, setGuest] = useState(false);
-  const [orgDetail, setOrg] = useState<orgList>();
+  const { organization, name } = useContext(UserContext);
+  /* 
+  const [orgDetail, setOrg] = useState<orgList>(); */
   const [selectedSeg, setSeg] = useState("home");
-
-  useEffect(() => {
-    firestore
-      .collection("users")
-      .doc(userId)
-      .collection("detail")
-      .doc(userId)
-      .get()
-      .then((doc) => {
-        setOrg(toEntry(doc));
-      });
-  }, [userId]);
 
   const returnSegment = (selectedSegment: string) => {
     if (selectedSegment === "guest") {
@@ -70,7 +56,7 @@ const AdminHomePage: React.FC = () => {
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
         {selectedGuest && <AdminGuestSeg />}
-        {selectedHome && <AdminHomeSeg />}
+        {selectedHome && <AdminHomeSeg name={`${name}`} />}
       </IonContent>
     </IonPage>
   );

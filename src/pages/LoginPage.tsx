@@ -10,6 +10,7 @@ import {
   IonItem,
   IonList,
   IonPage,
+  IonProgressBar,
   IonToast,
 } from "@ionic/react";
 import "./styles/components.css";
@@ -23,17 +24,27 @@ const LoginPage: React.FC = () => {
   const [status, setStatus] = useState({ loading: false, error: false });
   const { loggedIn } = useAuth();
 
+  const [isLoading, setLoading] = useState(false);
   const [errorName, setError] = useState({ errorCode: "" });
   const [showToast, setShowToast] = useState(false);
   const handleLogin = async () => {
+    setLoading(true);
     try {
       setStatus({ loading: true, error: false });
       const credential = await auth.signInWithEmailAndPassword(email, password);
+      turnOffLoading();
     } catch (error) {
       setStatus({ loading: false, error: true });
       setError({ errorCode: `${error.message}` });
       setShowToast(true);
+      setLoading(false);
     }
+  };
+
+  const turnOffLoading = () => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
   };
   if (loggedIn) {
     console.log(loggedIn);
@@ -43,6 +54,9 @@ const LoginPage: React.FC = () => {
   return (
     <IonPage>
       <IonContent color="light" fullscreen>
+        {isLoading && (
+          <IonProgressBar color="primary" type="indeterminate"></IonProgressBar>
+        )}
         <IonCard className="ionCardstyle">
           <IonCardHeader>
             <div className="ion-text-center centerImg">

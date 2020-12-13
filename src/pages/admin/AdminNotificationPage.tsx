@@ -19,11 +19,20 @@ const AdminNotificationPage: React.FC = () => {
   const { organization } = useContext(UserContext);
   const [reqList, setReqList] = useState<reqList[]>([]);
   const [showNoData, setShow] = useState(false);
-
   const [isLoading, setLoading] = useState(true);
-  setTimeout(() => {
-    setLoading(false);
-  }, 2000);
+  useEffect(() => {
+    const postEntriesRef = firestore
+      .collection("public")
+      .doc(organization)
+      .collection("requests");
+    return postEntriesRef.onSnapshot((snapshot) => {
+      if (snapshot.size) {
+        setShow(false);
+      } else {
+        setShow(true);
+      }
+    });
+  }, [organization]);
 
   useEffect(() => {
     const postEntriesRef = firestore
@@ -36,21 +45,9 @@ const AdminNotificationPage: React.FC = () => {
     );
   }, [organization]);
 
-  useEffect(() => {
-    const postEntriesRef = firestore
-      .collection("public")
-      .doc(organization)
-      .collection("requests");
-    return postEntriesRef.onSnapshot((snapshot) => {
-      if (snapshot.size) {
-        setShow(false);
-      } else {
-        setShow(true);
-
-        setLoading(false);
-      }
-    });
-  }, [organization]);
+  setTimeout(() => {
+    setLoading(false);
+  }, 500);
 
   return (
     <IonPage>

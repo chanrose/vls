@@ -69,7 +69,7 @@ const AdminSettingPage: React.FC = () => {
 
             <IonItem>
               <IonText color="primary" onClick={() => setAccModal(true)}>
-                Account Management
+                Account Detail
               </IonText>
             </IonItem>
             <IonItem>

@@ -17,7 +17,8 @@ interface ThemeContextInt {
 
 export const AuthContext = React.createContext<Auth>({ loggedIn: false });
 export const OrgContext = React.createContext({organization: ""});
-export const UserContext = React.createContext({organization: "", name: ""});
+export const UserContext = React.createContext({organization: "", name: "", organId: "", email: "", fName: "", lName: ""});
+export const GuestContext = React.createContext({organization: "", name: ""});
 
 export function useAuth(): Auth {
     return useContext(AuthContext);
