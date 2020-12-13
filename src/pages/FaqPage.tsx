@@ -33,7 +33,7 @@ const FaqPage: React.FC<turnOffModal> = ({ turnOffModal }) => {
                   />
                 </div>
                 <IonCardTitle className="centerText">
-                  Special Thanks to
+                  Special Thanks
                 </IonCardTitle>
               </IonCardHeader>
 
@@ -67,6 +67,7 @@ const FaqPage: React.FC<turnOffModal> = ({ turnOffModal }) => {
               </IonCardHeader>
 
               <IonCardContent>
+                <br />
                 <IonText>
                   <div className="ion-text-center">
                     VLS does not make use of any collected data
@@ -83,6 +84,7 @@ const FaqPage: React.FC<turnOffModal> = ({ turnOffModal }) => {
                 <div className="ion-text-center centerImg">
                   <img height="150 px" src="/assets/media/contactUs.svg" />
                 </div>{" "}
+                <br />
                 <IonCardSubtitle className="centerText">
                   Contact Us
                 </IonCardSubtitle>

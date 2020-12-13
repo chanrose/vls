@@ -8,6 +8,8 @@ import {
   IonCardTitle,
   IonContent,
   IonPage,
+  IonSlide,
+  IonSlides,
   IonText,
 } from "@ionic/react";
 import "./styles/components.css";
@@ -16,58 +18,70 @@ const GettingStartedPage: React.FC = () => {
   return (
     <IonPage>
       <IonContent color="light" fullscreen>
-        <IonCard className="ionCardstyle">
-          <IonCardHeader>
-            <div className="ion-text-center centerImg">
-              <img src="/assets/icon/app2Logo.png" height="200 px" />
-            </div>
-            <IonCardTitle className="centerText">Getting started</IonCardTitle>
-            <IonCardSubtitle className="centerText">
-              Updated on Dec 11
-            </IonCardSubtitle>
-          </IonCardHeader>
+        <IonSlides>
+          <IonSlide>
+            <IonCard className="ionCardstyle">
+              <IonCardHeader>
+                <div className="ion-text-center">
+                  <img height="100 px" src="/assets/media/voiceControl.svg" />
+                </div>
+                <IonCardTitle className="centerText">Powering Up</IonCardTitle>
+                <IonCardSubtitle className="centerText">
+                  Updated on Dec 13
+                </IonCardSubtitle>
+              </IonCardHeader>
 
-          <IonCardContent>
-            {/* <IonGrid>
-              <IonRow className="centerText">
-                <IonCol>
-                  <IonImg
-                    className="flagIcon"
-                    src="/assets/media/englishLogo.png"
+              <IonCardContent>
+                <br />
+                <IonText>
+                  <div className="ion-text-center">
+                    Getting started?
+                    <br />
+                    Slide Next!
+                  </div>
+                </IonText>
+                <br />
+              </IonCardContent>
+            </IonCard>
+          </IonSlide>
+          <IonSlide>
+            <IonCard className="ionCardstyle">
+              <IonCardHeader>
+                <div className="ion-text-center">
+                  <img
+                    height="100 px"
+                    src="/assets/media/addPost.svg"
+                    alt="adding post"
                   />
-                  <br />
-                  <IonLabel>English</IonLabel>
-                </IonCol>
+                </div>
+                <IonCardSubtitle className="centerText">
+                  As the administrator
+                </IonCardSubtitle>
+                <IonCardTitle className="centerText">
+                  Post Announcement
+                </IonCardTitle>
+              </IonCardHeader>
 
-                <div className="grayStraightLine" />
-
-                <IonCol>
-                  <IonImg
-                    className="flagIcon"
-                    src="/assets/media/thaiLogo.png"
-                  />
-                  <br />
-                  <IonLabel>Thai</IonLabel>
-                </IonCol>
-              </IonRow>
-            </IonGrid> */}
-            <br />
-            <IonText>
-              <div className="ion-text-center">
-                Welcome to VLS's App, you will be ask to sign in as guest or as
-                administrators. Please proceed.
-              </div>
-            </IonText>
-            <br />
-            <IonButton
-              routerLink="/gettingstarted2"
-              className="IonButtonRadius"
-              expand="block"
-            >
-              START
-            </IonButton>
-          </IonCardContent>
-        </IonCard>
+              <IonCardContent>
+                <br />
+                <IonText>
+                  <div className="ion-text-center">
+                    You can make announcement <br /> with Guest's Post
+                    <br />
+                  </div>
+                </IonText>
+                <br />
+              </IonCardContent>
+            </IonCard>
+          </IonSlide>
+        </IonSlides>
+        <IonButton
+          routerLink="/gettingstarted2"
+          className="IonButtonRadius"
+          expand="block"
+        >
+          START
+        </IonButton>
       </IonContent>
     </IonPage>
   );

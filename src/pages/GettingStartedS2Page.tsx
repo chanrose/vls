@@ -100,10 +100,9 @@ const GettingStartedS2Page: React.FC = () => {
               </IonItem>
 
               <IonItem>
-                <IonLabel hidden> Your Organization</IonLabel>
+                <IonLabel> Your Organization</IonLabel>
                 <br />
                 <IonSelect
-                  slot="start"
                   value={organization}
                   placeholder="Select One"
                   onIonChange={(e) => setOrg(e.detail.value!)}
