@@ -13,6 +13,7 @@ import {
   IonItem,
   IonList,
   IonPage,
+  IonProgressBar,
   IonSearchbar,
   IonText,
   IonTitle,
@@ -58,6 +59,10 @@ const AdminViewPage: React.FC = () => {
   const [searchText, setSearch] = useState("");
   const [filterSearch, setFSearch] = useState<Entry[]>([]);
   const [showNoData, setShow] = useState(false);
+  const [isLoading, setLoading] = useState(true);
+  setTimeout(() => {
+    setLoading(false);
+  }, 2000);
 
   const viewEntry = () => {
     entriesRef.onSnapshot(({ docs }) => setEntries(docs.map(toEntry)));
@@ -188,7 +193,12 @@ const AdminViewPage: React.FC = () => {
               <IonText>{filterName} </IonText>
             </IonButton>
           </IonItem>
-
+          {isLoading && (
+            <IonProgressBar
+              color="primary"
+              type="indeterminate"
+            ></IonProgressBar>
+          )}
           {showNoData && (
             <div className="ion-text-center centerImg">
               <img src="/assets/media/noData.svg" height="200 px" />

@@ -10,9 +10,6 @@ import {
 } from "@ionic/react";
 import { UserContext } from "../../auth";
 import { PostEntry, toEntry } from "../../model";
-import { firestore } from "../../firebase";
-import RequestCard from "../../components/RequestCard";
-import { useHistory } from "react-router";
 
 const GuestHomePage: React.FC = () => {
   const { name, organization } = useContext(UserContext);
