@@ -70,7 +70,7 @@ const FaqPage: React.FC<turnOffModal> = ({ turnOffModal }) => {
                 <br />
                 <IonText>
                   <div className="ion-text-center">
-                    VLS does not make use of any collected data
+                    VLS does not make use data
                     <br />
                     from our side
                   </div>
