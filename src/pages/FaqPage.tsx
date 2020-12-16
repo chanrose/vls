@@ -71,6 +71,8 @@ const FaqPage: React.FC<turnOffModal> = ({ turnOffModal }) => {
                 <IonText>
                   <div className="ion-text-center">
                     VLS does not make use of any collected data
+                    <br />
+                    from our side
                   </div>
                 </IonText>
               </IonCardContent>
@@ -79,12 +81,10 @@ const FaqPage: React.FC<turnOffModal> = ({ turnOffModal }) => {
           <IonSlide>
             <IonCard className="IonCardFaq">
               <br />
-              <br />
               <IonCardHeader>
                 <div className="ion-text-center centerImg">
                   <img height="150 px" src="/assets/media/contactUs.svg" />
                 </div>{" "}
-                <br />
                 <IonCardSubtitle className="centerText">
                   Contact Us
                 </IonCardSubtitle>
@@ -92,13 +92,11 @@ const FaqPage: React.FC<turnOffModal> = ({ turnOffModal }) => {
               </IonCardHeader>
 
               <IonCardContent>
-                <br />
                 <IonText>
                   <div className="ion-text-center">
                     bdchanbroset@gmail.com <br /> andreas.christian.m@gmail.com
                   </div>
                 </IonText>
-                <br />
               </IonCardContent>
             </IonCard>
           </IonSlide>
@@ -140,7 +138,6 @@ const FaqPage: React.FC<turnOffModal> = ({ turnOffModal }) => {
               </IonCardHeader>
 
               <IonCardContent>
-                <br />
                 <IonText>
                   <div className="ion-text-center">
                     Get started with <br /> gh repo clone chanrose/vls

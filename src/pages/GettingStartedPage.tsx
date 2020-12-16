@@ -20,14 +20,14 @@ const GettingStartedPage: React.FC = () => {
       <IonContent color="light" fullscreen>
         <IonSlides>
           <IonSlide>
-            <IonCard className="ionCardstyle">
+            <IonCard className="IonCardFaq">
               <IonCardHeader>
                 <div className="ion-text-center">
                   <img height="100 px" src="/assets/media/voiceControl.svg" />
                 </div>
                 <IonCardTitle className="centerText">Powering Up</IonCardTitle>
                 <IonCardSubtitle className="centerText">
-                  Updated on Dec 13
+                  Updated on Dec 16
                 </IonCardSubtitle>
               </IonCardHeader>
 
@@ -35,9 +35,9 @@ const GettingStartedPage: React.FC = () => {
                 <br />
                 <IonText>
                   <div className="ion-text-center">
-                    Getting started?
+                    New to VLS?
                     <br />
-                    Slide Next!
+                    Slide For Tutorial
                   </div>
                 </IonText>
                 <br />
@@ -45,7 +45,7 @@ const GettingStartedPage: React.FC = () => {
             </IonCard>
           </IonSlide>
           <IonSlide>
-            <IonCard className="ionCardstyle">
+            <IonCard className="IonCardFaq">
               <IonCardHeader>
                 <div className="ion-text-center">
                   <img
@@ -74,14 +74,42 @@ const GettingStartedPage: React.FC = () => {
               </IonCardContent>
             </IonCard>
           </IonSlide>
+          <IonSlide>
+            <IonCard className="IonCardFaq">
+              <IonCardHeader>
+                <div className="ion-text-center">
+                  <img
+                    height="100 px"
+                    src="/assets/media/taskList.svg"
+                    alt="Managing vehicle Information"
+                  />
+                </div>
+                <IonCardSubtitle className="centerText">
+                  Manage Vehicle Information
+                </IonCardSubtitle>
+                <IonCardTitle className="centerText">
+                  CRUD Functionality
+                </IonCardTitle>
+              </IonCardHeader>
+
+              <IonCardContent>
+                <br />
+                <IonText>
+                  <div className="ion-text-center">
+                    You can keep track <br /> of members' vehicle
+                    <br />
+                  </div>
+                </IonText>
+                <br />
+              </IonCardContent>
+            </IonCard>
+          </IonSlide>
         </IonSlides>
-        <IonButton
-          routerLink="/gettingstarted2"
-          className="IonButtonRadius"
-          expand="block"
-        >
-          START
-        </IonButton>
+        <div className="ion-text-center">
+          <IonButton routerLink="/gettingstarted2" fill="clear">
+            START
+          </IonButton>
+        </div>
       </IonContent>
     </IonPage>
   );

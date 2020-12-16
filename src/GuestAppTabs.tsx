@@ -46,6 +46,9 @@ const GuestAppTabs: React.FC = () => {
       setName(getObj.name);
     }
   };
+
+  console.log(guestName);
+
   return (
     <GuestContext.Provider
       value={{ organization: `${orgId}`, name: `${guestName}` }}
@@ -53,9 +56,16 @@ const GuestAppTabs: React.FC = () => {
       <IonTabs>
         <IonRouterOutlet>
           <Switch>
-            <Route exact path="/guest/viewPosts/" component={GuestViewPage} />
+            {/* <Route exact path="/guest/viewPosts/" component={GuestViewPage} /> */}
+            <Route exact path="/guest/viewPosts/">
+              <GuestViewPage organization={orgId} />
+            </Route>
 
-            <Route exact path="/guest/request/" component={GuestRequestPage} />
+            <Route exact path="/guest/request/" component={GuestRequestPage}>
+              <GuestRequestPage organization={orgId} />
+            </Route>
+
+            {/* <Route exact path="/guest/request/" component={GuestRequestPage} /> */}
             <Route exact path="/guest/settings/" component={GuestSettingPage} />
             <Route exact path="/guest/home/">
               <GuestHomePage />

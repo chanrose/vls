@@ -14,14 +14,17 @@ import RequestCard from "../../components/RequestCard";
 import { Storage } from "@capacitor/core";
 import { useAuth, useAuthInit, UserContext } from "../../auth";
 
-const GuestViewPage: React.FC = ({}) => {
+interface props {
+  organization: string;
+}
+const GuestViewPage: React.FC<props> = ({ organization }) => {
   const [postList, setPostList] = useState<PostEntry[]>([]);
   const [showNoData, setShow] = useState(false);
-  const [{ organization }, setID] = useState(useContext(UserContext));
+
   const [isLoading, setLoading] = useState(true);
   setTimeout(() => {
     setLoading(false);
-  }, 2000);
+  }, 500);
 
   useEffect(() => {
     const postEntriesRef = firestore
@@ -59,11 +62,6 @@ const GuestViewPage: React.FC = ({}) => {
       </IonHeader>
       {isLoading && <IonProgressBar type="indeterminate"></IonProgressBar>}
       <IonContent className="ion-padding" fullscreen>
-        {/*        <div className="ion-text-center">
-          <img src="/assets/media/building.svg" height="150 px" />
-          <br />
-          <br />
-        </div> */}
         <div>
           {showNoData && (
             <div className="ion-text-center centerImg">

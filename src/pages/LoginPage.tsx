@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  IonAlert,
   IonButton,
   IonCard,
   IonCardContent,
@@ -19,6 +20,7 @@ import { Redirect } from "react-router";
 import { auth } from "../firebase";
 
 const LoginPage: React.FC = () => {
+  const [showAlert, setShowAlert] = useState(false);
   const [email, setEmailString] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState({ loading: false, error: false });
@@ -34,9 +36,9 @@ const LoginPage: React.FC = () => {
       const credential = await auth.signInWithEmailAndPassword(email, password);
       turnOffLoading();
     } catch (error) {
+      setShowAlert(true);
       setStatus({ loading: false, error: true });
       setError({ errorCode: `${error.message}` });
-      setShowToast(true);
       setLoading(false);
     }
   };
@@ -53,11 +55,18 @@ const LoginPage: React.FC = () => {
 
   return (
     <IonPage>
+      <IonAlert
+        isOpen={showAlert}
+        onDidDismiss={() => setShowAlert(false)}
+        header={`Login Failed`}
+        message={`${errorName.errorCode}`}
+        buttons={["Close"]}
+      />
       <IonContent color="light" fullscreen>
         {isLoading && (
           <IonProgressBar color="primary" type="indeterminate"></IonProgressBar>
         )}
-        <IonCard className="ionCardstyle">
+        <IonCard className="IonCardFaq">
           <IonCardHeader>
             <div className="ion-text-center centerImg">
               <img
@@ -112,12 +121,12 @@ const LoginPage: React.FC = () => {
             </IonButton>
           </IonCardContent>
         </IonCard>
-        <IonToast
+        {/*   <IonToast
           isOpen={showToast}
           onDidDismiss={() => setShowToast(false)}
           message={errorName.errorCode}
           duration={1000}
-        />
+        /> */}
       </IonContent>
     </IonPage>
   );

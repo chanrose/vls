@@ -71,10 +71,10 @@ const RegistrationPage: React.FC = () => {
   return (
     <IonPage>
       <IonContent color="light" fullscreen>
-        <IonCard className="ionCardstyle">
+        <IonCard className="IonCardFaq">
           <div className="ion-text-center centerImg">
             <img
-              height="100 px"
+              height="80 px"
               src={"/assets/media/fillForm.svg"}
               alt="App logo"
             />

@@ -18,8 +18,10 @@ import { OrgContext, UserContext } from "../../auth";
 import { firestore } from "../../firebase";
 import { reqList, toEntry } from "../../model";
 import RequestCard from "../../components/RequestCard";
-
-const GuestRequestPage: React.FC = () => {
+interface props {
+  organization: string;
+}
+const GuestRequestPage: React.FC<props> = ({ organization }) => {
   const [reqList, setReqList] = useState<reqList[]>([]);
   const [showNoData, setShow] = useState(true);
   const [idNo, setIdNo] = useState("");
@@ -28,7 +30,6 @@ const GuestRequestPage: React.FC = () => {
   const [guestTele, setTele] = useState("");
   const [requestType, setRequest] = useState("");
   const [messageRemark, setMessage] = useState("");
-  const { organization } = useContext(UserContext);
   const { name } = useContext(UserContext);
 
   const [showModal, setModal] = useState(false);

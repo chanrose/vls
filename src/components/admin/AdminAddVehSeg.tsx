@@ -73,27 +73,28 @@ const AdminAddVehSeg: React.FC = () => {
       <IonItemDivider>
         <IonLabel>Owner Information: </IonLabel>
       </IonItemDivider>
+      <br />
       <IonItem>
-        <IonLabel>Sticker No.</IonLabel>
-        <div className="ion-text-end">
+        <div>
+          <IonLabel position="stacked">Sticker No.</IonLabel>
           <IonInput
             type="text"
             value={sticker}
             onIonChange={(e) => setSticker(e.detail.value!)}
-          />{" "}
-        </div>
-      </IonItem>
-
-      <IonItem>
-        <IonLabel>Owner: </IonLabel>
-        <div className="ion-text-end">
-          <IonInput
-            type="text"
-            value={vehicleOwner}
-            onIonChange={(e) => setOwner(e.detail.value!)}
+            placeholder="MM001"
           />
         </div>
       </IonItem>
+      <IonItem>
+        <IonLabel position="stacked">Owner: </IonLabel>
+        <IonInput
+          type="text"
+          value={vehicleOwner}
+          onIonChange={(e) => setOwner(e.detail.value!)}
+          placeholder="John Beth"
+        />
+      </IonItem>
+      <br />
       <IonItem>
         <IonLabel>Who is the owner?</IonLabel>
         <IonSelect
@@ -109,35 +110,32 @@ const AdminAddVehSeg: React.FC = () => {
       </IonItem>
 
       <IonItem>
-        <IonLabel>ID No: </IonLabel>
-        <div className="ion-text-end">
-          <IonInput
-            type="text"
-            value={idNo}
-            onIonChange={(e) => setIdNo(e.detail.value!)}
-          />{" "}
-        </div>
+        <IonLabel position="stacked">ID No: </IonLabel>
+        <IonInput
+          type="text"
+          value={idNo}
+          onIonChange={(e) => setIdNo(e.detail.value!)}
+          placeholder="203000151"
+        />
       </IonItem>
 
       <IonItem>
-        <IonLabel>Email: </IonLabel>
-        <div className="ion-text-end">
-          <IonInput
-            type="text"
-            value={ownerEmail}
-            onIonChange={(e) => setEmail(e.detail.value!)}
-          />
-        </div>
+        <IonLabel position="stacked">Email: </IonLabel>
+        <IonInput
+          type="text"
+          value={ownerEmail}
+          onIonChange={(e) => setEmail(e.detail.value!)}
+          placeholder="johnbeth@gmail.com"
+        />
       </IonItem>
       <IonItem>
-        <IonLabel>Phone: </IonLabel>
-        <div className="ion-text-end">
-          <IonInput
-            type="text"
-            value={ownerTele}
-            onIonChange={(e) => setTele(e.detail.value!)}
-          />
-        </div>
+        <IonLabel position="stacked">Phone: </IonLabel>
+        <IonInput
+          type="text"
+          value={ownerTele}
+          onIonChange={(e) => setTele(e.detail.value!)}
+          placeholder="0615488942"
+        />
       </IonItem>
       <IonItem>
         <IonLabel>Driving License: </IonLabel>
@@ -161,58 +159,53 @@ const AdminAddVehSeg: React.FC = () => {
         </IonSelect>
       </IonItem>
       <IonItem>
-        <IonLabel>Plate: </IonLabel>
-        <div className="ion-text-end">
-          <IonInput
-            type="text"
-            value={vehiclePlate}
-            onIonChange={(e) => setPlate(e.detail.value!)}
-          />{" "}
-        </div>
+        <IonLabel position="stacked">Plate: </IonLabel>
+        <IonInput
+          type="text"
+          value={vehiclePlate}
+          onIonChange={(e) => setPlate(e.detail.value!)}
+          placeholder="7788"
+        />
       </IonItem>
 
       <IonItem>
-        <IonLabel>Province: </IonLabel>
-        <div className="ion-text-end">
-          <IonInput
-            type="text"
-            value={province}
-            onIonChange={(e) => setProvince(e.detail.value!)}
-          />{" "}
-        </div>
+        <IonLabel position="stacked">Province: </IonLabel>
+        <IonInput
+          type="text"
+          value={province}
+          onIonChange={(e) => setProvince(e.detail.value!)}
+          placeholder="Saraburi"
+        />
       </IonItem>
 
       <IonItem>
-        <IonLabel>Brand: </IonLabel>
-        <div className="ion-text-end">
-          <IonInput
-            type="text"
-            value={vehicleBrand}
-            onIonChange={(e) => setBrand(e.detail.value!)}
-          />
-        </div>
+        <IonLabel position="stacked">Brand: </IonLabel>
+        <IonInput
+          type="text"
+          value={vehicleBrand}
+          onIonChange={(e) => setBrand(e.detail.value!)}
+          placeholder="Honda"
+        />
       </IonItem>
 
       <IonItem>
-        <IonLabel>Model: </IonLabel>
-        <div className="ion-text-end">
-          <IonInput
-            type="text"
-            value={vehicleModel}
-            onIonChange={(e) => setModel(e.detail.value!)}
-          />
-        </div>
+        <IonLabel position="stacked">Model: </IonLabel>
+        <IonInput
+          type="text"
+          value={vehicleModel}
+          onIonChange={(e) => setModel(e.detail.value!)}
+          placeholder="CTX 2020"
+        />
       </IonItem>
 
       <IonItem>
-        <IonLabel>Colour: </IonLabel>
-        <div className="ion-text-end">
-          <IonInput
-            type="text"
-            value={vehicleColour}
-            onIonChange={(e) => setColour(e.detail.value!)}
-          />
-        </div>
+        <IonLabel position="stacked">Colour: </IonLabel>
+        <IonInput
+          type="text"
+          value={vehicleColour}
+          onIonChange={(e) => setColour(e.detail.value!)}
+          placeholder="Red"
+        />
       </IonItem>
 
       <IonItem>
@@ -231,6 +224,7 @@ const AdminAddVehSeg: React.FC = () => {
           max="2030-12-20"
           value={insuranceExpire}
           onIonChange={(e) => setInsurance(e.detail.value!)}
+          placeholder="Select Date"
         />
       </IonItem>
 
@@ -247,19 +241,22 @@ const AdminAddVehSeg: React.FC = () => {
       </IonItem>
 
       <IonItem>
-        <IonLabel>Greenbook Owner: </IonLabel>
+        <IonLabel position="stacked">Greenbook Owner: </IonLabel>
         <IonInput
           type="text"
           value={greenBookOwner}
           onIonChange={(e) => setGB(e.detail.value!)}
+          placeholder="Jason Bethlem"
         />
       </IonItem>
 
       <IonItem>
-        <IonLabel>Remark: </IonLabel>
+        <IonLabel position="stacked">Remark: </IonLabel>
         <IonTextarea
+          rows={3}
           value={messageRemark}
           onIonChange={(e) => setMessage(e.detail.value!)}
+          placeholder="Reminder"
         />
       </IonItem>
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  IonAlert,
   IonButton,
   IonCard,
   IonCardContent,
@@ -10,6 +11,7 @@ import {
   IonItem,
   IonLabel,
   IonList,
+  IonLoading,
   IonPage,
   IonSelect,
   IonSelectOption,
@@ -21,6 +23,7 @@ import { orgList, toEntry } from "../model";
 import { Plugins } from "@capacitor/core";
 
 const GettingStartedS2Page: React.FC = () => {
+  const [showAlert, setShowAlert] = useState(false);
   const [errorName, setErr] = useState({ Err: "", error: false });
   const { Storage } = Plugins;
   const history = useHistory();
@@ -29,6 +32,8 @@ const GettingStartedS2Page: React.FC = () => {
   const [logIn, setLog] = useState(false);
   const [orgEntries, setOrgEntries] = useState<orgList[]>([]);
   const [userDetail, setUserDetail] = useState({ name: "", organization: "" });
+  const [isLoading, setLoading] = useState(false);
+
   const getUserDetail = async () => {
     try {
       const ret = await Storage.get({ key: "userDetail" });
@@ -57,10 +62,12 @@ const GettingStartedS2Page: React.FC = () => {
   }
 
   const handleLogin = async () => {
-    if (organization === "") {
+    if (organization === "" || name === "") {
       setErr({ error: true, Err: "Please fill in the information correctly!" });
+      setShowAlert(true);
       return null;
     }
+    setLoading(true);
     await Storage.set({
       key: "userDetail",
       value: JSON.stringify({
@@ -74,7 +81,20 @@ const GettingStartedS2Page: React.FC = () => {
   return (
     <IonPage>
       <IonContent color="light" fullscreen>
-        <IonCard className="ionCardstyle">
+        <IonLoading
+          isOpen={isLoading}
+          onDidDismiss={() => setLoading(false)}
+          message={"Please wait..."}
+          duration={5000}
+        />
+        <IonCard className="IonCardFaq">
+          <IonAlert
+            isOpen={showAlert}
+            onDidDismiss={() => setShowAlert(false)}
+            header={`Enter Failed`}
+            message={`${errorName.Err}`}
+            buttons={["Close"]}
+          />
           <IonCardHeader>
             <div className="ion-text-center centerImg">
               <img
