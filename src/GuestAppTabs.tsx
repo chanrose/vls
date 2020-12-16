@@ -47,8 +47,6 @@ const GuestAppTabs: React.FC = () => {
     }
   };
 
-  console.log(guestName);
-
   return (
     <GuestContext.Provider
       value={{ organization: `${orgId}`, name: `${guestName}` }}

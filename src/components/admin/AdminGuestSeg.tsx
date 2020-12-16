@@ -84,7 +84,6 @@ const AdminGuestSeg: React.FC = () => {
     if (event.target.files!.length > 0) {
       const file = event.target.files!.item(0);
       const pictureUrl = URL.createObjectURL(file);
-      console.log("file:", pictureUrl);
       setPictureUrl(pictureUrl);
     }
   };
@@ -98,9 +97,7 @@ const AdminGuestSeg: React.FC = () => {
           width: 600,
         });
         setPictureUrl(photo.webPath!);
-      } catch (error) {
-        console.log("Camera error:", error);
-      }
+      } catch (error) {}
     } else {
       fileInputRef.current!.click();
     }

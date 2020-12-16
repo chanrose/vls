@@ -99,18 +99,6 @@ const AdminViewPage: React.FC = () => {
   return (
     <IonPage>
       <IonHeader translucent>
-        {/*         <IonToolbar>
-          <IonSegment
-            onIonChange={(e) => console.log("Segment selected", e.detail.value)}
-          >
-            <IonSegmentButton value="home">
-              <IonLabel>Vehicle</IonLabel>
-            </IonSegmentButton>
-            <IonSegmentButton value="guest">
-              <IonLabel>Ticket</IonLabel>
-            </IonSegmentButton>
-          </IonSegment>
-        </IonToolbar> */}
         <IonToolbar>
           <IonTitle>
             {" "}

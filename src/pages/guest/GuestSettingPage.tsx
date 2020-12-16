@@ -25,7 +25,6 @@ const GuestSettingPage: React.FC = () => {
   const { Storage } = Plugins;
   const logout = async () => {
     await Storage.clear();
-    console.log("Key", await Storage.keys());
   };
 
   const [showCreditModal, setCreditModal] = useState(false);

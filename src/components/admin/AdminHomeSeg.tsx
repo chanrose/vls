@@ -1,7 +1,5 @@
 import { IonButton, IonImg } from "@ionic/react";
 import React, { useContext } from "react";
-import { useHistory } from "react-router";
-import { UserContext } from "../../auth";
 import "../../pages/styles/admin.css";
 
 interface props {

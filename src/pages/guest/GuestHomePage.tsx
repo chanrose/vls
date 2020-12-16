@@ -38,7 +38,6 @@ const GuestHomePage: React.FC = () => {
     }
   };
 
-  console.log(guestName);
   return (
     <IonPage>
       <IonHeader translucent>
