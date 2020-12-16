@@ -1,4 +1,4 @@
-# Latest Updated on Dec 10, 2020
+# Latest Updated on Dec 16, 2020
 
 - Updated Admin's Guest Seg to Post, Edit, Update, Delete
 - Update Notification page for admin to see, review, edit, update, and delete all the posts
